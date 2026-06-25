@@ -1,19 +1,26 @@
-"""VSD Literature Assistant — RAG-powered Q&A with Streamlit.
-Deployed on HuggingFace Spaces.
-"""
+"""VSD 文献智能助手 — Streamlit Cloud 版（BGE-small 轻量）"""
 import streamlit as st
 import os, pickle, numpy as np
 
-st.set_page_config(page_title="VSD Literature Assistant", page_icon="📚", layout="wide")
+st.set_page_config(page_title="VSD 文献智能助手", page_icon="📚", layout="wide")
 
-# Paths relative to repo root
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_DIR = os.path.join(BASE_DIR, "vsd_rag_db")
+
+# ── 聊天气泡样式 ──
+st.markdown("""
+<style>
+.user-msg { background: #e3f2fd; border-radius: 12px 12px 4px 12px;
+    padding: 10px 16px; margin: 8px 0 8px auto; max-width: 75%; text-align: right; }
+.ast-msg  { background: #f5f5f5; border-radius: 12px 12px 12px 4px;
+    padding: 10px 16px; margin: 8px auto 8px 0; max-width: 85%; }
+.msg-label { font-size: 0.8em; color: #888; margin-bottom: 4px; }
+</style>
+""", unsafe_allow_html=True)
 
 
 @st.cache_resource
 def load_retriever():
-    """Load embedding model and FAISS index. Cached across sessions."""
     from sentence_transformers import SentenceTransformer
     import faiss
 
@@ -27,9 +34,8 @@ def load_retriever():
 
 
 def retrieve(model, index, texts, metas, query, top_k=5):
-    """Two-stage retrieval: FAISS coarse search + paper-level dedup."""
-    q_emb = model.encode([query]).astype("float32")
     import faiss
+    q_emb = model.encode([query]).astype("float32")
     faiss.normalize_L2(q_emb)
     scores, indices = index.search(q_emb, top_k * 3)
     seen, results = set(), []
@@ -38,147 +44,149 @@ def retrieve(model, index, texts, metas, query, top_k=5):
         if pid not in seen:
             seen.add(pid)
             results.append({
-                "id": pid,
-                "title": metas[idx]["title"],
-                "journal": metas[idx]["journal"],
-                "year": metas[idx]["year"],
-                "text": texts[idx][:500],
-                "score": float(score),
+                "id": pid, "title": metas[idx]["title"],
+                "journal": metas[idx]["journal"], "year": metas[idx]["year"],
+                "text": texts[idx][:500], "score": float(score),
             })
         if len(results) >= top_k:
             break
     return results
 
 
-# ── UI ──
-st.title("📚 VSD Literature Assistant")
-st.caption(
-    "RAG-powered Q&A over 38 papers on congenital heart disease & deep learning | "
-    "[GitHub](https://github.com) · Built with FAISS + BGE + Streamlit"
-)
+# ── 初始化 ──
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
 model, index, texts, metas = load_retriever()
 
-query = st.text_input(
-    "Ask a question about VSD, echocardiography, or deep learning:",
-    placeholder="e.g., What are the challenges in VSD subtype classification?",
-)
-
-if query:
-    with st.spinner("Searching literature..."):
-        results = retrieve(model, index, texts, metas, query)
-
-    # ── Retrieved Papers ──
-    st.markdown("### 📄 Retrieved Papers")
-    cols = st.columns(len(results))
-    for i, (col, r) in enumerate(zip(cols, results)):
-        with col:
-            score_color = (
-                "green" if r["score"] > 0.6
-                else "orange" if r["score"] > 0.45
-                else "red"
-            )
-            st.markdown(f"**#{i + 1}** :{score_color}[{r['score']:.3f}]")
-            st.markdown(f"**{r['title']}**")
-            st.caption(f"{r['journal']}, {r['year']}")
-
-    # ── Answer Section ──
-    st.markdown("---")
-    st.markdown("### 📝 AI Answer")
-
-    context_parts = []
-    for i, r in enumerate(results):
-        context_parts.append(
-            f"[{i + 1}] {r['title']} ({r['journal']}, {r['year']}): {r['text'][:300]}"
-        )
-    context = "\n\n".join(context_parts)
-
-    prompt = f"""You are a VSD (ventricular septal defect) deep learning research assistant.
-Based on the following papers, answer the user's question. Cite sources using [1][2] notation.
-
-PAPERS:
-{context}
-
-QUESTION: {query}
-
-Answer concisely with citations. If the papers don't cover the question, say so."""
-
-    # Try DeepSeek API if key provided
-    api_key = st.session_state.get("api_key", "")
-    if api_key:
-        with st.spinner("Generating answer via DeepSeek..."):
-            try:
-                from openai import OpenAI
-                client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
-                response = client.chat.completions.create(
-                    model="deepseek-chat",
-                    messages=[{"role": "user", "content": prompt}],
-                    temperature=0.3,
-                    max_tokens=800,
-                )
-                answer = response.choices[0].message.content
-                st.markdown(answer)
-            except Exception as e:
-                st.error(f"API call failed: {e}")
-    else:
-        st.info("💡 Enter your DeepSeek API key in the sidebar to enable live AI answers.")
-        with st.expander("📋 Click to copy the prompt (ready for manual use)"):
-            st.code(prompt, language="text")
-
-    # ── Paper Details ──
-    st.markdown("---")
-    st.markdown("### 🔍 Paper Details")
-    for i, r in enumerate(results):
-        with st.expander(f"[{i + 1}] {r['title'][:80]}... (score: {r['score']:.3f})"):
-            st.markdown("**Full Text Excerpt:**")
-            st.text(r["text"])
-            st.markdown(f"**Journal:** {r['journal']} ({r['year']})")
-
-    # ── Debug ──
-    with st.expander("🔧 Debug: Full Prompt"):
-        st.code(prompt, language="text")
-
-
-# ── Sidebar ──
+# ── 侧边栏 ──
 with st.sidebar:
-    st.header("⚙️ Settings")
+    st.header("⚙️ 设置")
     api_key = st.text_input(
-        "DeepSeek API Key",
-        type="password",
-        help="Get one at https://platform.deepseek.com",
+        "DeepSeek API Key", type="password",
+        value=st.session_state.get("api_key_ui", ""),
+        help="在 https://platform.deepseek.com 获取",
     )
     if api_key:
         st.session_state["api_key"] = api_key
-        st.success("API key set ✓")
+        st.session_state["api_key_ui"] = api_key
+        st.success("✅ 已设置")
 
-    st.header("📖 About")
+    if st.button("🗑️ 清空对话"):
+        st.session_state.messages = []
+        st.rerun()
+
+    st.divider()
+    st.header("📖 关于")
     st.markdown("""
-    **VSD Literature Assistant** is a RAG (Retrieval-Augmented Generation) system
-    built on **38 papers** covering:
-    - VSD clinical guidelines & epidemiology
-    - Deep learning in echocardiography
-    - Self-supervised learning (DINOv2)
-    - Data leakage methodology
-    - Biomedical signal processing
+    **VSD 文献智能助手**基于 RAG 技术，覆盖 **38 篇**先心病深度学习论文。
 
-    **Tech Stack:**
-    - 🗂️ FAISS vector search (512-dim, IP)
-    - 🧠 BGE-small-zh-v1.5 embeddings
-    - 📝 Chinese full-text chunked encoding
-    - 🎈 Streamlit frontend
-    - 🤖 DeepSeek API (optional)
+    **技术栈：**
+    - 🧠 BGE-small 嵌入（512维）
+    - 🗂️ FAISS 向量检索
+    - 🤖 DeepSeek API
+    - 🎈 Streamlit Cloud
 
-    **Author:** Graduate student project — CV → AI career transition
+    **完整版**（BGE-M3 + Reranker）部署在独立服务器。
     """)
+    st.caption("BGE + FAISS + DeepSeek 构建")
 
-    st.header("🔬 Test Queries")
-    st.markdown("""
-    Try these:
-    - *DINOv2在医学影像中有什么优势？*
-    - *VSD亚型分类的主要挑战是什么？*
-    - *数据泄漏对深度学习研究有什么影响？*
-    - *Cheng等2024年的工作有什么局限性？*
-    - *Gao等2025年的BSPC论文和我们的研究有什么区别？*
-    """)
 
-    st.caption("Built with ❤️ using FAISS + BGE + Streamlit")
+# ── 主界面 ──
+st.title("📚 VSD 文献智能助手")
+st.caption("基于 38 篇先天性心脏病深度学习论文 · 支持多轮对话 · 中英文检索")
+
+# 渲染历史消息
+for msg in st.session_state.messages:
+    role = msg["role"]
+    css_class = "user-msg" if role == "user" else "ast-msg"
+    label = "🧑 你" if role == "user" else "🤖 助手"
+    st.markdown(
+        f'<div class="{css_class}"><div class="msg-label">{label}</div>{msg["content"]}</div>',
+        unsafe_allow_html=True,
+    )
+    if msg.get("sources") and role == "assistant":
+        with st.expander("📄 参考来源"):
+            for j, s in enumerate(msg["sources"]):
+                sc = f"{s['score']:.3f}"
+                st.markdown(
+                    f"**[{j + 1}] {s['title']}** "
+                    f"（{s['journal']}, {s['year']}）· 相关度 {sc}"
+                )
+
+# 输入
+query = st.chat_input("请输入您的问题……")
+
+if query:
+    # 存用户消息
+    st.session_state.messages.append({"role": "user", "content": query})
+
+    # 检索
+    with st.spinner("🔍 检索文献中……"):
+        results = retrieve(model, index, texts, metas, query)
+
+    # 构建 prompt
+    context_parts = []
+    for i, r in enumerate(results):
+        context_parts.append(
+            f"[{i + 1}] {r['title']}（{r['journal']}, {r['year']}）：{r['text'][:400]}"
+        )
+    context = "\n\n".join(context_parts)
+
+    history_parts = []
+    recent = st.session_state.messages[:-1][-6:]
+    for m in recent:
+        role = "用户" if m["role"] == "user" else "助手"
+        history_parts.append(f"{role}：{m['content'][:200]}")
+    history = "\n".join(history_parts) if history_parts else "（无历史对话）"
+
+    prompt = f"""你是 VSD（室间隔缺损）深度学习研究助手。请根据以下论文内容回答用户问题。
+
+对话历史：
+{history}
+
+相关论文：
+{context}
+
+用户问题：{query}
+
+请用中文回答，标注引用来源如 [1][2]。如果论文无法回答，请如实说明。"""
+
+    # 生成回答
+    api_key = st.session_state.get("api_key", "")
+    if api_key:
+        with st.spinner("🤖 正在生成回答……"):
+            try:
+                from openai import OpenAI
+                client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
+
+                response = client.chat.completions.create(
+                    model="deepseek-chat",
+                    messages=[{"role": "user", "content": prompt}],
+                    temperature=0.3, max_tokens=800,
+                )
+                answer = response.choices[0].message.content
+
+                st.session_state.messages.append({
+                    "role": "assistant", "content": answer, "sources": results,
+                })
+                st.rerun()
+
+            except Exception as e:
+                st.session_state.messages.append({
+                    "role": "assistant",
+                    "content": f"❌ API 调用失败：{e}", "sources": results,
+                })
+                st.rerun()
+    else:
+        no_key_parts = [
+            "💡 **未设置 API Key**\n\n在左侧输入 DeepSeek API Key 即可启用 AI 回答。\n",
+            f"---\n**检索结果（Top-{len(results)}）：**",
+        ]
+        for j, r in enumerate(results):
+            no_key_parts.append(f"\n**[{j + 1}] {r['title']}** · 相关度 {r['score']:.3f}")
+
+        st.session_state.messages.append({
+            "role": "assistant", "content": "\n".join(no_key_parts), "sources": results,
+        })
+        st.rerun()
