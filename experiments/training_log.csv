@@ -1,6 +1,5 @@
-stage,dataset,params_M,batch,grad_accum,optimizer,lr,precision,gpu_mem_peak_MB,train_min,final_loss,eval_loss,notes
-pretrain,,,,,,,,,,,,
-sft,,,,,,,,,,,,
-lora,,,,,,,,,,,,
-dpo,,,,,,,,,,,,
-grpo,,,,,,,,,,,,
+stage,scale,source_dataset,n_samples,params_M,batch,grad_accum,effective_batch,optimizer,lr,precision,epochs,train_steps,seq_len,gpu_mem_peak_MB,gpu_util_mean_pct,train_seconds,train_min,loss_first,loss_last,note
+pretrain,small,gongjy/minimind_dataset pretrain_t2t_mini (1.27M),60000,63.91,32,8,256,AdamW,5e-4,bf16,2,3750,340,7363,97.1,619,10.32,7.7297,3.3452,cosine schedule+warmup; trained from scratch
+sft,small,gongjy/minimind_dataset sft_t2t_mini (905k),20000,63.91,16,1,16,AdamW,1e-5,bf16,2,2500,768,7363,97.1,479,7.98,3.9110,3.1707,init from pretrain ckpt; loss on response tokens only
+pretrain,medium,gongjy/minimind_dataset pretrain_t2t_mini (1.27M),150000,63.91,32,8,256,AdamW,5e-4,bf16,2,9376,340,7363,98.8,1531,25.52,7.3084,2.5271,even-sampled subset; trained from scratch
+sft,medium,gongjy/minimind_dataset sft_t2t_mini (905k),50000,63.91,16,1,16,AdamW,1e-5,bf16,2,6250,768,7363,98.8,1177,19.62,2.8209,2.2106,init from medium pretrain ckpt

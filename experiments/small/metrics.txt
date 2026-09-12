@@ -1,0 +1,4 @@
+seconds={'pretrain': 619, 'sft': 479}
+pretrain: log_points=76 loss_first=7.7297 loss_last=3.3452
+sft: log_points=50 loss_first=3.9110 loss_last=3.1707
+gpu={'mem_peak_MB': 7363, 'util_mean_pct': 97.1, 'temp_peak_C': 74, 'samples': 218}
