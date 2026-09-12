@@ -73,6 +73,18 @@ cd .. && printf '0\n' | python eval_llm.py --weight full_sft --lora_weight lora_
 
 实测：只训 0.393M（占 0.61%）、适配器 0.78MB、显存峰值 4.6GB、20k 数据 3 轮仅 256 秒。
 
+### DPO 偏好对齐（在 full-SFT 基座上，需 chosen/rejected 数据）
+
+```bash
+# 数据：ModelScope gongjy/minimind_dataset 的 dpo.jsonl（17166 对，字段 chosen/rejected）
+cd trainer
+python -u train_dpo.py --data_path ../dataset/dpo.jsonl --from_weight full_sft --epochs 1 \
+       --batch_size 4 --learning_rate 4e-8 --beta 0.15 --log_interval 50 --num_workers 4
+cd .. && printf '0\n' | python eval_llm.py --weight dpo --max_new_tokens 120
+```
+
+实测：4292 步 / 744 秒，policy+reference 双模型显存峰值 5.71GB；lr 必须极小（≤5e-8）以防灾难性遗忘。
+
 ## 4. 推理与解析
 
 ```bash

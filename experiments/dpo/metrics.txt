@@ -1,0 +1,4 @@
+steps=86 seconds=744 pairs=17166 beta=0.15 lr=4e-8 batch=4
+loss_first=0.6646 loss_last=0.4276 loss_min=0.3908
+loss_mean_first_half=0.6415 loss_mean_second_half=0.6201
+gpu=mem_peak_MB:5711 util_mean_pct:98.4 temp_peak_C:78 samples:147
