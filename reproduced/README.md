@@ -59,6 +59,20 @@ python -u train_pretrain.py --data_path ../dataset/pretrain_med.jsonl --epochs 2
 python -u train_full_sft.py --data_path ../dataset/sft_med.jsonl --epochs 2 --from_weight pretrain        --batch_size 16 --accumulation_steps 1 --learning_rate 1e-5 --dtype bfloat16 --log_interval 100
 ```
 
+
+### LoRA 参数高效微调（在 full-SFT 基座上）
+
+```bash
+cd trainer
+python -u train_lora.py --data_path ../dataset/sft_sub.jsonl --lora_name lora_demo \
+       --from_weight full_sft --epochs 3 --batch_size 32 --learning_rate 1e-4 \
+       --log_interval 50 --num_workers 4
+# 推理：基座 + 适配器叠加加载
+cd .. && printf '0\n' | python eval_llm.py --weight full_sft --lora_weight lora_demo --max_new_tokens 120
+```
+
+实测：只训 0.393M（占 0.61%）、适配器 0.78MB、显存峰值 4.6GB、20k 数据 3 轮仅 256 秒。
+
 ## 4. 推理与解析
 
 ```bash

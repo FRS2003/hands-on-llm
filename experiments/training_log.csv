@@ -3,3 +3,4 @@ pretrain,small,gongjy/minimind_dataset pretrain_t2t_mini (1.27M),60000,63.91,32,
 sft,small,gongjy/minimind_dataset sft_t2t_mini (905k),20000,63.91,16,1,16,AdamW,1e-5,bf16,2,2500,768,7363,97.1,479,7.98,3.9110,3.1707,init from pretrain ckpt; loss on response tokens only
 pretrain,medium,gongjy/minimind_dataset pretrain_t2t_mini (1.27M),150000,63.91,32,8,256,AdamW,5e-4,bf16,2,9376,340,7363,98.8,1531,25.52,7.3084,2.5271,even-sampled subset; trained from scratch
 sft,medium,gongjy/minimind_dataset sft_t2t_mini (905k),50000,63.91,16,1,16,AdamW,1e-5,bf16,2,6250,768,7363,98.8,1177,19.62,2.8209,2.2106,init from medium pretrain ckpt
+lora,lora,sft subset (20k) on medium full-SFT base,20000,63.91(base)+0.393 trainable,32,1,32,AdamW,1e-4,bf16,3,1875,340,4601,96.0,256,4.27,2.4065,2.5691,LoRA adaptors only 0.61% trainable; adapter ckpt 0.779MB; loss_min 2.1526
