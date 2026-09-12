@@ -50,11 +50,11 @@ python -c "import torch; print(torch.cuda.is_available(), torch.cuda.is_bf16_sup
 
 ## 五、手写组件 Checklist（`from_scratch/`）
 - [ ] BPE Tokenizer（merge 规则、编解码）
-- [ ] RMSNorm（对比 LayerNorm）
-- [ ] RoPE 旋转位置编码（复数/旋转矩阵两种实现）
-- [ ] GQA（MHA / MQA / GQA 对比与 KV Cache 显存计算）
-- [ ] SwiGLU 前馈网络
-- [ ] Causal Self-Attention（含 mask、张量维度标注）
+- [x] RMSNorm（对比 LayerNorm，含数值自检）
+- [x] RoPE 旋转位置编码（rotate-half，验证相对位置不变性/保模长）
+- [x] GQA（repeat_kv 统一 MHA/MQA/GQA + 因果遮蔽，12 项自检）
+- [x] SwiGLU 前馈网络（门控分支数值验证）
+- [x] Causal Self-Attention（含 mask、张量维度标注、未来不可见测试）
 - [ ] Triton 版 RMSNorm Kernel
 - [ ] 分块 Online-Softmax（Flash Attention 核心）
 
