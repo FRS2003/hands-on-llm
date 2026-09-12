@@ -1,5 +1,7 @@
 # MiniMind From Scratch（从零构建轻量级语言模型）
 
+> 📚 **本模块属于 [Hands-on-LLM 动手学大模型](../README.md) 学习库 · 返回总览看完整学习路线**
+
 > 不依赖高层封装，用原生 PyTorch 逐层实现现代轻量级语言模型的核心组件，并完整跑通
 > **预训练 → SFT → LoRA → DPO → GRPO** 的训练链路。
 >

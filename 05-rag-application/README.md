@@ -1,5 +1,7 @@
 # VSD Literature Assistant · 医学文献混合检索 RAG 与问答 Agent
 
+> 📚 **本模块属于 [Hands-on-LLM 动手学大模型](../README.md) 学习库 · 返回总览看完整学习路线**
+
 面向**先天性心脏病（VSD / CHD）医学文献**的智能检索与问答系统：从 PubMed / PMC 采集文献并构建本地知识库，
 采用 **BM25 稀疏检索 + 稠密向量检索的双路混合召回、RRF 融合、重排（Rerank）与 HyDE / 查询扩展**，
 结合大模型（DeepSeek，OpenAI 兼容接口）生成**带文献引用**的回答；并实现一个 **ReAct Agent**，

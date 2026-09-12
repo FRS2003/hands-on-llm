@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# secrets / env
+.env
+*.key
+
+# model weights & logs (large / reproducible)
+*.pth
+*.bin
+*.safetensors
+*.log
+
+# datasets & local indexes (large)
+*.faiss
+*.index
+dataset/*.jsonl
+
+# editor / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

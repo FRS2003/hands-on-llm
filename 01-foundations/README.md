@@ -1,5 +1,7 @@
 # CS336 个人中文学习笔记 · LLMs from Scratch
 
+> 📚 **本模块属于 [Hands-on-LLM 动手学大模型](../README.md) 学习库 · 返回总览看完整学习路线**
+
 > 学习 Stanford **CS336: Language Modeling from Scratch** 过程中整理的**个人中文笔记（小白友好版）**，
 > 按课程讲次 L1–L17 系统梳理，用尽量通俗的方式讲清大模型从零构建的完整链路。
 

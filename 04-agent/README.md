@@ -1,5 +1,7 @@
 # MiniCode Agent — 终端 AI 编程智能体
 
+> 📚 **本模块属于 [Hands-on-LLM 动手学大模型](../README.md) 学习库 · 返回总览看完整学习路线**
+
 一个用 **Harness Engineering** 思路实现的终端 AI Coding Agent：在 ReAct（Thought→Action→Observation）循环之上，
 构建了 Skill 能力路由、记忆沉淀与按需注入、分层上下文压缩、主从多智能体协作与分层安全审查，
 以提升复杂编程任务下的执行准确率、上下文稳定性、推理效率与安全性。模型通过 OpenAI 兼容接口接入（默认 DeepSeek）。

@@ -1,5 +1,7 @@
 # LLaMA-Factory Lab（大模型高效微调与分布式训练实验）
 
+> 📚 **本模块属于 [Hands-on-LLM 动手学大模型](../README.md) 学习库 · 返回总览看完整学习路线**
+
 > 源码级复现业界主流 LLM 微调框架 [hiyouga/LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory)
 >（Apache-2.0，ACL 2024），并围绕**对齐算法、参数高效微调、分布式并行、量化推理**做系统的对照实验与二次开发。
 >
