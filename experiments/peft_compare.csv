@@ -1,0 +1,9 @@
+method,trainable_params,param_ratio_pct,gpu_mem_MB,train_min,eval_score,extra_infer_latency,notes
+full,,,,,,no,
+freeze,,,,,,no,
+lora,,,,,,merge,no,
+qlora,,,,,,merge,no,
+adapter,,,,,,yes,
+prefix,,,,,,yes,
+p_tuning,,,,,,yes,
+dora,,,,,,merge,no,

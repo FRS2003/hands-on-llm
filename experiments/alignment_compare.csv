@@ -1,0 +1,7 @@
+algorithm,needs_reward_model,needs_reference,data_type,gpu_mem_MB,train_min,final_loss,eval_winrate,stability,notes
+sft,no,no,instruction,,,,,
+dpo,no,yes,preference_pair,,,,,
+ppo,yes,yes,prompt+rm,,,,,
+kto,no,yes,binary_feedback,,,,,
+orpo,no,no,instruction,,,,,
+simpo,no,no,instruction,,,,,

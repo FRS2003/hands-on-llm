@@ -1,0 +1,8 @@
+strategy,world_size,gpu_mem_per_card_MB,throughput_tok_s,comm_time_pct,notes
+ddp,1,,,,,
+ddp,2,,,,,
+zero1,2,,,,,
+zero2,2,,,,,
+zero3,2,,,,,
+tp,,,,,,
+pp,,,,,,

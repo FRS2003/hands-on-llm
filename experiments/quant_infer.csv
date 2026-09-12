@@ -1,0 +1,5 @@
+method,bits,model_size_MB,ppl,first_token_latency_ms,tpot_ms,throughput_tok_s,concurrency,notes
+fp16,16,,,,,,,
+gptq,4,,,,,,,
+awq,4,,,,,,,
+vllm_fp16,16,,,,,,,

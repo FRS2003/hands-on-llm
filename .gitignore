@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+# 模型权重 / 数据 / 训练产物
+*.pt *.pth *.bin *.safetensors *.gguf
+saves/
+output/
+checkpoint*/
+*.log
+wandb/
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
