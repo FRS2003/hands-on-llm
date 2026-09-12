@@ -1,0 +1,97 @@
+# MiniMind From Scratch（从零构建轻量级语言模型）
+
+> 不依赖高层封装，用原生 PyTorch 逐层实现现代轻量级语言模型的核心组件，并完整跑通
+> **预训练 → SFT → LoRA → DPO → GRPO** 的训练链路。
+>
+> 本仓库复现自 [jingyaogong/minimind](https://github.com/jingyaogong/minimind)（MIT License），
+> 并在其基础上补充三部分自己的工作：**① 不看参考实现的手写组件；② 分阶段/多方法对比实验；③ 源码与公式推导笔记。**
+
+> **✅ 最新进展（2026-09）**：已在单卡 RTX 3080 Ti 上完整跑通「继续预训练 → SFT → LoRA → DPO」，
+> 做了 **small / medium 两档数据规模对照**与 **全量微调 vs LoRA 资源对比**、**DPO 偏好对齐**，产出真实 loss 曲线、显存/耗时/吞吐与生成样例。
+> 详见 [`experiments/`](experiments/)（[实验详解](experiments/README.md) · [生成样例](experiments/generation_samples.md) · [复现步骤](reproduced/)）。
+
+## 一、项目目标
+- 手写 BPE 分词器与 Transformer Decoder：RMSNorm、RoPE、GQA、SwiGLU、Causal Attention；
+- 跑通 “数据清洗去重 → 预训练 → SFT → LoRA → DPO → GRPO” 全流程，记录每阶段 loss / 显存峰值 / 吞吐 / 耗时 / 生成效果；
+- 用 Triton 编写 RMSNorm 自定义 Kernel、手写分块 Flash Attention 以降低显存；
+- 实践 DeepSpeed ZeRO 分片、梯度检查点、混合精度（BF16）与多卡数据并行；
+- 依据 Chinchilla 结论拟合 Scaling Law，核算训练资源。
+
+## 二、目录结构
+| 目录 | 内容 |
+| --- | --- |
+| `from_scratch/` | **手写组件**：不看官方实现，自己写的 tokenizer 与模型模块（核心） |
+| `reproduced/` | 基于官方仓库跑通的训练脚本、确切命令与踩坑记录（注明来源，非原创） |
+| `experiments/` | 对比实验记录：训练日志 CSV、loss 曲线、显存/耗时、生成样例 |
+| `notes/` | 源码阅读笔记、RoPE/DPO/GRPO 等公式推导 |
+
+## 三、运行环境
+- OS: Ubuntu 22.04（云 GPU）/ Windows 11；Python 3.10；CUDA 12.4；PyTorch 2.6.0
+- **实测单卡 RTX 3080 Ti 12GB 即可训练 63.9M 参数模型**：bf16 下全量微调显存峰值约 7.4GB、LoRA 仅 4.6GB，GPU 利用率 96–99%
+
+```bash
+conda create -n minimind python=3.10 -y && conda activate minimind
+# 注意：若 pip 拉取 torch/nvidia 大包零增长卡死，改用 curl 下载 wheel + 离线安装，见 reproduced/README.md
+pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124
+pip install transformers==4.57.6 datasets==3.6.0 modelscope sentencepiece trl peft accelerate einops safetensors
+python -c "import torch; print(torch.cuda.is_available(), torch.cuda.is_bf16_supported())"
+```
+
+## 四、复现路线 Checklist
+- [x] 环境搭建、数据下载（ModelScope）与等间隔抽样构造子集
+- [x] 预训练（Pretrain，from scratch，bf16 + 梯度累积 + cosine 调度）
+- [x] 指令微调（SFT，从 pretrain 热启动，多轮对话仅对 response 计算 loss）
+- [x] LoRA 参数高效微调（只训 0.61% 参数，对比全量微调的显存/体积/耗时）
+- [ ] BPE 分词器自行训练（当前先用仓库 tokenizer，手写版见 `from_scratch/`）
+- [x] DPO 偏好对齐（17k 偏好对、β=0.15，验证 -ln2 初始与隐式 reward margin 拉开）
+- [ ] GRPO 强化学习对齐
+- [ ] Triton Kernel / 分块注意力
+- [ ] DeepSpeed ZeRO + 混合精度 + 梯度检查点（多卡）
+
+## 五、手写组件 Checklist（`from_scratch/`）
+- [ ] BPE Tokenizer（merge 规则、编解码）
+- [x] RMSNorm（对比 LayerNorm，含数值自检）
+- [x] RoPE 旋转位置编码（rotate-half，验证相对位置不变性/保模长）
+- [x] GQA（repeat_kv 统一 MHA/MQA/GQA + 因果遮蔽，12 项自检）
+- [x] SwiGLU 前馈网络（门控分支数值验证）
+- [x] Causal Self-Attention（含 mask、张量维度标注、未来不可见测试）
+- [ ] Triton 版 RMSNorm Kernel
+- [ ] 分块 Online-Softmax（Flash Attention 核心）
+
+## 六、实验结果（已完成：Pretrain + SFT + LoRA + DPO）
+
+![loss curves](experiments/assets/loss_curves.png)
+
+模型固定为 **63.91M**（hidden 768 / 8 层 / GQA，KV 头=4 / 词表 6400，bf16），两档数据规模对照：
+
+| 实验 | 阶段 | 数据量 | 步数 | 耗时 | loss（起→终） | 显存峰值 | GPU 利用率 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| small | Pretrain | 60,000 | 3,750 | 10.3 min | 7.73 → **3.35** | 7.36 GB | 97.1% |
+| small | SFT | 20,000 | 2,500 | 8.0 min | 3.91 → **3.17** | 7.36 GB | 97.1% |
+| **medium** | Pretrain | 150,000 | 9,376 | 25.5 min | 7.31 → **2.53** | 7.36 GB | 98.8% |
+| **medium** | SFT | 50,000 | 6,250 | 19.6 min | 2.82 → **2.21** | 7.36 GB | 98.8% |
+| LoRA | 在 medium-SFT 上 | 20,000 | 1,875 | 4.3 min | 围绕 2.21 波动 | **4.60 GB** | 96.0% |
+| DPO | 在 medium-SFT 上 | 17,166 对 | 4,292 | 12.4 min | 0.693→0.62（均值） | 5.71 GB | 98.4% |
+
+![lora compare](experiments/assets/lora_compare.png)
+
+![dpo curve](experiments/assets/dpo_curve.png)
+
+- **数据规模效应**：pretrain 数据 ×2.5，最终 loss 3.35→2.53，生成连贯度与指令遵循明显改善。
+- **消融**：只预训练的模型只会续写、无法遵循指令；经 SFT 后才学会 chat template 与助手式作答。
+- **PEFT 性价比**：LoRA 只训 **0.393M（0.61%）** 参数、适配器仅 **0.78MB**（全量 132MB）、显存降 37%，可热插拔叠加。
+- **DPO 偏好对齐**：loss 从理论值 -ln2=0.693 缓慢下移（区间均值 0.642→0.620），让输出更收敛；DPO 调偏好不增知识。
+- 推理（FP16）解码速度约 47–100 tokens/s；GPU 画像见 `experiments/assets/gpu_profile.png`。
+- **诚实的局限**：仅用约 5% 全量语料 + 63M 参数，仍有事实错误/重复/代码错误，符合 Chinchilla 对小模型 token 量的判断。
+- 逐步 loss 数据：[`experiments/training_log.csv`](experiments/training_log.csv) 与各档 `*_curve.csv`；完整分析见 [`experiments/README.md`](experiments/README.md)。
+
+## 七、学习笔记
+- [架构组件推导](notes/architecture.md)：RMSNorm / RoPE / GQA / SwiGLU / 残差与 Pre-Norm
+- [对齐算法推导](notes/alignment.md)：SFT 损失、DPO 闭式解、GRPO 组内优势、与 PPO 的区别
+
+## 八、参考与致谢
+- 原始项目：[jingyaogong/minimind](https://github.com/jingyaogong/minimind)（MIT）
+- 数据集：ModelScope `gongjy/minimind_dataset`
+- 论文：RoFormer(RoPE)、GQA、GLU Variants(SwiGLU)、LoRA、DPO、DeepSeekMath(GRPO)、FlashAttention、Chinchilla
+
+> 说明：`reproduced/` 内为对原项目的学习性复现，著作权归原作者；`from_scratch/`、`experiments/`、`notes/` 为本人独立实现与记录。

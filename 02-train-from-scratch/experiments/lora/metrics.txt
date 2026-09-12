@@ -1,0 +1,3 @@
+steps=39 seconds=256 loss_first=2.4065 loss_last=2.5691 loss_min=2.1526
+total_params_M=64.305 lora_trainable_M=0.393 lora_ratio_pct=0.61
+gpu=mem_peak_MB:4601 util_mean_pct:96.0 temp_peak_C:72 samples:51

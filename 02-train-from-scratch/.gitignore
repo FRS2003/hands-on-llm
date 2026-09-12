@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+# 虚拟环境
+.venv/
+venv/
+env/
+# 模型权重 / 数据 / 训练产物（体积大，不上传，README 说明获取方式）
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.ckpt
+checkpoints/
+output/
+runs/
+dataset/raw/
+wandb/
+*.log
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
