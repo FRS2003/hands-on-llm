@@ -1,0 +1,6 @@
+stage,dataset,params_M,batch,grad_accum,optimizer,lr,precision,gpu_mem_peak_MB,train_min,final_loss,eval_loss,notes
+pretrain,,,,,,,,,,,,
+sft,,,,,,,,,,,,
+lora,,,,,,,,,,,,
+dpo,,,,,,,,,,,,
+grpo,,,,,,,,,,,,
