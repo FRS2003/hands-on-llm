@@ -103,10 +103,11 @@ python -c "import torch; print(torch.cuda.is_available(), torch.cuda.is_bf16_sup
 ## 七、学习笔记
 - [架构组件推导](notes/architecture.md)：RMSNorm / RoPE / GQA / SwiGLU / 残差与 Pre-Norm
 - [对齐算法推导](notes/alignment.md)：SFT 损失、DPO 闭式解、GRPO 组内优势、与 PPO 的区别
+- **[训练全流程小白详解](notes/training-pipeline-explained-zh.md)（[Word 版](notes/training-pipeline-explained-zh.docx)）**：用大白话+类比讲透 Pretrain→SFT→LoRA→DPO→GRPO→RLVR 每一步是什么、为什么、看哪些日志数字，配本项目单卡真实结果
 
 ## 八、参考与致谢
 - 原始项目：[jingyaogong/minimind](https://github.com/jingyaogong/minimind)（MIT）
 - 数据集：ModelScope `gongjy/minimind_dataset`
 - 论文：RoFormer(RoPE)、GQA、GLU Variants(SwiGLU)、LoRA、DPO、DeepSeekMath(GRPO)、FlashAttention、Chinchilla
 
-> 说明：`reproduced/` 内为对原项目的学习性复现，著作权归原作者；`from_scratch/`、`experiments/`、`notes/` 为本人独立实现与记录。
+> 说明：`reproduced/` 内为对原项目的学习性复现，著作权归原作者；`from_scratch/`、`experiments/`、`notes/` 为独立实现与记录。

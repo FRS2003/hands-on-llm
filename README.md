@@ -63,7 +63,8 @@ MoE/Scaling/对齐   DPO·GRPO + 对照实验     量化推理 选型           
 
 - 第一次看：从 [`LEARNING_PATH.md`](LEARNING_PATH.md) 按顺序学，每个模块都有自己的 README 导览；
 - 想直接看代码：进 [`02-train-from-scratch/from_scratch`](02-train-from-scratch/from_scratch) 看手写组件，`python test_model.py`、`python test_grpo_logic.py` 跑数值自检；
-- 面试速查：[`appendix/`](appendix) 里有名名词词典、论文清单和结合本仓库真实数字的面试问答。
+- 面试速查：[`appendix/`](appendix) 里有名词词典、论文清单和结合本仓库真实数字的面试问答；
+- 离线/批注：CS336 五篇精讲与 ② 的训练全流程详解都附了排版好的 **Word 版**（与同名 `.md` 同目录的 `.docx`），可直接下载打印或批注。
 
 ## 📂 仓库结构
 
@@ -75,6 +76,7 @@ hands-on-llm/
 ├── 04-agent/                # MiniCode 编程智能体
 ├── 05-rag-application/      # VSD 医学文献 RAG 问答（2026-06 起）
 ├── appendix/                # 名词词典 / 论文清单 / 面试问答
+├── tools/                   # 辅助工具：Markdown→Word 转换器 md2docx.py
 ├── LEARNING_PATH.md         # 学习路径与使用指南
 └── LICENSE                  # MIT
 ```
@@ -97,9 +99,9 @@ hands-on-llm/
 
 ## 🙏 致谢与说明
 
-本仓库为个人学习作品，训练部分复现自 [jingyaogong/minimind](https://github.com/jingyaogong/minimind)（MIT）、
+本仓库为一套面向学习者的动手学习资料，训练部分复现自 [jingyaogong/minimind](https://github.com/jingyaogong/minimind)（MIT）、
 框架实验参考 [hiyouga/LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory)（Apache-2.0）、
-理论笔记对应 [Stanford CS336](https://stanford-cs336.github.io/)（笔记为个人理解，不含其受版权保护的讲义/作业），各模块 README 内有更详细出处。如有疏漏欢迎 Issue 指正。
+理论笔记对应 [Stanford CS336](https://stanford-cs336.github.io/)（笔记为学习理解，不含其受版权保护的讲义/作业），各模块 README 内有更详细出处。如有疏漏欢迎 Issue 指正。
 
 ## License
 

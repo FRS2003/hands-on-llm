@@ -28,7 +28,8 @@ python cli.py
 ## 目录
 - 根目录为核心源码与测试（`test_*.py`）；
 - `skills/`：高层 Skill 的提示模板（add-feature / fix-bug / refactor / code-review）；
-- `docs/`：开发全流程记录、复刻方案与问题答疑。
+- `docs/`：开发全流程记录、复刻方案与问题答疑；
+- 推荐先读 [Agent 两步终止机制答疑：为什么最终答案不走 JSON](docs/问题答疑.md)（[Word 版](docs/问题答疑.docx)），讲清 Harness 工程里"决策终止"与"答案生成"为什么要拆开。
 
 ## 安全说明
 仓库**不包含任何真实 API Key / 服务器密码**，统一从环境变量读取（见 `.env.example`）。
