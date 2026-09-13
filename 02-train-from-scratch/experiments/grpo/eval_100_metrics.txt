@@ -1,0 +1,10 @@
+GRPO quantitative eval on 100 HELD-OUT prompts (excluded from the 600 training subset)
+same seeds/sampling; max_new_tokens=300; rule reward identical to trainer/train_grpo_rule.py
+weight      n ruleScore len20-800  thinkOK  tag==1  noTag  repPen avgChars
+full_sft  100     0.255     1.000    0.050   0.770  0.220   0.120      411
+grpo      100     0.339     0.980    0.100   0.750  0.240   0.096      427
+
+DELTA rule_score 0.255 -> 0.339  (+0.084)
+DELTA thinkOK     0.050 -> 0.100  (+0.050)
+DELTA tag==1      0.770 -> 0.750  (-0.020)
+DELTA repPenalty  0.120 -> 0.096  (-0.024)

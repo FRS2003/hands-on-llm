@@ -110,14 +110,37 @@ DPO **只调整输出偏好/风格、不增加知识**：对齐后回答更简�
 
 **分析（诚实）**：组内优势均值严格为 0、KL 贴近 0、LR 余弦衰减均与理论一致，证明 GRPO 机制正确跑通；但规则奖励只定义"格式/长度/不重复"、**不评判内容对错**，故 63M 模型事实正确性并未提升；batch=2 使 Reward 噪声较大、有 1 条在闭合 think 前触及 512 token 上限。原始日志/逐步 CSV/对比全文见 [`grpo/`](grpo/)。
 
-## 8. GPU 画像与推理速度
+**100 条 held-out 定量评测**：评测题从全量 19,502 条等间隔抽取、并**排除 GRPO 训练用的 600 条**（脚本 `../reproduced/eval_grpo_100.py`，逐条明细 `grpo/eval_100_detail.csv`）：
+
+| 权重 | 规则分均值 | 长度合规(20–800) | think段合规 | 标签恰1个 | 3-gram重复惩罚 | 平均字符 |
+| --- | ---:| ---:| ---:| ---:| ---:| ---:|
+| full_sft | 0.255 | 1.00 | 0.05 | 0.77 | 0.120 | 411 |
+| grpo | **0.339** | 0.98 | 0.10 | 0.75 | **0.096** | 427 |
+
+样本扩到 100 条后结论更稳健：规则分 **+0.084**、3-gram 重复度下降（0.120→0.096）、think 段长度合规率翻倍；"标签恰 1 个"比例基本持平（-0.02，属采样噪声）。提升温和且集中在"格式/重复度"，再次印证纯规则奖励不改变内容正确性。注：本次 max_new_tokens=300，think 段容易超过规则设定的 300 字符上限，故 think 段合规率绝对值偏低。
+
+## 8. 五阶段统一生成横评（pretrain → GRPO）
+
+用**同一组 6 个 prompt、同一随机种子与采样参数**让五个权重分别生成（pretrain 走续写模式、其余走对话模板；LoRA 是叠加在 SFT 主干上的适配器）。完整对比见独立文档 [`stage_evolution.md`](stage_evolution.md)（逐条原文 `stage_evolution.txt`，脚本 `../reproduced/compare_5stages.py`）。
+
+| 阶段 | 平均字符 | 闭合 think 标签 | 定位 |
+| --- | ---:| ---:| --- |
+| pretrain | 209 | 0/6 | 只会续写、不遵循指令、事实易错乱 |
+| SFT | 544 | 4/6 | 学会助手角色与 markdown/代码块结构 |
+| LoRA | 522 | 5/6 | 仅训 0.61% 参数即复现 SFT 的指令遵循 |
+| DPO | 529 | 5/6 | 调偏好/措辞，不增加知识 |
+| GRPO | 517 | 4/6 | 强 KL 约束下小幅优化格式 |
+
+**核心结论**：能力跃迁最大的是 **pretrain → SFT**（从"不会答题"到"会答题"），之后三个阶段都在 SFT 基础上做精细化调整，五阶段不可互相替代。
+
+## 9. GPU 画像与推理速度
 
 ![gpu profile](assets/gpu_profile.png)
 
 - 训练阶段 GPU 利用率长期 96–99%、温度峰值 72–75°C；显存峰值 pretrain/SFT 7.36GB、LoRA 4.60GB。
 - 推理（FP16，单条 `model.generate`）解码速度约 **47–100 tokens/s**。
 
-## 9. 关键发现
+## 10. 关键发现
 
 1. **数据规模的边际收益清晰可见**：pretrain 数据量 ×2.5（6 万→15 万），同架构同超参下最终 loss 由 3.35 降到 2.53；
    SFT 由 3.17 降到 2.21，medium 模型生成的语句连贯度、指令遵循度明显更好（见 `generation_samples.md`）。
@@ -129,10 +152,12 @@ DPO **只调整输出偏好/风格、不增加知识**：对齐后回答更简�
 5. **loss 与生成质量并不完全等价**：SFT loss 降到 2.2 后模型能稳定输出结构化中文，但受 63M 参数 + 仅约 5% 全量语料限制，
    仍有事实错误、重复、代码语法错误——与 Chinchilla「小模型需要足够 token」的结论一致，是后续扩数据/扩参的方向。
 
-## 10. 目录与复现
+## 11. 目录与复现
 
 - `small/`、`medium/`、`lora/`、`dpo/`：各自的 `*_curve.csv`（逐步 loss/lr）、`metrics.txt`、原始生成记录、GPU 采样 CSV；
 - `grpo/`：GRPO 原始训练日志、逐步指标 CSV、metrics 与前后生成对比文本；
+- `grpo/eval_100_*`：100 条 held-out 定量评测（指标表 + 200 行逐条明细）；
+- `stage_evolution.md / .txt`：五阶段同种子生成横评（解读文档 + 逐条原文）；
 - `assets/`：loss 对比曲线、GPU 画像、LoRA 资源对比图；
 - `generation_samples.md`：pretrain-only / small-SFT / medium-SFT / LoRA / DPO 生成样例对比；
 - 完整复现命令见 [`../reproduced/`](../reproduced/)；逐步汇总见 [`training_log.csv`](training_log.csv)。

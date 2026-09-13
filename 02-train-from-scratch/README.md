@@ -47,6 +47,8 @@ python -c "import torch; print(torch.cuda.is_available(), torch.cuda.is_bf16_sup
 - [ ] BPE 分词器自行训练（当前先用仓库 tokenizer，手写版见 `from_scratch/`）
 - [x] DPO 偏好对齐（17k 偏好对、β=0.15，验证 -ln2 初始与隐式 reward margin 拉开）
 - [x] GRPO 强化学习对齐（纯规则奖励免 1.8B 奖励模型，300 步 / 21.7 min；规则分 0.109→0.290、|KL|≈0.005）
+- [x] GRPO 100 条 held-out 定量评测（排除训练题，规则分 +0.084、3-gram 重复度 0.120→0.096）
+- [x] 五阶段同种子生成横评（pretrain→GRPO 能力演进，见 experiments/stage_evolution.md）
 - [ ] Triton Kernel / 分块注意力
 - [ ] DeepSpeed ZeRO + 混合精度 + 梯度检查点（多卡）
 
@@ -74,7 +76,7 @@ python -c "import torch; print(torch.cuda.is_available(), torch.cuda.is_bf16_sup
 | **medium** | SFT | 50,000 | 6,250 | 19.6 min | 2.82 → **2.21** | 7.36 GB | 98.8% |
 | LoRA | 在 medium-SFT 上 | 20,000 | 1,875 | 4.3 min | 围绕 2.21 波动 | **4.60 GB** | 96.0% |
 | DPO | 在 medium-SFT 上 | 17,166 对 | 4,292 | 12.4 min | 0.693→0.62（均值） | 5.71 GB | 98.4% |
-| GRPO | full_sft 热启动 | 600 prompt | 300 | 21.7 min | 规则分 0.109→0.290 | 9.9 GB | rollout 为主 |
+| GRPO | full_sft 热启动 | 600 prompt | 300 | 21.7 min | 规则分 0.109→0.290；100 条 held-out +0.084 | 9.9 GB | rollout 为主 |
 
 ![lora compare](experiments/assets/lora_compare.png)
 
@@ -89,6 +91,7 @@ python -c "import torch; print(torch.cuda.is_available(), torch.cuda.is_bf16_sup
 - **PEFT 性价比**：LoRA 只训 **0.393M（0.61%）** 参数、适配器仅 **0.78MB**（全量 132MB）、显存降 37%，可热插拔叠加。
 - **DPO 偏好对齐**：loss 从理论值 -ln2=0.693 缓慢下移（区间均值 0.642→0.620），让输出更收敛；DPO 调偏好不增知识。
 - **GRPO 强化学习**：免 1.8B 奖励模型、改纯规则奖励，300 步耗时 21.7 min；组内优势均值**严格为 0**（组内中心化）、平均 |KL|≈0.005（β=0.1 锚定、策略未漂移）、LR 3e-7→3e-8 余弦衰减；同 prompt/同种子前后对比，**规则分 0.109→0.290**（输出长度更受控、思维链格式更规范、重复更少）。规则只约束格式不判对错，**内容正确性不因此提升**，原始日志/曲线/对比见 [`experiments/grpo/`](experiments/grpo/)。
+- **GRPO 扩样评测与五阶段横评**：在 100 条**未参与训练**的 held-out 题上规则分 0.255→0.339（+0.084）、3-gram 重复度 0.120→0.096，与 5 条对比方向一致且更稳健；并用同种子让五个阶段同题生成，直观看出 **pretrain→SFT 能力跃迁最大**、后三阶段为精细调整，见 [experiments/stage_evolution.md](experiments/stage_evolution.md) 与 [experiments/grpo/](experiments/grpo/)。
 - 推理（FP16）解码速度约 47–100 tokens/s；GPU 画像见 `experiments/assets/gpu_profile.png`。
 - **诚实的局限**：仅用约 5% 全量语料 + 63M 参数，仍有事实错误/重复/代码错误，符合 Chinchilla 对小模型 token 量的判断。
 - 逐步 loss 数据：[`experiments/training_log.csv`](experiments/training_log.csv) 与各档 `*_curve.csv`；完整分析见 [`experiments/README.md`](experiments/README.md)。
