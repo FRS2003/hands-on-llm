@@ -1,0 +1,8 @@
+weight=arith_grpo temp=0.8
+  add: 74/120 = 0.617
+  TOTAL: 74/120 = 0.617
+    [add gold=10 pred=10] 10
+    [add gold=8 pred=7] 7
+    [add gold=10 pred=9] 9
+    [add gold=10 pred=10] 10
+    [add gold=12 pred=14] 14

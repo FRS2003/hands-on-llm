@@ -1,0 +1,8 @@
+Model Params: 63.91M
+Trainable Params: 63.912M
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 4000 examples [00:00, 239876.70 examples/s]
+Epoch:[1/1](50/250), loss: 0.8273, logits_loss: 0.8273, aux_loss: 0.0000, lr: 0.00000914, epoch_time: 0.0min
+Epoch:[1/1](100/250), loss: 0.6773, logits_loss: 0.6773, aux_loss: 0.0000, lr: 0.00000689, epoch_time: 0.0min
+Epoch:[1/1](150/250), loss: 0.5243, logits_loss: 0.5243, aux_loss: 0.0000, lr: 0.00000411, epoch_time: 0.0min
+Epoch:[1/1](200/250), loss: 0.4194, logits_loss: 0.4194, aux_loss: 0.0000, lr: 0.00000186, epoch_time: 0.0min
+Epoch:[1/1](250/250), loss: 0.3908, logits_loss: 0.3908, aux_loss: 0.0000, lr: 0.00000100, epoch_time: 0.0min

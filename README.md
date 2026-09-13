@@ -8,7 +8,7 @@
 </p>
 
 > 一条**由理论到落地**的大模型自学与实战路径：先读透原理，再用原生 PyTorch 手搓并完整跑通
-> **预训练 → SFT → LoRA → DPO → GRPO**，然后读懂工业级微调框架、动手做 Agent，最后用 RAG 把模型落到真实场景。
+> **预训练 → SFT → LoRA → DPO → GRPO → 可验证奖励 RLVR**，然后读懂工业级微调框架、动手做 Agent，最后用 RAG 把模型落到真实场景。
 > 所有训练实验都在**单张消费级显卡（RTX 3080 Ti 12GB）**上真实跑过，数字、曲线、生成样例与踩坑全部留档，不做"截图式学习"。
 
 ## 🧭 学习路线（建议按编号顺序）
@@ -23,7 +23,7 @@ MoE/Scaling/对齐   DPO·GRPO + 对照实验     量化推理 选型           
 | 模块 | 目录 | 你会看到什么 |
 | --- | --- | --- |
 | ① 理论基础 | [`01-foundations`](01-foundations) | Stanford CS336（L1–L17）5 篇中文精讲：分词、Transformer、注意力变体、MoE、GPU/并行、Scaling Law、推理优化、对齐与 GRPO |
-| ② 手搓与训练 | [`02-train-from-scratch`](02-train-from-scratch) | 原生 PyTorch 手写 RMSNorm/RoPE/GQA/SwiGLU + 26 项数值自检；单卡跑通五阶段训练并做规模/资源/偏好对照实验 |
+| ② 手搓与训练 | [`02-train-from-scratch`](02-train-from-scratch) | 原生 PyTorch 手写 RMSNorm/RoPE/GQA/SwiGLU + 26 项数值自检；单卡跑通五阶段训练 + 可验证奖励 RLVR，并做规模/资源/偏好/架构对照实验 |
 | ③ 工业框架 | [`03-peft-framework`](03-peft-framework) | 源码级走读 LLaMA-Factory；对齐算法、PEFT、分布式、量化推理四张选型对照表 + 垂直领域微调方案 |
 | ④ Agent 工程 | [`04-agent`](04-agent) | 终端编程 Agent：ReAct + Harness、Skill 路由、记忆闭环、分层上下文压缩、主从多智能体、分层安全 |
 | ⑤ RAG 落地 | [`05-rag-application`](05-rag-application) | 医学文献混合检索问答：BM25+稠密双路、RRF、Rerank、HyDE、带引文生成、ReAct 编排、Streamlit |
@@ -55,6 +55,7 @@ MoE/Scaling/对齐   DPO·GRPO + 对照实验     量化推理 选型           
 - **LoRA 只训 0.61% 参数**（0.393M/63.91M），适配器权重 132MB→0.78MB，显存 7.36GB→4.60GB；
 - **DPO** 用 17,166 对偏好数据，loss 从理论值 -ln2≈0.693 起步并缓慢下降，学习率刻意取 4e-8 防止灾难性遗忘；
 - **GRPO** 免 1.8B 奖励模型改纯规则奖励，单卡真实训练 300 步（21.7 min）：组内优势均值严格为 0、平均 |KL|≈0.005 未漂移，同 prompt/种子前后对比规则分 0.109→0.290；100 条未训练 held-out 题上 +0.084、3-gram 重复度下降，并做五阶段（pretrain→GRPO）同种子生成横评；另配 14 项纯 tensor 自检；
+- **可验证奖励 RLVR（答案对错自动判分）**：一位加法先 SFT 冷启动到「采样能偶尔答对」的甜区（greedy 0.633），再用对错判分的 GRPO（B8×G4、lr 4e-6、β-KL 0.08、300 步）把独立 120 题 **greedy 0.633→0.792、采样三种子均值 0.503→0.603**；对照证明 RL 只放大已有能力、不注入知识，并复现了 lr 过大 / KL 过弱导致的策略崩溃；
 - **架构/精度消融**：同骨架实测 MHA/GQA/MQA——训练侧 MQA 比 MHA 省约 12% 显存、快约 16%，而推理 KV cache@4096 为 100.7/50.3/12.6MB（随 KV 头数 8:4:1，长上下文这才是 GQA/MQA 主价值）；bf16 较 fp32 省 35–49% 显存、约 1.8× 吞吐；
 - 全程显存峰值 4.6–7.4GB、GPU 利用率 96–99%，证明单卡可完整走通主链路。
 
@@ -90,6 +91,7 @@ hands-on-llm/
 - [x] GRPO 纯规则奖励 300 步全量训练，补 Reward/KL/Loss 曲线与前后生成对比
 - [x] GRPO 100 条 held-out 定量评测 + 五阶段同种子生成横评（能力演进证据链）
 - [x] MHA/GQA/MQA × 混合精度 × batch 架构消融（训练显存/吞吐 + 推理 KV cache 实测）
+- [x] 可验证奖励 RLVR（对错判分）：SFT 甜区冷启动 + GRPO，greedy 0.633→0.792，含能力边界 / 策略崩溃对照
 - [ ] Triton 自定义 Kernel、手写分块 Flash Attention、DeepSpeed ZeRO 实测
 - [ ] 持续补充论文精读与面试题
 

@@ -1,6 +1,6 @@
 # 实验记录（Experiments）
 
-> 单卡 **RTX 3080 Ti 12GB** 上，从零复现 MiniMind（63.9M）的 **继续预训练 → 监督微调（SFT）→ LoRA 参数高效微调 → DPO 偏好对齐 → GRPO 强化学习** 全流程。
+> 单卡 **RTX 3080 Ti 12GB** 上，从零复现 MiniMind（63.9M）的 **继续预训练 → 监督微调（SFT）→ LoRA 参数高效微调 → DPO 偏好对齐 → GRPO 强化学习 → 可验证奖励 RLVR** 全流程。
 > 所有数字均来自真实训练日志（`*/` 目录下的 `*_curve.csv`、`metrics.txt`），曲线图见 `assets/`。
 
 ## 1. 运行环境
@@ -149,14 +149,28 @@ DPO **只调整输出偏好/风格、不增加知识**：对齐后回答更简�
 
 **一句话结论**：训练时 GQA/MQA 省得有限；推理长上下文/高并发时 KV cache 按 KV 头数等比缩小（MQA 仅 MHA 的 1/8），这才是 GQA/MQA 的核心价值，也是 LLaMA-2/3 选 GQA 的根本原因。小 batch(bs=1) 下三架构差异被固定开销抹平，算子优势要在合理 batch 下才显现。
 
-## 10. GPU 画像与推理速度
+## 10. 可验证奖励 GRPO（RLVR：答案对错自动判分）
+
+纯规则奖励只改格式、不判对错（见 §7），这里用**答案可程序化判分**的一位加法做 RLVR：答对 +1 / 答错 0，先 SFT 冷启动到"采样能偶尔答对"的甜区，再用 GRPO 放大正确采样（完整过程、甜区探测与负结果对照见 [`verifiable_rl/`](verifiable_rl/)，脚本 `../reproduced/train_grpo_arith.py`）。
+
+| 环节 | 配置 / 结果 |
+| --- | --- |
+| 冷启动 SFT | full_sft → 一位加法 1 epoch（250 步）：greedy 0.633 / 采样 0.503（甜区） |
+| GRPO | B8×G4、lr 4e-6、β(KL)=0.08、300 步、CISPO、bf16，复用官方 TorchRolloutEngine |
+| **独立 120 题** | **greedy 0.633→0.792（+25%）；采样三种子均值 0.503→0.603（+20%）** |
+
+![verifiable rl](assets/verifiable_rl_curve.png)
+
+**边界（负结果同样关键）**：① 任务超出能力边界（两位加法不会进位）时组内全错、优势恒 0，RL 教不会新知识；② SFT 已到天花板（greedy 0.99）时 RL 无空间；③ lr 过大、KL 锚定太弱会**策略崩溃**（greedy 崩到 0.03–0.27、KL 偏离到 −2.9）。结论：**RL 只放大已有能力、不注入知识，且必须靠 β-KL 锚定 + 保守学习率才能稳定训练。**
+
+## 11. GPU 画像与推理速度
 
 ![gpu profile](assets/gpu_profile.png)
 
 - 训练阶段 GPU 利用率长期 96–99%、温度峰值 72–75°C；显存峰值 pretrain/SFT 7.36GB、LoRA 4.60GB。
 - 推理（FP16，单条 `model.generate`）解码速度约 **47–100 tokens/s**。
 
-## 11. 关键发现
+## 12. 关键发现
 
 1. **数据规模的边际收益清晰可见**：pretrain 数据量 ×2.5（6 万→15 万），同架构同超参下最终 loss 由 3.35 降到 2.53；
    SFT 由 3.17 降到 2.21，medium 模型生成的语句连贯度、指令遵循度明显更好（见 `generation_samples.md`）。
@@ -167,14 +181,16 @@ DPO **只调整输出偏好/风格、不增加知识**：对齐后回答更简�
 6. **DPO 对齐特性**：loss 从理论值 -ln2 起步、以极小学习率缓慢下移，验证了偏好目标；DPO 改变输出风格而非知识容量，需严格控制 lr 防止遗忘。
 5. **loss 与生成质量并不完全等价**：SFT loss 降到 2.2 后模型能稳定输出结构化中文，但受 63M 参数 + 仅约 5% 全量语料限制，
    仍有事实错误、重复、代码语法错误——与 Chinchilla「小模型需要足够 token」的结论一致，是后续扩数据/扩参的方向。
+7. **RL 只放大已有能力、不注入知识（RLVR 实测，见 §10）**：一位加法冷启动到甜区后，可验证奖励 GRPO 把 held-out greedy 0.633→0.792；但任务超能力边界（组内全错无梯度）、SFT 已到天花板、或 lr 过大 KL 过弱（策略崩溃）时均无效——RLVR 生效前提是「SFT 已具备但未稳固」，且需 β-KL 锚定参考模型。
 
-## 12. 目录与复现
+## 13. 目录与复现
 
 - `small/`、`medium/`、`lora/`、`dpo/`：各自的 `*_curve.csv`（逐步 loss/lr）、`metrics.txt`、原始生成记录、GPU 采样 CSV；
 - `grpo/`：GRPO 原始训练日志、逐步指标 CSV、metrics 与前后生成对比文本；
 - `grpo/eval_100_*`：100 条 held-out 定量评测（指标表 + 200 行逐条明细）；
 - `stage_evolution.md / .txt`：五阶段同种子生成横评（解读文档 + 逐条原文）；
 - `ablation/`：MHA/GQA/MQA × 精度 × batch 消融数据、KV cache 表、解读与对照图；
+- `verifiable_rl/`：可验证奖励 GRPO（RLVR）数据、完整训练/评测日志、甜区与策略崩溃对照、解读文档；
 - `assets/`：loss 对比曲线、GPU 画像、LoRA 资源对比图；
 - `generation_samples.md`：pretrain-only / small-SFT / medium-SFT / LoRA / DPO 生成样例对比；
 - 完整复现命令见 [`../reproduced/`](../reproduced/)；逐步汇总见 [`training_log.csv`](training_log.csv)。

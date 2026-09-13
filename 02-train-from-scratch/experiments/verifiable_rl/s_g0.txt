@@ -1,0 +1,8 @@
+weight=arith_sft temp=0.0
+  add: 76/120 = 0.633
+  TOTAL: 76/120 = 0.633
+    [add gold=10 pred=10] 10
+    [add gold=8 pred=7] 7
+    [add gold=10 pred=10] 10
+    [add gold=10 pred=10] 10
+    [add gold=12 pred=12] 12

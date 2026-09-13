@@ -1,0 +1,8 @@
+weight=arith_sft temp=0.8
+  add: 65/120 = 0.542
+  TOTAL: 65/120 = 0.542
+    [add gold=10 pred=10] 10
+    [add gold=8 pred=6] 6
+    [add gold=10 pred=9] 9
+    [add gold=10 pred=10] 10
+    [add gold=12 pred=13] 13

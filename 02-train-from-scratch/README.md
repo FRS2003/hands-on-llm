@@ -63,7 +63,7 @@ python -c "import torch; print(torch.cuda.is_available(), torch.cuda.is_bf16_sup
 - [ ] Triton 版 RMSNorm Kernel
 - [ ] 分块 Online-Softmax（Flash Attention 核心）
 
-## 六、实验结果（已完成：Pretrain + SFT + LoRA + DPO + GRPO）
+## 六、实验结果（已完成：Pretrain + SFT + LoRA + DPO + GRPO + 可验证奖励 RLVR）
 
 ![loss curves](experiments/assets/loss_curves.png)
 
@@ -78,6 +78,7 @@ python -c "import torch; print(torch.cuda.is_available(), torch.cuda.is_bf16_sup
 | LoRA | 在 medium-SFT 上 | 20,000 | 1,875 | 4.3 min | 围绕 2.21 波动 | **4.60 GB** | 96.0% |
 | DPO | 在 medium-SFT 上 | 17,166 对 | 4,292 | 12.4 min | 0.693→0.62（均值） | 5.71 GB | 98.4% |
 | GRPO | full_sft 热启动 | 600 prompt | 300 | 21.7 min | 规则分 0.109→0.290；100 条 held-out +0.084 | 9.9 GB | rollout 为主 |
+| **RLVR** | arith_sft 冷启动(一位加法) | 4,000 题 | 300 | — | held-out greedy 0.633→**0.792**、采样 0.503→0.603 | — | rollout 为主 |
 
 ![lora compare](experiments/assets/lora_compare.png)
 
@@ -94,6 +95,7 @@ python -c "import torch; print(torch.cuda.is_available(), torch.cuda.is_bf16_sup
 - **GRPO 强化学习**：免 1.8B 奖励模型、改纯规则奖励，300 步耗时 21.7 min；组内优势均值**严格为 0**（组内中心化）、平均 |KL|≈0.005（β=0.1 锚定、策略未漂移）、LR 3e-7→3e-8 余弦衰减；同 prompt/同种子前后对比，**规则分 0.109→0.290**（输出长度更受控、思维链格式更规范、重复更少）。规则只约束格式不判对错，**内容正确性不因此提升**，原始日志/曲线/对比见 [`experiments/grpo/`](experiments/grpo/)。
 - **GRPO 扩样评测与五阶段横评**：在 100 条**未参与训练**的 held-out 题上规则分 0.255→0.339（+0.084）、3-gram 重复度 0.120→0.096，与 5 条对比方向一致且更稳健；并用同种子让五个阶段同题生成，直观看出 **pretrain→SFT 能力跃迁最大**、后三阶段为精细调整，见 [experiments/stage_evolution.md](experiments/stage_evolution.md) 与 [experiments/grpo/](experiments/grpo/)。
 - **架构与精度消融**：同骨架只改 KV 头数，MHA/GQA/MQA 参数 68.6/63.9/60.4M；训练侧（bs8,bf16）峰值显存 2623/2490/2312MB、吞吐 60/64/70 k tok/s（MQA 比 MHA 快约 16%）；**推理 KV cache@4096 = 100.7/50.3/12.6MB，与 KV 头数成正比（MQA 仅 MHA 的 1/8），这才是 GQA/MQA 主价值**；bf16 比 fp32 省 35–49% 显存、约 1.8× 吞吐。见 [experiments/ablation/](experiments/ablation/)。
+- **可验证奖励 RLVR（答案对错自动判分）**：一位加法先 SFT 冷启动到甜区（greedy 0.633、采样 0.503），再用可验证奖励 GRPO（答对+1/错 0，B8×G4、lr 4e-6、β-KL 0.08、300 步）把**独立 120 题 greedy 提到 0.792（+25%）、三种子采样均值 0.503→0.603（+20%）**；对照实验证明 RL 只放大已有能力、不注入知识（任务超能力边界则组内全错无梯度、SFT 到顶则无空间、lr 过大且 KL 过弱会策略崩溃），见 [experiments/verifiable_rl/](experiments/verifiable_rl/)。
 - 推理（FP16）解码速度约 47–100 tokens/s；GPU 画像见 `experiments/assets/gpu_profile.png`。
 - **诚实的局限**：仅用约 5% 全量语料 + 63M 参数，仍有事实错误/重复/代码错误，符合 Chinchilla 对小模型 token 量的判断。
 - 逐步 loss 数据：[`experiments/training_log.csv`](experiments/training_log.csv) 与各档 `*_curve.csv`；完整分析见 [`experiments/README.md`](experiments/README.md)。
