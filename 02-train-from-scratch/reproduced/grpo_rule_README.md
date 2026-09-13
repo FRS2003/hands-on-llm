@@ -50,8 +50,16 @@ reward_model = _DummyRuleReward()  # 原为 LMForRewardModel(args.reward_model_p
 2. **静态核对**：`rollout_engine.RolloutResult` 的 6 个字段与训练脚本消费端逐一对应。
 3. **数值自检**：`from_scratch/test_grpo_logic.py` 覆盖规则奖励、组内优势中心化、
    KL 非负、初始 ratio=1、CISPO loss 可反传，共 14 项断言全过（CPU 秒级）。
-4. 端到端第一步的真实 generate/前向在有卡 GPU 上为毫秒级，切有卡模式后执行 `bash start_grpo.sh`。
+4. 已在有卡 RTX 3080 Ti 上执行 `bash start_grpo.sh` 跑完全部 300 步，结果见下节「实际训练结果」。
+
+## 实际训练结果（2026-09-13，单卡 RTX 3080 Ti 12GB）
+- 300 个 optimizer step，wall **21m40s**（≈4.33 s/step，在线 rollout 生成是主要开销），显存峰值约 **9.9 GB**。
+- Reward（规则分；batch=2 噪声大）：全程均值 0.391，中段(step101–200) 0.494；LR 3e-7→3e-8 余弦衰减。
+- KL(ref)：均值 -0.0042、平均 |KL|=0.0051、区间 [-0.024, 0.008]，始终贴近 0，**策略未漂移**。
+- 组内优势：max|Adv Mean|=0（组内中心化正确）、Adv Std 均值 0.93（组内确有区分度、梯度有效）。
+- Actor(policy) loss 0.069±0.091，围绕 0 波动（策略梯度目标本就不趋零）。
+- **前后对比**（5 个相同 prompt、同种子/采样参数，脚本 `compare_grpo_gen.py`）：平均规则分 **full_sft 0.109 → grpo 0.290**，最佳一条 0.047→1.750（满分）。
+- 产物：`../experiments/grpo/`（grpo_train.log、grpo_curve.csv、metrics.txt、gen_grpo_compare.txt），曲线图 `../experiments/assets/grpo_curve.png`。
 
 ## 客观局限
-规则奖励只约束**长度/格式/不重复**，不判断内容正确性，因此本实验用于**完整走通 GRPO 机制、
-观察平均奖励上升、KL 受控、组内优势被拉开**，不声称内容质量提升——这一点与 DPO 阶段的记录口径一致。
+规则奖励只约束**长度/格式/不重复**，不判断内容正确性，因此本实验用于**完整走通 GRPO 机制、观察奖励/KL/优势的真实变化**，不声称内容正确性提升（实测前后对比中提升的正是格式维度）；batch=2 使 Reward 噪声较大、有 1 条生成在闭合 think 标签前触及 512 token 上限，均如实保留。

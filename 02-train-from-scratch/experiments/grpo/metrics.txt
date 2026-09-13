@@ -1,0 +1,49 @@
+GRPO (rule-based reward, CISPO) - training metrics
+=================================================
+Config: from=full_sft, data=rlaif_sub.jsonl(600 prompts), epochs=1,
+        batch_size=2 x num_generations=4, max_seq_len=512, max_gen_len=384,
+        lr=3e-7 cosine, beta(KL)=0.1, loss_type=cispo, bf16, single RTX 3080Ti 12GB
+Model : policy=reference=63.91M; reward = pure rule-based (no 1.8B reward model)
+
+Schedule
+--------
+total optimizer steps : 300
+logged points (every5): 60
+wall time             : 1300s (~21m40s, 4.33s/step)
+
+Reward (rule-based, higher=better; batch=2 -> noisy)
+---------------------------------------------------
+mean all          : 0.3911
+mean step<=100    : 0.3479
+mean 100<s<=200   : 0.4939
+mean step>200     : 0.3314
+max / min         : 1.4916 / -0.0064
+
+KL to reference (stay ~0, beta=0.1 anchor)
+------------------------------------------
+mean / mean|KL|   : -0.00415 / 0.00508
+max / min         : 0.00830 / -0.02390
+
+Advantage normalization (GRPO group-relative)
+--------------------------------------------
+max|Adv Mean| (must ~0): 0.000000
+Adv Std mean (nonzero => within-group spread): 0.9261
+
+Actor (policy) loss - PG objective hovers around 0
+-------------------------------------------------
+mean / std        : 0.0694 / 0.0913
+
+Response length
+---------------
+mean / max / min  : 216.0 / 375.6 / 40.5 tokens
+
+Learning rate (cosine)
+----------------------
+start / end       : 3.00e-07 / 3.00e-08
+Before/after generation comparison (same 5 prompts, same seeds/sampling, open_thinking)
+---------------------------------------------------------------------------------------
+full_sft (before GRPO): avg_rule_score=0.109  avg_chars=627  exact-one-think-tag=5/5
+grpo     (after 300  ): avg_rule_score=0.290  avg_chars=701  exact-one-think-tag=4/5
+best case: a prompt scored 0.047 before vs 1.750 (full marks) after
+scope: rule reward shapes length/think-tag/non-repetition ONLY; factual correctness unchanged (63M scale)
+artifact: gen_grpo_compare.txt ; one after-sample hit the 512-token cap before closing think tag

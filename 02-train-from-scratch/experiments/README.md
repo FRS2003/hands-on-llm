@@ -1,6 +1,6 @@
 # 实验记录（Experiments）
 
-> 单卡 **RTX 3080 Ti 12GB** 上，从零复现 MiniMind（63.9M）的 **继续预训练 → 监督微调（SFT）→ LoRA 参数高效微调 → DPO 偏好对齐** 全流程。
+> 单卡 **RTX 3080 Ti 12GB** 上，从零复现 MiniMind（63.9M）的 **继续预训练 → 监督微调（SFT）→ LoRA 参数高效微调 → DPO 偏好对齐 → GRPO 强化学习** 全流程。
 > 所有数字均来自真实训练日志（`*/` 目录下的 `*_curve.csv`、`metrics.txt`），曲线图见 `assets/`。
 
 ## 1. 运行环境
@@ -90,14 +90,34 @@ DPO 需同时持有 policy 与冻结的 reference 两个模型，故显存略升
 因学习率刻意取极小（4e-8，防止灾难性遗忘）且 batch=4 噪声大，曲线呈「高噪声、缓慢下降」形态。
 DPO **只调整输出偏好/风格、不增加知识**：对齐后回答更简短收敛（见 `generation_samples.md`），但 63M 的知识边界不变。
 
-## 7. GPU 画像与推理速度
+## 7. GRPO 强化学习（纯规则奖励 / CISPO）
+
+在 full_sft 基座上做 GRPO，**移除官方无条件加载的 1.8B 学习型奖励模型**（fp16≈3.6GB），奖励完全由内置规则给出（回答长度 20–800、`</think>` 思维段 20–300、标签恰好 1 个、3-gram 重复惩罚），改造最小 diff 见 [`../reproduced/grpo_rule_README.md`](../reproduced/grpo_rule_README.md)。
+
+![grpo curve](assets/grpo_curve.png)
+
+| 指标 | 数值 |
+| --- | --- |
+| prompt / 步数 | 600 / 300（batch 2 × num_gen 4） |
+| 耗时 / 速度 | 21.7 min / ≈4.33 s·step（在线 rollout 为主） |
+| lr / β / loss 类型 | 3e-7→3e-8 余弦 / 0.1 / CISPO |
+| Reward 均值 | 全程 0.391，中段(101–200) 0.494（batch=2 噪声大） |
+| KL(ref) | 均值 -0.0042、平均 |KL| 0.0051，始终贴近 0 |
+| 组内优势 | max|Adv Mean|=0（中心化）、Adv Std 均值 0.93 |
+| 显存峰值 | 9.9 GB（policy+reference 双模型 + 8 路生成 KV） |
+
+**前后对比**（同 5 个 prompt、同种子/采样，脚本 `../reproduced/compare_grpo_gen.py`）：平均规则分 full_sft **0.109 → grpo 0.290**，最佳一条 0.047→1.750（满分），长度更受控、思维链格式更规范、重复更少。
+
+**分析（诚实）**：组内优势均值严格为 0、KL 贴近 0、LR 余弦衰减均与理论一致，证明 GRPO 机制正确跑通；但规则奖励只定义"格式/长度/不重复"、**不评判内容对错**，故 63M 模型事实正确性并未提升；batch=2 使 Reward 噪声较大、有 1 条在闭合 think 前触及 512 token 上限。原始日志/逐步 CSV/对比全文见 [`grpo/`](grpo/)。
+
+## 8. GPU 画像与推理速度
 
 ![gpu profile](assets/gpu_profile.png)
 
 - 训练阶段 GPU 利用率长期 96–99%、温度峰值 72–75°C；显存峰值 pretrain/SFT 7.36GB、LoRA 4.60GB。
 - 推理（FP16，单条 `model.generate`）解码速度约 **47–100 tokens/s**。
 
-## 8. 关键发现
+## 9. 关键发现
 
 1. **数据规模的边际收益清晰可见**：pretrain 数据量 ×2.5（6 万→15 万），同架构同超参下最终 loss 由 3.35 降到 2.53；
    SFT 由 3.17 降到 2.21，medium 模型生成的语句连贯度、指令遵循度明显更好（见 `generation_samples.md`）。
@@ -109,9 +129,10 @@ DPO **只调整输出偏好/风格、不增加知识**：对齐后回答更简�
 5. **loss 与生成质量并不完全等价**：SFT loss 降到 2.2 后模型能稳定输出结构化中文，但受 63M 参数 + 仅约 5% 全量语料限制，
    仍有事实错误、重复、代码语法错误——与 Chinchilla「小模型需要足够 token」的结论一致，是后续扩数据/扩参的方向。
 
-## 9. 目录与复现
+## 10. 目录与复现
 
 - `small/`、`medium/`、`lora/`、`dpo/`：各自的 `*_curve.csv`（逐步 loss/lr）、`metrics.txt`、原始生成记录、GPU 采样 CSV；
+- `grpo/`：GRPO 原始训练日志、逐步指标 CSV、metrics 与前后生成对比文本；
 - `assets/`：loss 对比曲线、GPU 画像、LoRA 资源对比图；
 - `generation_samples.md`：pretrain-only / small-SFT / medium-SFT / LoRA / DPO 生成样例对比；
 - 完整复现命令见 [`../reproduced/`](../reproduced/)；逐步汇总见 [`training_log.csv`](training_log.csv)。

@@ -8,8 +8,8 @@
 > 本仓库复现自 [jingyaogong/minimind](https://github.com/jingyaogong/minimind)（MIT License），
 > 并在其基础上补充三部分自己的工作：**① 不看参考实现的手写组件；② 分阶段/多方法对比实验；③ 源码与公式推导笔记。**
 
-> **✅ 最新进展（2026-09）**：已在单卡 RTX 3080 Ti 上完整跑通「继续预训练 → SFT → LoRA → DPO」，
-> 做了 **small / medium 两档数据规模对照**与 **全量微调 vs LoRA 资源对比**、**DPO 偏好对齐**，产出真实 loss 曲线、显存/耗时/吞吐与生成样例。
+> **✅ 最新进展（2026-09）**：已在单卡 RTX 3080 Ti 上完整跑通「继续预训练 → SFT → LoRA → DPO → GRPO」**五阶段**，
+> 做了 **small / medium 两档数据规模对照**、**全量微调 vs LoRA 资源对比**、**DPO 偏好对齐**与 **GRPO 纯规则强化学习（300 步真实训练 + 同种子前后对比）**，产出真实 loss/reward 曲线、显存/耗时/吞吐与生成样例。
 > 详见 [`experiments/`](experiments/)（[实验详解](experiments/README.md) · [生成样例](experiments/generation_samples.md) · [复现步骤](reproduced/)）。
 
 ## 一、项目目标
@@ -46,7 +46,7 @@ python -c "import torch; print(torch.cuda.is_available(), torch.cuda.is_bf16_sup
 - [x] LoRA 参数高效微调（只训 0.61% 参数，对比全量微调的显存/体积/耗时）
 - [ ] BPE 分词器自行训练（当前先用仓库 tokenizer，手写版见 `from_scratch/`）
 - [x] DPO 偏好对齐（17k 偏好对、β=0.15，验证 -ln2 初始与隐式 reward margin 拉开）
-- [ ] GRPO 强化学习对齐
+- [x] GRPO 强化学习对齐（纯规则奖励免 1.8B 奖励模型，300 步 / 21.7 min；规则分 0.109→0.290、|KL|≈0.005）
 - [ ] Triton Kernel / 分块注意力
 - [ ] DeepSpeed ZeRO + 混合精度 + 梯度检查点（多卡）
 
@@ -60,7 +60,7 @@ python -c "import torch; print(torch.cuda.is_available(), torch.cuda.is_bf16_sup
 - [ ] Triton 版 RMSNorm Kernel
 - [ ] 分块 Online-Softmax（Flash Attention 核心）
 
-## 六、实验结果（已完成：Pretrain + SFT + LoRA + DPO）
+## 六、实验结果（已完成：Pretrain + SFT + LoRA + DPO + GRPO）
 
 ![loss curves](experiments/assets/loss_curves.png)
 
@@ -74,15 +74,21 @@ python -c "import torch; print(torch.cuda.is_available(), torch.cuda.is_bf16_sup
 | **medium** | SFT | 50,000 | 6,250 | 19.6 min | 2.82 → **2.21** | 7.36 GB | 98.8% |
 | LoRA | 在 medium-SFT 上 | 20,000 | 1,875 | 4.3 min | 围绕 2.21 波动 | **4.60 GB** | 96.0% |
 | DPO | 在 medium-SFT 上 | 17,166 对 | 4,292 | 12.4 min | 0.693→0.62（均值） | 5.71 GB | 98.4% |
+| GRPO | full_sft 热启动 | 600 prompt | 300 | 21.7 min | 规则分 0.109→0.290 | 9.9 GB | rollout 为主 |
 
 ![lora compare](experiments/assets/lora_compare.png)
 
 ![dpo curve](experiments/assets/dpo_curve.png)
 
+**GRPO（纯规则奖励 / CISPO，免学习型奖励模型）**：
+
+![grpo curve](experiments/assets/grpo_curve.png)
+
 - **数据规模效应**：pretrain 数据 ×2.5，最终 loss 3.35→2.53，生成连贯度与指令遵循明显改善。
 - **消融**：只预训练的模型只会续写、无法遵循指令；经 SFT 后才学会 chat template 与助手式作答。
 - **PEFT 性价比**：LoRA 只训 **0.393M（0.61%）** 参数、适配器仅 **0.78MB**（全量 132MB）、显存降 37%，可热插拔叠加。
 - **DPO 偏好对齐**：loss 从理论值 -ln2=0.693 缓慢下移（区间均值 0.642→0.620），让输出更收敛；DPO 调偏好不增知识。
+- **GRPO 强化学习**：免 1.8B 奖励模型、改纯规则奖励，300 步耗时 21.7 min；组内优势均值**严格为 0**（组内中心化）、平均 |KL|≈0.005（β=0.1 锚定、策略未漂移）、LR 3e-7→3e-8 余弦衰减；同 prompt/同种子前后对比，**规则分 0.109→0.290**（输出长度更受控、思维链格式更规范、重复更少）。规则只约束格式不判对错，**内容正确性不因此提升**，原始日志/曲线/对比见 [`experiments/grpo/`](experiments/grpo/)。
 - 推理（FP16）解码速度约 47–100 tokens/s；GPU 画像见 `experiments/assets/gpu_profile.png`。
 - **诚实的局限**：仅用约 5% 全量语料 + 63M 参数，仍有事实错误/重复/代码错误，符合 Chinchilla 对小模型 token 量的判断。
 - 逐步 loss 数据：[`experiments/training_log.csv`](experiments/training_log.csv) 与各档 `*_curve.csv`；完整分析见 [`experiments/README.md`](experiments/README.md)。

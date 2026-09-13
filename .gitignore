@@ -26,3 +26,5 @@ dataset/*.jsonl
 .vscode/
 .DS_Store
 Thumbs.db
+# keep the small, clean GRPO experiment log
+!02-train-from-scratch/experiments/grpo/grpo_train.log
