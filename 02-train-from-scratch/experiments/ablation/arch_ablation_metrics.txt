@@ -1,0 +1,11 @@
+
+Inference KV-cache size = 2(K,V)*n_layers*kv_heads*head_dim*seq*2bytes
+arch     seq=512    seq=1024    seq=2048    seq=4096
+MHA        12.58       25.17       50.33      100.66
+GQA         6.29       12.58       25.17       50.33
+MQA         1.57        3.15        6.29       12.58
+
+GQA model parameter footprint (MB)
+fp32      300.22
+bf16      158.04
+fp16      158.04

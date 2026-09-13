@@ -133,14 +133,30 @@ DPO **只调整输出偏好/风格、不增加知识**：对齐后回答更简�
 
 **核心结论**：能力跃迁最大的是 **pretrain → SFT**（从"不会答题"到"会答题"），之后三个阶段都在 SFT 基础上做精细化调整，五阶段不可互相替代。
 
-## 9. GPU 画像与推理速度
+## 9. 架构与精度消融（MHA / GQA / MQA × fp32/bf16/fp16 × batch）
+
+在同一 63M 骨架上只改 KV 头数（MHA=8 / GQA=4 / MQA=1）与精度，实测训练显存/吞吐与推理 KV cache（完整数据、图与解读见 [`ablation/`](ablation/)，脚本 `../reproduced/bench_arch.py`）：
+
+| 维度 | 关键实测（RTX 3080 Ti） |
+| --- | --- |
+| 参数量 | MHA 68.63M → GQA 63.91M(-6.9%) → MQA 60.37M(-12%)，只动 K/V 投影 |
+| 训练显存(bs8,bf16) | 2623 / 2490 / 2312 MB，训练侧省幅温和（激活大头与 KV 头数无关） |
+| 训练吞吐(bs8,bf16) | 60.0 / 64.2 / 69.7 k tok/s，MQA 比 MHA 快约 16% |
+| 混合精度 | bf16 比 fp32 省 35–49% 显存、约 1.8× 吞吐；bf16/fp16 显存相同，bf16 动态范围大更稳 |
+| 推理 KV cache(4096) | 100.7 / 50.3 / 12.6 MB，**与 KV 头数成正比（8:4:1）** |
+
+![arch ablation](assets/arch_ablation.png)
+
+**一句话结论**：训练时 GQA/MQA 省得有限；推理长上下文/高并发时 KV cache 按 KV 头数等比缩小（MQA 仅 MHA 的 1/8），这才是 GQA/MQA 的核心价值，也是 LLaMA-2/3 选 GQA 的根本原因。小 batch(bs=1) 下三架构差异被固定开销抹平，算子优势要在合理 batch 下才显现。
+
+## 10. GPU 画像与推理速度
 
 ![gpu profile](assets/gpu_profile.png)
 
 - 训练阶段 GPU 利用率长期 96–99%、温度峰值 72–75°C；显存峰值 pretrain/SFT 7.36GB、LoRA 4.60GB。
 - 推理（FP16，单条 `model.generate`）解码速度约 **47–100 tokens/s**。
 
-## 10. 关键发现
+## 11. 关键发现
 
 1. **数据规模的边际收益清晰可见**：pretrain 数据量 ×2.5（6 万→15 万），同架构同超参下最终 loss 由 3.35 降到 2.53；
    SFT 由 3.17 降到 2.21，medium 模型生成的语句连贯度、指令遵循度明显更好（见 `generation_samples.md`）。
@@ -152,12 +168,13 @@ DPO **只调整输出偏好/风格、不增加知识**：对齐后回答更简�
 5. **loss 与生成质量并不完全等价**：SFT loss 降到 2.2 后模型能稳定输出结构化中文，但受 63M 参数 + 仅约 5% 全量语料限制，
    仍有事实错误、重复、代码语法错误——与 Chinchilla「小模型需要足够 token」的结论一致，是后续扩数据/扩参的方向。
 
-## 11. 目录与复现
+## 12. 目录与复现
 
 - `small/`、`medium/`、`lora/`、`dpo/`：各自的 `*_curve.csv`（逐步 loss/lr）、`metrics.txt`、原始生成记录、GPU 采样 CSV；
 - `grpo/`：GRPO 原始训练日志、逐步指标 CSV、metrics 与前后生成对比文本；
 - `grpo/eval_100_*`：100 条 held-out 定量评测（指标表 + 200 行逐条明细）；
 - `stage_evolution.md / .txt`：五阶段同种子生成横评（解读文档 + 逐条原文）；
+- `ablation/`：MHA/GQA/MQA × 精度 × batch 消融数据、KV cache 表、解读与对照图；
 - `assets/`：loss 对比曲线、GPU 画像、LoRA 资源对比图；
 - `generation_samples.md`：pretrain-only / small-SFT / medium-SFT / LoRA / DPO 生成样例对比；
 - 完整复现命令见 [`../reproduced/`](../reproduced/)；逐步汇总见 [`training_log.csv`](training_log.csv)。
