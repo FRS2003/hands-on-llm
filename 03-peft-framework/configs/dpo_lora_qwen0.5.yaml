@@ -1,0 +1,38 @@
+# ============================================================
+# DPO 偏好对齐模板：先 SFT，再用成对偏好数据做 DPO
+# 数据需要 chosen/rejected 两列（注册方式见 ../custom/dataset_info.example.json）
+# 公式与 0.693 起点见 02 模块 notes/alignment.md
+# ============================================================
+model_name_or_path: Qwen/Qwen2.5-0.5B
+
+stage: dpo                   # 切换对齐阶段；kto/orpo/simpo 同理改这里
+do_train: true
+finetuning_type: lora
+lora_rank: 8
+lora_alpha: 16
+lora_dropout: 0.05
+lora_target: all
+
+# 偏好数据集：每条含 chosen / rejected（同一 prompt 的更好/更差回答）
+dataset: my_preference
+template: qwen
+cutoff_len: 1024
+overwrite_cache: true
+preprocessing_num_workers: 8
+
+output_dir: saves/qwen0.5-dpo-lora
+logging_steps: 10
+save_steps: 500
+plot_loss: true
+overwrite_output_dir: true
+
+per_device_train_batch_size: 2
+gradient_accumulation_steps: 8
+learning_rate: 5.0e-6        # 对齐阶段学习率最小，避免灾难性遗忘
+num_train_epochs: 1.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+gradient_checkpointing: true
+pref_beta: 0.1               # DPO 的 β：越大越贴近参考模型
+pref_loss: sigmoid           # sigmoid=标准DPO；可选 ipo/simpo/orpo/kto（以本地版本为准）

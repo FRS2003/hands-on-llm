@@ -1,0 +1,34 @@
+{
+  "_comment": "把本文件内容合并进 LLaMA-Factory/data/dataset_info.json。key（如 my_instruction）就是 yaml 里 dataset: 引用的名字。",
+
+  "my_instruction": {
+    "file_name": "my_instruction.example.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output"
+    }
+  },
+
+  "my_multiturn": {
+    "file_name": "my_multiturn.example.json",
+    "formatting": "sharegpt",
+    "columns": { "messages": "messages" },
+    "tags": {
+      "role_tag": "role",
+      "content_tag": "content",
+      "user_tag": "user",
+      "assistant_tag": "assistant"
+    }
+  },
+
+  "my_preference": {
+    "file_name": "my_preference.example.json",
+    "ranking": false,
+    "columns": {
+      "prompt": "instruction",
+      "chosen": "chosen",
+      "rejected": "rejected"
+    }
+  }
+}

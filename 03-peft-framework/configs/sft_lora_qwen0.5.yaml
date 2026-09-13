@@ -1,0 +1,42 @@
+# ============================================================
+# LoRA 指令微调模板（消费级单卡首选）
+# 用法：llamafactory-cli train sft_lora_qwen0.5.yaml
+# 对照实验时只改你要研究的那一个变量（如 lora_rank），其余保持一致
+# ============================================================
+
+### 模型
+model_name_or_path: Qwen/Qwen2.5-0.5B   # 也可换成本地路径
+
+### 方法
+stage: sft                  # sft / dpo / kto / orpo / ppo
+do_train: true
+finetuning_type: lora       # full / freeze / lora
+lora_rank: 8                # 低秩瓶颈维 r，常用 8/16/32/64
+lora_alpha: 16              # 缩放，经验取 2*r
+lora_dropout: 0.05
+lora_target: all            # all=全部线性层；想最省可写 q_proj,v_proj
+
+### 数据（dataset 名必须先在 data/dataset_info.json 注册，见 ../custom）
+dataset: my_instruction     # 占位：换成你注册的数据集名
+template: qwen              # 必须与基座匹配（Qwen 用 qwen）
+cutoff_len: 1024            # 单条最大 token 长，超长截断
+max_samples: 100000
+overwrite_cache: true
+preprocessing_num_workers: 8
+
+### 输出
+output_dir: saves/qwen0.5-sft-lora-r8
+logging_steps: 10
+save_steps: 500
+plot_loss: true             # 自动画 loss 曲线
+overwrite_output_dir: true
+
+### 训练超参
+per_device_train_batch_size: 4
+gradient_accumulation_steps: 4   # 等效 batch = 4*4 = 16
+learning_rate: 2.0e-4           # LoRA 可用比全参大的 lr
+num_train_epochs: 3.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true                      # 支持 Ampere+ 优先 bf16，否则用 fp16
+gradient_checkpointing: true    # 用重计算换显存

@@ -1,0 +1,10 @@
+[
+  {
+    "messages": [
+      {"role": "user", "content": "LoRA 为什么省显存？"},
+      {"role": "assistant", "content": "因为它冻结原权重，只训练旁路的两个小矩阵 A、B，需要存梯度和优化器状态的参数大幅减少。"},
+      {"role": "user", "content": "那它推理会变慢吗？"},
+      {"role": "assistant", "content": "不会。训练后可把 BA 合并回原权重，推理时结构不变，没有额外延迟。"}
+    ]
+  }
+]

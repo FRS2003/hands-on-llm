@@ -26,7 +26,7 @@
 - **学什么**：LLaMA-Factory 的 Model Loader / Data Worker / Trainer 源码链路；
   对齐算法（SFT/PPO/DPO/KTO/ORPO/SimPO）、PEFT（Full/LoRA/QLoRA/DoRA…）、
   分布式（DDP/TP/PP/ZeRO）、量化推理（GPTQ/AWQ + vLLM）的横向选型。
-- **怎么用**：读 `experiments/*.csv` 四张对照表，配合 `docs/垂直领域大模型微调实践方案.md`。
+- **怎么用**：先读 `notes/source_walkthrough.md` 走通"配置→模型→数据→训练器"四层源码链路，再读 `notes/` 两篇选型笔记；`configs/` 是带注释、可直接改跑的 yaml 模板，`custom/` 是数据集注册与回调示例，`experiments/*.csv` 是留给你自测填数的空白对照表，`docs/` 有端到端实践方案（均附 Word）。
 - **产出标准**：给定资源与任务约束，能说出选哪种对齐/微调/并行方案及理由。
 
 ### ④ 04-agent · 会用模型做事（Agent 工程）

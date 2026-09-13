@@ -1,0 +1,17 @@
+{
+  "// 说明": "DeepSpeed ZeRO-2 配置：切分优化器状态+梯度，单机多卡性价比最高。yaml 里加 deepspeed: 本文件路径，并用 torchrun 启动",
+  "train_batch_size": "auto",
+  "train_micro_batch_size_per_gpu": "auto",
+  "gradient_accumulation_steps": "auto",
+  "bf16": { "enabled": "auto" },
+  "zero_optimization": {
+    "stage": 2,
+    "allgather_partitions": true,
+    "allgather_bucket_size": 5.0e8,
+    "overlap_comm": true,
+    "reduce_scatter": true,
+    "reduce_bucket_size": 5.0e8,
+    "contiguous_gradients": true
+  },
+  "gradient_clipping": "auto"
+}

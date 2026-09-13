@@ -1,0 +1,45 @@
+# ============================================================
+# QLoRA 模板：4bit 量化基座 + LoRA，适合 6~8GB 小卡跑更大模型
+# 与 sft_lora 的差异只在「量化」三行 + 更小 batch，其余完全一致
+# ============================================================
+
+### 模型
+model_name_or_path: Qwen/Qwen2.5-1.5B
+
+### 量化（QLoRA 关键）
+quantization_bit: 4            # 4bit NF4 量化冻结基座
+quantization_method: bitsandbytes
+quantization_double_quant: true  # 双重量化，再省一点显存
+
+### 方法
+stage: sft
+do_train: true
+finetuning_type: lora
+lora_rank: 8
+lora_alpha: 16
+lora_dropout: 0.05
+lora_target: all
+
+### 数据
+dataset: my_instruction
+template: qwen
+cutoff_len: 1024
+overwrite_cache: true
+preprocessing_num_workers: 8
+
+### 输出
+output_dir: saves/qwen1.5-sft-qlora-r8
+logging_steps: 10
+save_steps: 500
+plot_loss: true
+overwrite_output_dir: true
+
+### 训练（小卡把 batch 调小、靠梯度累积补）
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 16
+learning_rate: 1.0e-4
+num_train_epochs: 3.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+gradient_checkpointing: true
