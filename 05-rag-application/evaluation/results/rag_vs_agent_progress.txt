@@ -1,0 +1,42 @@
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 11107.99it/s]
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]Loading weights: 100%|██████████| 201/201 [00:00<00:00, 3542.25it/s]
+Active questions: 58
+======================================================================
+RAG  Q  1 [L1_si] Recall=OK Hit=[21] Time=2s
+Agent Q  1 [L1_si] Recall=OK Hit=[21] Steps=5 Time=10s
+RAG  Q  2 [L1_si] Recall=OK Hit=[10, 157, 206] Time=2s
+Agent Q  2 [L1_si] Recall=OK Hit=[10, 157, 206] Steps=14 Time=26s
+RAG  Q  5 [L1_si] Recall=OK Hit=[11, 47, 108] Time=2s
+Agent Q  5 [L1_si] Recall=OK Hit=[11, 47, 108] Steps=5 Time=11s
+RAG  Q  6 [L1_si] Recall=OK Hit=[1, 2] Time=1s
+Agent Q  6 [L1_si] Recall=OK Hit=[1, 2] Steps=12 Time=23s
+RAG  Q  7 [L1_si] Recall=OK Hit=[55] Time=2s
+Agent Q  7 [L1_si] Recall=OK Hit=[55] Steps=6 Time=10s
+RAG  Q  8 [L1_si] Recall=OK Hit=[14] Time=2s
+Agent Q  8 [L1_si] Recall=OK Hit=[14] Steps=5 Time=8s
+RAG  Q 10 [L1_si] Recall=OK Hit=[36, 168] Time=2s
+Agent Q 10 [L1_si] Recall=OK Hit=[36, 168] Steps=10 Time=22s
+RAG  Q 12 [L1_si] Recall=OK Hit=[22] Time=2s
+Agent Q 12 [L1_si] Recall=OK Hit=[22] Steps=6 Time=11s
+RAG  Q 13 [L1_si] Recall=OK Hit=[31] Time=1s
+Agent Q 13 [L1_si] Recall=OK Hit=[31] Steps=6 Time=9s
+RAG  Q 17 [L1_si] Recall=OK Hit=[19, 20, 79] Time=2s
+Agent Q 17 [L1_si] Recall=OK Hit=[19, 20, 79] Steps=11 Time=23s
+  --- 10/58 done ---
+RAG  Q 18 [L1_si] Recall=OK Hit=[20, 139, 144] Time=4s
+Agent Q 18 [L1_si] Recall=OK Hit=[20, 139, 144] Steps=10 Time=23s
+RAG  Q 19 [L1_si] Recall=OK Hit=[25, 27, 34] Time=2s
+Agent Q 19 [L1_si] Recall=67% Hit=[27, 34] Steps=11 Time=21s
+RAG  Q 21 [L1_si] Recall=OK Hit=[39, 49] Time=4s
+Agent Q 21 [L1_si] Recall=OK Hit=[39, 49] Steps=9 Time=19s
+RAG  Q 22 [L1_si] Recall=OK Hit=[98, 99, 108] Time=2s
+Agent Q 22 [L1_si] Recall=OK Hit=[98, 99, 108] Steps=7 Time=11s
+RAG  Q 23 [L1_si] Recall=OK Hit=[17, 113, 115] Time=3s
+Agent Q 23 [L1_si] Recall=OK Hit=[17, 113, 115] Steps=8 Time=17s
+RAG  Q 24 [L1_si] Recall=OK Hit=[124, 169] Time=4s
+Agent Q 24 [L1_si] Recall=OK Hit=[124, 169] Steps=8 Time=16s
+RAG  Q 25 [L1_si] Recall=OK Hit=[3, 33, 148] Time=2s
+Agent Q 25 [L1_si] Recall=33% Hit=[3] Steps=10 Time=23s
+RAG  Q 26 [L1_si] Recall=OK Hit=[167, 169, 172] Time=4s
+Agent Q 26 [L1_si] Recall=OK Hit=[167, 169, 172] Steps=9 Time=22s
+RAG  Q 28 [L1_si] Recall=OK Hit=[16, 139] Time=3s

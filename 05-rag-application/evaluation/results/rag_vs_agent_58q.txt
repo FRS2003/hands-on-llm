@@ -1,0 +1,86 @@
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 16976.94it/s]
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]Loading weights: 100%|██████████| 201/201 [00:00<00:00, 3541.65it/s]
+RAG benchmark: 58 questions
+Q  1 [L1_si] RAG=OK Agent=100%  Hit=[21]  Expected=[21]
+Q  2 [L1_si] RAG=OK Agent=100%  Hit=[10, 157, 206]  Expected=[10, 157, 206]
+Q  5 [L1_si] RAG=OK Agent=100%  Hit=[11, 47, 108]  Expected=[11, 47, 108]
+Q  6 [L1_si] RAG=OK Agent=100%  Hit=[1, 2]  Expected=[1, 2]
+Q  7 [L1_si] RAG=OK Agent=100%  Hit=[55]  Expected=[55]
+Q  8 [L1_si] RAG=OK Agent=100%  Hit=[14]  Expected=[14]
+Q 10 [L1_si] RAG=OK Agent=100%  Hit=[36, 168]  Expected=[36, 168]
+Q 12 [L1_si] RAG=OK Agent=100%  Hit=[22]  Expected=[22]
+Q 13 [L1_si] RAG=OK Agent=100%  Hit=[31]  Expected=[31]
+Q 17 [L1_si] RAG=OK Agent=100%  Hit=[19, 20, 79]  Expected=[19, 20, 79]
+Q 18 [L1_si] RAG=OK Agent=100%  Hit=[20, 139, 144]  Expected=[20, 139, 144]
+Q 19 [L1_si] RAG=OK Agent=67%  Hit=[25, 27, 34]  Expected=[25, 27, 34]
+Q 21 [L1_si] RAG=OK Agent=100%  Hit=[39, 49]  Expected=[39, 49]
+Q 22 [L1_si] RAG=OK Agent=100%  Hit=[98, 99, 108]  Expected=[98, 99, 108]
+Q 23 [L1_si] RAG=OK Agent=100%  Hit=[17, 113, 115]  Expected=[17, 113, 115]
+Q 24 [L1_si] RAG=OK Agent=100%  Hit=[124, 169]  Expected=[124, 169]
+Q 25 [L1_si] RAG=OK Agent=100%  Hit=[3, 33, 148]  Expected=[3, 33, 148]
+Q 26 [L1_si] RAG=OK Agent=100%  Hit=[167, 169, 172]  Expected=[167, 169, 172]
+Q 28 [L1_si] RAG=OK Agent=50%  Hit=[16, 139]  Expected=[16, 139]
+Q 29 [L1_si] RAG=OK Agent=50%  Hit=[79, 109]  Expected=[79, 109]
+Q 31 [L1_si] RAG=OK Agent=100%  Hit=[143, 192, 194]  Expected=[143, 192, 194]
+Q 33 [L1_si] RAG=OK Agent=67%  Hit=[7, 68, 124]  Expected=[7, 68, 124]
+Q 34 [L1_si] RAG=OK Agent=100%  Hit=[12]  Expected=[12]
+Q 35 [L1_si] RAG=OK Agent=100%  Hit=[134]  Expected=[134]
+Q 36 [L1_si] RAG=OK Agent=100%  Hit=[81]  Expected=[81]
+Q 39 [L1_si] RAG=OK Agent=100%  Hit=[40]  Expected=[40]
+Q 41 [L2_me] RAG=OK Agent=100%  Hit=[10, 147, 157]  Expected=[10, 147, 157]
+Q 42 [L2_me] RAG=OK Agent=100%  Hit=[21]  Expected=[21]
+Q 44 [L2_me] RAG=OK Agent=67%  Hit=[20, 133, 194]  Expected=[20, 133, 194]
+Q 45 [L2_me] RAG=OK Agent=50%  Hit=[14, 134]  Expected=[14, 134]
+Q 46 [L2_me] RAG=OK Agent=100%  Hit=[22]  Expected=[22]
+Q 47 [L2_me] RAG=OK Agent=100%  Hit=[34]  Expected=[34]
+Q 48 [L2_me] RAG=OK Agent=100%  Hit=[27]  Expected=[27]
+Q 49 [L2_me] RAG=OK Agent=100%  Hit=[36, 68, 168]  Expected=[36, 68, 168]
+Q 50 [L2_me] RAG=OK Agent=100%  Hit=[31]  Expected=[31]
+Q 51 [L2_me] RAG=OK Agent=100%  Hit=[16, 49, 68]  Expected=[16, 49, 68]
+Q 54 [L2_me] RAG=OK Agent=100%  Hit=[11]  Expected=[11]
+Q 56 [L2_me] RAG=OK Agent=100%  Hit=[80, 139, 190]  Expected=[80, 139, 190]
+Q 60 [L2_me] RAG=OK Agent=100%  Hit=[49]  Expected=[49]
+Q 61 [L2_me] RAG=OK Agent=100%  Hit=[68, 151, 157]  Expected=[68, 151, 157]
+Q 62 [L2_me] RAG=OK Agent=100%  Hit=[20, 139, 143]  Expected=[20, 139, 143]
+Q 64 [L2_me] RAG=OK Agent=67%  Hit=[33, 80, 143]  Expected=[33, 80, 143]
+Q 67 [L2_me] RAG=OK Agent=67%  Hit=[3, 56, 84]  Expected=[3, 56, 84]
+Q 69 [L2_me] RAG=OK Agent=100%  Hit=[124]  Expected=[124]
+Q 70 [L2_me] RAG=OK Agent=100%  Hit=[7]  Expected=[7]
+Q 71 [L2_me] RAG=OK Agent=100%  Hit=[167, 169, 199]  Expected=[167, 169, 199]
+Q 72 [L2_me] RAG=OK Agent=100%  Hit=[40]  Expected=[40]
+Q 73 [L2_me] RAG=OK Agent=100%  Hit=[40]  Expected=[40]
+Q 74 [L2_me] RAG=OK Agent=100%  Hit=[49]  Expected=[49]
+Q 75 [L2_me] RAG=OK Agent=100%  Hit=[29]  Expected=[29]
+Q 79 [L2_me] RAG=OK Agent=100%  Hit=[10, 33, 159]  Expected=[10, 33, 159]
+Q 80 [L2_me] RAG=OK Agent=100%  Hit=[139]  Expected=[139]
+Q 82 [L3_ha] RAG=OK Agent=100%  Hit=[139, 142]  Expected=[139, 142]
+Q 84 [L3_ha] RAG=OK Agent=100%  Hit=[169, 170, 172]  Expected=[169, 170, 172]
+Q 85 [L3_ha] RAG=OK Agent=100%  Hit=[139, 143]  Expected=[139, 143]
+Q 86 [L3_ha] RAG=OK Agent=100%  Hit=[40]  Expected=[40]
+Q 87 [L3_ha] RAG=OK Agent=100%  Hit=[27]  Expected=[27]
+Q 96 [L3_ha] RAG=OK Agent=100%  Hit=[22, 146]  Expected=[22, 146]
+
+============================================================
+RAG vs Agent (58 questions)
+============================================================
+                RAG          Agent        Winner    
+Rec 100%        58/58 (100%)    50/58 (86%)
+Avg Recall      100.0%         94.5%
+Avg Time        0s         9 steps
+  [L1_si] RAG=100.0%  Agent=93.6%  (n=26)
+  [L2_me] RAG=100.0%  Agent=94.2%  (n=26)
+  [L3_ha] RAG=100.0%  Agent=100.0%  (n=6)
+
+Agent > RAG: 0 questions
+
+RAG > Agent: 8 questions
+  Q19: RAG=100% Agent=67%
+  Q28: RAG=100% Agent=50%
+  Q29: RAG=100% Agent=50%
+  Q33: RAG=100% Agent=67%
+  Q44: RAG=100% Agent=67%
+  Q45: RAG=100% Agent=50%
+  Q64: RAG=100% Agent=67%
+  Q67: RAG=100% Agent=67%
+
+Done.

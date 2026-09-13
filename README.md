@@ -26,7 +26,7 @@ MoE/Scaling/对齐   DPO·GRPO + 对照实验     量化推理 选型           
 | ② 手搓与训练 | [`02-train-from-scratch`](02-train-from-scratch) | 原生 PyTorch 手写 RMSNorm/RoPE/GQA/SwiGLU + 26 项数值自检；单卡跑通五阶段训练 + 可验证奖励 RLVR，并做规模/资源/偏好/架构对照实验 |
 | ③ 工业框架 | [`03-peft-framework`](03-peft-framework) | 源码级走读 LLaMA-Factory；对齐算法、PEFT、分布式、量化推理四张选型对照表 + 垂直领域微调方案 |
 | ④ Agent 工程 | [`04-agent`](04-agent) | 终端编程 Agent：ReAct + Harness、Skill 路由、记忆闭环、分层上下文压缩、主从多智能体、分层安全 |
-| ⑤ RAG 落地 | [`05-rag-application`](05-rag-application) | 医学文献混合检索问答：BM25+稠密双路、RRF、Rerank、HyDE、带引文生成、ReAct 编排、Streamlit |
+| ⑤ RAG 落地 | [`05-rag-application`](05-rag-application) | 医学文献混合检索问答：BM25+稠密双路、加权融合、Rerank、HyDE/QE、带引文生成、ReAct 编排、Streamlit |
 
 ## 🎯 适合谁 / 你能收获什么
 
