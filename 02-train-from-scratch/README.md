@@ -101,8 +101,8 @@ python -c "import torch; print(torch.cuda.is_available(), torch.cuda.is_bf16_sup
 - 逐步 loss 数据：[`experiments/training_log.csv`](experiments/training_log.csv) 与各档 `*_curve.csv`；完整分析见 [`experiments/README.md`](experiments/README.md)。
 
 ## 七、学习笔记
-- [架构组件推导](notes/architecture.md)：RMSNorm / RoPE / GQA / SwiGLU / 残差与 Pre-Norm
-- [对齐算法推导](notes/alignment.md)：SFT 损失、DPO 闭式解、GRPO 组内优势、与 PPO 的区别
+- [架构组件推导](notes/architecture.md)（[Word](notes/architecture.docx)）：RMSNorm / RoPE / GQA / SwiGLU / 残差与 Pre-Norm 的公式推导
+- [对齐算法推导](notes/alignment.md)（[Word](notes/alignment.docx)）：SFT 损失、DPO 闭式解、GRPO 组内优势、与 PPO 的区别
 - **[训练全流程小白详解](notes/training-pipeline-explained-zh.md)（[Word 版](notes/training-pipeline-explained-zh.docx)）**：用大白话+类比讲透 Pretrain→SFT→LoRA→DPO→GRPO→RLVR 每一步是什么、为什么、看哪些日志数字，配本项目单卡真实结果
 
 ## 八、参考与致谢
