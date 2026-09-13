@@ -32,13 +32,13 @@
 ### ④ 04-agent · 会用模型做事（Agent 工程）
 - **学什么**：ReAct 循环与 Harness、Tool/Skill 分层与路由、记忆的"执行-反思-复用"闭环、
   分层上下文压缩、Supervisor-Worker 多智能体、安全过滤链。
-- **怎么用**：从 `mini_code_core.py` 入口读主循环，再看 `skill_router / memory / context_manager / multi_agent / security`，`tests/` 有场景测试。
+- **怎么用**：从 `mini_code_core.py` 入口读主循环，再看 `skill_router / memory / context_manager / multi_agent / security`，`tests/` 有场景测试，`docs/` 有两步终止机制答疑与 Agent 架构自测问答（均附 Word）。
 - **产出标准**：能设计一个带工具调用、记忆与安全边界的 Agent，并解释各模块解决什么问题。
 
 ### ⑤ 05-rag-application · 落到真实场景（RAG）
-- **学什么**：语料采集清洗、BM25 稀疏 + 稠密向量双路召回、RRF 融合、Rerank、
+- **学什么**：语料采集清洗、BM25 稀疏 + 稠密向量双路召回、分数加权融合、Rerank、
   HyDE/查询扩展、带引文生成、ReAct 检索式推理、Streamlit 前端、检索效果 benchmark。
-- **怎么用**：按 `retrieval → agent → app → evaluation` 的流水线顺序读，`evaluation/` 有多种召回/重排变体的对照评测。
+- **怎么用**：先读 `docs/RAG入门导读.md` 建立主线，再按 `retrieval → evaluation → agent → app` 顺序看代码；`evaluation/` 有召回/融合/重排变体的对照评测，真实日志见 `evaluation/results/`。
 - **产出标准**：能搭一条可评测的 RAG 流水线，并说清每一环对召回率/准确率的影响。
 
 ## 时间安排建议（参考）
@@ -51,4 +51,4 @@
 
 ## 先修知识
 Python、PyTorch 基本用法、机器学习/深度学习基础概念（梯度、损失、优化器、注意力）。
-缺原理时回 ①，缺工程细节时查 `appendix/` 的名词词典与论文清单。
+缺原理时回 ①，缺工程细节时查 `appendix/` 的名词词典、论文清单与核心知识自测（core-self-check）。

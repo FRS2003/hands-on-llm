@@ -30,7 +30,7 @@ MoE/Scaling/对齐   DPO·GRPO + 对照实验     量化推理 选型           
 
 ## 🎯 适合谁 / 你能收获什么
 
-- 想系统补齐**大模型训练与落地**、准备算法/大模型方向校招或转岗的同学；
+- 想系统补齐**大模型训练与落地**、从理论走向动手实践的同学；
 - 会调包但说不清"Transformer 内部 / 为什么 SFT 学习率要更小 / DPO loss 为何从 0.693 起步"的人；
 - 想在**单卡**上把预训练→对齐全链路亲手跑一遍、并留下可复现实验记录的人。
 
@@ -63,7 +63,7 @@ MoE/Scaling/对齐   DPO·GRPO + 对照实验     量化推理 选型           
 
 - 第一次看：从 [`LEARNING_PATH.md`](LEARNING_PATH.md) 按顺序学，每个模块都有自己的 README 导览；
 - 想直接看代码：进 [`02-train-from-scratch/from_scratch`](02-train-from-scratch/from_scratch) 看手写组件，`python test_model.py`、`python test_grpo_logic.py` 跑数值自检；
-- 面试速查：[`appendix/`](appendix) 里有名词词典、论文清单和结合本仓库真实数字的面试问答；
+- 自测回查：[`appendix/`](appendix) 里有名词词典、论文清单，以及结合本仓库真实数字的核心知识自测；
 - 离线/批注：CS336 五篇精讲与 ② 的训练全流程详解都附了排版好的 **Word 版**（与同名 `.md` 同目录的 `.docx`），可直接下载打印或批注。
 
 ## 📂 仓库结构
@@ -75,7 +75,7 @@ hands-on-llm/
 ├── 03-peft-framework/       # LLaMA-Factory 源码走读与选型对照
 ├── 04-agent/                # MiniCode 编程智能体
 ├── 05-rag-application/      # VSD 医学文献 RAG 问答（2026-06 起）
-├── appendix/                # 名词词典 / 论文清单 / 面试问答
+├── appendix/                # 名词词典 / 论文清单 / 核心知识自测
 ├── tools/                   # 辅助工具：Markdown→Word 转换器 md2docx.py
 ├── LEARNING_PATH.md         # 学习路径与使用指南
 └── LICENSE                  # MIT
@@ -95,7 +95,7 @@ hands-on-llm/
 - [x] MHA/GQA/MQA × 混合精度 × batch 架构消融（训练显存/吞吐 + 推理 KV cache 实测）
 - [x] 可验证奖励 RLVR（对错判分）：SFT 甜区冷启动 + GRPO，greedy 0.633→0.792，含能力边界 / 策略崩溃对照
 - [ ] Triton 自定义 Kernel、手写分块 Flash Attention、DeepSpeed ZeRO 实测
-- [ ] 持续补充论文精读与面试题
+- [ ] 持续补充论文精读与自测题
 
 ## 🙏 致谢与说明
 
