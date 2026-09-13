@@ -1,4 +1,4 @@
-# MiniCode Agent — 终端 AI 编程智能体
+# Coding Agent · 终端 AI 编程智能体
 
 > 📚 **本模块属于 [Hands-on-LLM 动手学大模型](../README.md) 学习库 · 返回总览看完整学习路线**
 
@@ -29,7 +29,7 @@ python cli.py
 - 根目录为核心源码与测试（`test_*.py`）；
 - `skills/`：高层 Skill 的提示模板（add-feature / fix-bug / refactor / code-review）；
 - `docs/`：教学与自测文档（问题答疑、架构自测问答、外部 Skill 设计调研）；
-- 推荐学习顺序：先读 [Agent 两步终止机制答疑：为什么最终答案不走 JSON](docs/问题答疑.md)（[Word 版](docs/问题答疑.docx)），理解 Harness 工程里"决策终止"与"答案生成"为什么要拆开；再用 [Agent 架构自测问答](docs/Agent架构自测问答.md)（[Word 版](docs/Agent架构自测问答.docx)）系统检验对 Harness、MiniCode 架构与安全设计的理解，每个结论都能在根目录源码中找到实现。
+- 推荐学习顺序：先读 [Agent 两步终止机制答疑：为什么最终答案不走 JSON](docs/问题答疑.md)（[Word 版](docs/问题答疑.docx)），理解 Harness 工程里"决策终止"与"答案生成"为什么要拆开；再用 [Agent 架构自测问答](docs/Agent架构自测问答.md)（[Word 版](docs/Agent架构自测问答.docx)）系统检验对 Harness、本 Agent 架构与安全设计的理解，每个结论都能在根目录源码中找到实现。
 
 ## 安全说明
 仓库**不包含任何真实 API Key / 服务器密码**，统一从环境变量读取（见 `.env.example`）。

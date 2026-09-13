@@ -52,7 +52,7 @@
 | `/writing-great-skills` | 帮你写新的自定义 Skill |
 | `/git-guardrails-claude-code` | 拦截危险 git 操作 |
 
-## 对 MiniCode 的设计启示
+## 对本编程 Agent 的设计启示
 
 1. **Agent 开发也可以用 Skill 模式**：把检索 / 阅读 / 验证 / 对比封装成独立 Skill，每个有专用 Prompt，类似多 Agent 但更轻量
 2. **TDD 思维可用于 Agent 评测**：先写预期行为（expected_papers），再跑 Agent 验证
