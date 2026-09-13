@@ -74,6 +74,13 @@ def convert(md_path):
     normal.font.name = EN_BODY
     normal.element.get_or_add_rPr().get_or_add_rFonts().set(qn("w:eastAsia"), EA_BODY)
     normal.paragraph_format.line_spacing = 1.4
+    # 内置 Heading 1-6 指定东亚字体为微软雅黑（标题样式自带大纲级别，导航窗格据此生成多级目录）
+    for _hl in range(1, 7):
+        try:
+            doc.styles["Heading %d" % _hl].element.get_or_add_rPr(
+                ).get_or_add_rFonts().set(qn("w:eastAsia"), EA_HEAD)
+        except KeyError:
+            pass
 
     i, n = 0, len(lines); in_code = False; code_buf = []; table_buf = []
     def close_table():
@@ -109,11 +116,11 @@ def convert(md_path):
         m = re.match(r"^(#{1,6})\s+(.*)$", s)
         if m:
             lv = len(m.group(1)); sizes = {1:20,2:16,3:13.5,4:12,5:11.5,6:11}
-            p = doc.add_paragraph(); p.paragraph_format.space_before = Pt(10 if lv<=2 else 6)
+            p = doc.add_paragraph(style="Heading %d" % min(lv,6))  # 内置标题样式: 导航窗格识别多级层级
+            p.paragraph_format.space_before = Pt(10 if lv<=2 else 6)
             p.paragraph_format.space_after = Pt(4)
             add_inline(p, m.group(2), size=sizes.get(lv,11), base_ea=EA_HEAD,
-                       color=HEAD_COLOR if lv<=3 else None)
-            for r in p.runs: r.bold = True
+                       color=HEAD_COLOR, bold=True)
             i += 1; continue
         mq = re.match(r"^>\s?(.*)$", s)
         if mq:
