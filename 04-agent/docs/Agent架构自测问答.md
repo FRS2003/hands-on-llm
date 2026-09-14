@@ -294,3 +294,7 @@ JSON parser 要求: 引号写成 \"、换行写成 \n  ← 语法驱动
 - A3: 记忆系统 reflect() 的具体 Prompt 设计和提炼逻辑
 - A4: DeepSeek 三模型（chat/v4-pro/reasoner）能力边界实测对比
 - A5: 评测集可信度比模型效果更重要（42 道题标注错误的具体案例）
+
+---
+
+← 返回 [04-agent 模块首页](../README.md) · [两步终止机制答疑](问题答疑.md)
