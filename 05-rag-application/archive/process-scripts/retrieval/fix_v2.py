@@ -11,7 +11,7 @@ for p in papers:
     first_author = p["authors"].split(",")[0].split(";")[0].strip()
     first_author_last = first_author.split()[-1] if " " in first_author else first_author
     year = p.get("year", "")
-    
+
     ab = p.get("en_abstract", "")
     # Only add metadata prefix if abstract doesn't already start with it
     if not ab.lower().startswith(first_author_last.lower()):

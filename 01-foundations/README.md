@@ -23,4 +23,4 @@
 ## 说明与免责
 - 本模块**只包含课程的中文精讲笔记**，不含课程官方讲义（lectures）、阅读论文（readings）与作业（assignments），这些材料的版权归 Stanford CS336 及相应作者所有。
 - 笔记为学习过程中的理解，难免有疏漏，欢迎 Issue 讨论指正。
-- 课程主页：https://stanford-cs336.github.io/
+- 课程主页：[CS336: Language Modeling from Scratch](https://stanford-cs336.github.io/)

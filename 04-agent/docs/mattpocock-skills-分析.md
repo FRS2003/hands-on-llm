@@ -1,6 +1,6 @@
 # Matt Pocock Skills — 功能总结
 
-> 来源: [github.com/mattpocock/skills](https://github.com/mattpocock/skills)  
+> 来源: [github.com/mattpocock/skills](https://github.com/mattpocock/skills)
 > Stars: 103k+ | 安装: `npx skills@latest add mattpocock/skills`
 
 ## 核心理念

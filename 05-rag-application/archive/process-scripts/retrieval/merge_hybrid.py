@@ -12,11 +12,11 @@ for p in papers:
     first_author = p["authors"].split(",")[0].strip()
     last_name = first_author.split()[-1] if " " in first_author else first_author
     year = p.get("year", "")
-    
+
     # Remove any existing LLM summary to avoid duplication
     if "[LLM Summary]" in ab:
         ab = ab.split("[LLM Summary]")[0].strip()
-    
+
     # Ensure author prefix
     if not ab.lower().startswith(last_name.lower()):
         # Find the original abstract (before LLM)
@@ -36,12 +36,12 @@ with open("vsd_rag_enriched.json", "r", encoding="utf-8") as f:
 # For each paper: author prefix + truncated original abstract + LLM summary
 for p in papers:
     ab = p.get("en_abstract", "")
-    
+
     # Get author info
     first_author = p["authors"].split(",")[0].strip()
     last_name = first_author.split()[-1] if " " in first_author else first_author
     year = p.get("year", "")
-    
+
     # Split LLM off
     llm_part = ""
     orig_part = ab
@@ -49,7 +49,7 @@ for p in papers:
         parts = ab.split("[LLM Summary]" , 1)
         orig_part = parts[0].strip()
         llm_part = "[LLM Summary] " + parts[1].strip()
-    
+
     # Ensure author prefix on orig part
     if not orig_part.lower().startswith(last_name.lower()):
         # Find the real start (skip Title/Authors headers if present)
@@ -57,7 +57,7 @@ for p in papers:
         if title_start > 0:
             orig_part = orig_part[title_start:]
         orig_part = f"{last_name} et al. ({year}) - {orig_part}"
-    
+
     # Combine: short author-tagged version + LLM summary
     p["en_abstract"] = f"{orig_part[:1200]} {llm_part}"
 

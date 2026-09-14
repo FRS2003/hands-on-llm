@@ -59,7 +59,7 @@ def search(query, use_reranker=False, top_k=5, oversample=20):
     q_emb = embedder.encode([query]).astype("float32")
     faiss.normalize_L2(q_emb)
     scores, indices = index.search(q_emb, oversample)
-    
+
     candidates, seen = [], set()
     for idx, score in zip(indices[0], scores[0]):
         pid = metas[idx]["id"]
@@ -68,14 +68,14 @@ def search(query, use_reranker=False, top_k=5, oversample=20):
             candidates.append({"id": pid, "score": float(score)})
         if len(candidates) >= oversample:
             break
-    
+
     if use_reranker and reranker:
         pairs = [(query, texts[idx]) for idx in indices[0][:len(candidates)]]
         rs = reranker.predict(pairs)
         for c, s in zip(candidates, rs):
             c["rerank_score"] = float(s)
         candidates.sort(key=lambda x: x.get("rerank_score", x["score"]), reverse=True)
-    
+
     return candidates[:top_k]
 
 print("

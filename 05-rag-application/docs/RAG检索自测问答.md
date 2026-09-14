@@ -98,19 +98,19 @@ FAISS（进程内的库）:
       ├─ index = faiss.read_index("faiss.index")   ← 从磁盘读到内存
       ├─ index.search(query_vec, k=5)              ← 进程内调用，<1ms
       └─ 脚本结束，索引从内存释放
-  
+
   关掉 Python，FAISS 就不存在了。但磁盘上的 faiss.index 文件完好无损，下次启动时需要重新读取
 
 
 Milvus（一直跑着的服务）:
   终端 1: $ milvus start          ← 服务常驻后台，一直在等请求
-  
+
   终端 2: 你的 Python 脚本
       ├─ from pymilvus import connections
       ├─ connections.connect("localhost:19530")     ← 连到服务
       ├─ collection.search(query_vec, k=5)          ← gRPC 网络调用
       └─ 脚本结束，Milvus 服务还活着
-  
+
   关掉 Python，Milvus 还在跑，下一个脚本接着用。
 ```
 

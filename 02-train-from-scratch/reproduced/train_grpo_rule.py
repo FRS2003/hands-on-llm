@@ -186,7 +186,7 @@ def grpo_train_epoch(epoch, loader, iters, rollout_engine, ref_model, reward_mod
             raw_model = getattr(raw_model, '_orig_mod', raw_model)
             state_dict = raw_model.state_dict()
             torch.save({k: v.half().cpu() for k, v in state_dict.items()}, ckp)
-            lm_checkpoint(lm_config, weight=args.save_weight, model=model, optimizer=optimizer, 
+            lm_checkpoint(lm_config, weight=args.save_weight, model=model, optimizer=optimizer,
                          epoch=epoch, step=step, wandb=wandb, save_dir='../checkpoints', scheduler=scheduler)
             model.train()
             del state_dict
@@ -248,18 +248,18 @@ if __name__ == "__main__":
     local_rank = init_distributed_mode()
     if dist.is_initialized(): args.device = f"cuda:{local_rank}"
     setup_seed(42 + (dist.get_rank() if dist.is_initialized() else 0))
-    
+
     # ========== 2. 配置目录、模型参数、检查ckp ==========
     os.makedirs(args.save_dir, exist_ok=True)
     lm_config = MiniMindConfig(hidden_size=args.hidden_size, num_hidden_layers=args.num_hidden_layers,
                                max_seq_len=args.max_seq_len + args.max_gen_len, use_moe=bool(args.use_moe))
     ckp_data = lm_checkpoint(lm_config, weight=args.save_weight, save_dir='../checkpoints') if args.from_resume==1 else None
-    
+
     # ========== 3. 设置混合精度 ==========
     device_type = "cuda" if "cuda" in args.device else "cpu"
     dtype = torch.bfloat16 if args.dtype == "bfloat16" else torch.float16
     autocast_ctx = nullcontext() if device_type == "cpu" else torch.cuda.amp.autocast(dtype=dtype)
-    
+
     # ========== 4. 配wandb ==========
     wandb = None
     if args.use_wandb and is_main_process():
@@ -268,7 +268,7 @@ if __name__ == "__main__":
         resume = 'must' if wandb_id else None
         wandb_run_name = f"MiniMind-GRPO-Epoch-{args.epochs}-BS-{args.batch_size}-LR-{args.learning_rate}"
         wandb.init(project=args.wandb_project, name=wandb_run_name, id=wandb_id, resume=resume)
-    
+
     # ========== 5. 初始化模型和数据 ==========
     base_weight = args.from_weight
     # Policy模型
@@ -303,7 +303,7 @@ if __name__ == "__main__":
     iters = len(loader_for_count)
     total_optimizer_steps = math.ceil(iters / args.accumulation_steps) * args.epochs
     scheduler = CosineAnnealingLR(optimizer, T_max=total_optimizer_steps, eta_min=args.learning_rate / 10)
-    
+
     # ========== 6. 从ckp恢复状态 ==========
     start_epoch, start_step = 0, 0
     if ckp_data:
@@ -312,7 +312,7 @@ if __name__ == "__main__":
         scheduler.load_state_dict(ckp_data['scheduler'])
         start_epoch = ckp_data['epoch']
         start_step = ckp_data.get('step', 0)
-    
+
     # ========== 7. 编译和分布式包装 ==========
     if args.use_compile == 1:
         model = torch.compile(model)
@@ -321,7 +321,7 @@ if __name__ == "__main__":
     if dist.is_initialized():
         model = DistributedDataParallel(model, device_ids=[local_rank])
     rollout_engine.update_policy(model)
-    
+
     # ========== 8. 开始训练 ==========
     for epoch in range(start_epoch, args.epochs):
         train_sampler and train_sampler.set_epoch(epoch)
@@ -329,12 +329,12 @@ if __name__ == "__main__":
         skip = start_step if (epoch == start_epoch and start_step > 0) else 0
         batch_sampler = SkipBatchSampler(train_sampler or indices, args.batch_size, skip)
         loader = DataLoader(train_ds, batch_sampler=batch_sampler, num_workers=args.num_workers, pin_memory=True)
-        if skip > 0: 
+        if skip > 0:
             Logger(f'Epoch [{epoch + 1}/{args.epochs}]: 跳过前{start_step}个step，从step {start_step + 1}开始')
             grpo_train_epoch(epoch, loader, len(loader) + skip, rollout_engine, ref_model, reward_model, start_step, wandb, use_sglang = (args.rollout_engine == "sglang"))
         else:
             grpo_train_epoch(epoch, loader, len(loader), rollout_engine, ref_model, reward_model, 0, wandb, use_sglang = (args.rollout_engine == "sglang"))
-    
+
     # ========== 9. 清理分布进程 ==========
     if dist.is_initialized():
         dist.barrier()

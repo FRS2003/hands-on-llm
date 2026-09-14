@@ -1,5 +1,6 @@
 *.docx
 __pycache__/
+*.pyc
 .DS_Store
 # 教学笔记的 Word 版随仓库发布，取消忽略 notes 下的 docx
 !notes/*.docx

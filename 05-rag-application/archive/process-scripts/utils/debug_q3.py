@@ -21,7 +21,7 @@ for q in ["Cheng等2024年工作的局限性是什么？", "Cheng 2024 limitatio
     q_emb = embedder.encode([q]).astype("float32")
     faiss.normalize_L2(q_emb)
     scores, indices = index.search(q_emb, 38)  # search ALL
-    
+
     print(f"Query: {q}")
     # Find where paper 12 ranks
     for rank, (idx, score) in enumerate(zip(indices[0], scores[0])):
