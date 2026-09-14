@@ -1,0 +1,10 @@
+# 本目录的训练日志是"每个数字可回溯"的实验证据，需纳入版本管理，
+# 在此覆盖上级 .gitignore 对 *.log 的忽略。
+!logs/
+!logs/*.log
+# 双保险：权重与训练断点不入库（本实验包本就不含）
+*.safetensors
+*.bin
+*.pt
+*.pth
+checkpoint-*/

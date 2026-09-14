@@ -144,6 +144,19 @@ LoRA 效果差一口气、能多花一点算力 ─────────► D
 
 > 这些数字强烈依赖模型大小、量化方式、batch/并发和显卡，**务必按 `experiments/quant_infer.csv` 的列在自己环境实测**，不要直接套用网上的数字下结论。
 
+### 3.5 实测对照：bf16 vs NF4-4bit（本仓库已复现）
+
+在 RTX 3080 Ti + Qwen2.5-0.5B 上用 transformers + bitsandbytes 实测，脚本与日志见 [`../experiments/quant_lab/`](../experiments/quant_lab/README.md)，汇总见 [`../experiments/quant_infer.csv`](../experiments/quant_infer.csv)。
+
+| 精度 | 模型显存 | PPL（↓） | TTFT | TPOT | 吞吐 |
+| --- | --- | --- | --- | --- | --- |
+| bf16 | 942 MB | 7.1544 | 27.2 ms | 25.2 ms | 39.6 tok/s |
+| NF4-4bit | 444 MB | 8.0397 | 61.2 ms | 47.2 ms | 21.4 tok/s |
+
+- **显存压到约 47%**（不是理论的 1/4：量化常数、默认不量化的 lm_head、固定 CUDA 开销都占空间；模型越大，纯权重占比越高，越接近 1/4）；
+- **PPL 上升约 12%**，这是 4bit 的精度代价，小模型对量化更敏感，大模型通常更"抗量化"；
+- **这张卡上 4bit 反而更慢**：每次前向都要把 4bit 反量化回 bf16 计算，而 0.5B 小模型根本不受显存带宽瓶颈，省带宽没有收益、反量化却有成本。4bit 的真正价值是"让原本放不下的模型放得下 / 省出显存开更大 batch 与更长上下文"，而不是给小模型提速；当模型大到带宽受限，量化才可能同时带来吞吐收益。GPTQ/AWQ/vLLM 未实测，对应行留空。
+
 ---
 
 ## 收尾：三类选型的共同方法论

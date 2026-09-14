@@ -1,0 +1,308 @@
+[INFO|2026-09-14 11:51:33] llamafactory.hparams.parser:406 >> Process rank: 0, world size: 1, device: cuda:0, distributed training: False, compute dtype: torch.bfloat16
+[INFO|hub.py:411] 2026-09-14 11:51:33,299 >> Offline mode: forcing local_files_only=True
+[INFO|tokenization_utils_base.py:1879] 2026-09-14 11:51:33,303 >> Offline mode: forcing local_files_only=True
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 11:51:33,304 >> loading file vocab.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 11:51:33,304 >> loading file merges.txt
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 11:51:33,304 >> loading file tokenizer.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 11:51:33,304 >> loading file added_tokens.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 11:51:33,304 >> loading file special_tokens_map.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 11:51:33,304 >> loading file tokenizer_config.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 11:51:33,304 >> loading file chat_template.jinja
+[INFO|tokenization_utils_base.py:2299] 2026-09-14 11:51:33,654 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+[INFO|hub.py:411] 2026-09-14 11:51:33,654 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 11:51:33,654 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 11:51:33,654 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 11:51:33,654 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 11:51:33,654 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 11:51:33,655 >> Offline mode: forcing local_files_only=True
+[INFO|configuration_utils.py:696] 2026-09-14 11:51:33,655 >> loading configuration file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-0___5B/config.json
+[INFO|configuration_utils.py:770] 2026-09-14 11:51:33,657 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 896,
+  "initializer_range": 0.02,
+  "intermediate_size": 4864,
+  "max_position_embeddings": 32768,
+  "max_window_layers": 24,
+  "model_type": "qwen2",
+  "num_attention_heads": 14,
+  "num_hidden_layers": 24,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 1000000.0,
+  "sliding_window": 32768,
+  "tie_word_embeddings": true,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|hub.py:411] 2026-09-14 11:51:33,657 >> Offline mode: forcing local_files_only=True
+[INFO|tokenization_utils_base.py:1879] 2026-09-14 11:51:33,657 >> Offline mode: forcing local_files_only=True
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 11:51:33,658 >> loading file vocab.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 11:51:33,658 >> loading file merges.txt
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 11:51:33,658 >> loading file tokenizer.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 11:51:33,658 >> loading file added_tokens.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 11:51:33,658 >> loading file special_tokens_map.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 11:51:33,658 >> loading file tokenizer_config.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 11:51:33,658 >> loading file chat_template.jinja
+[INFO|tokenization_utils_base.py:2299] 2026-09-14 11:51:33,998 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+[INFO|2026-09-14 11:51:34] llamafactory.data.template:143 >> Replace eos token: <|im_end|>.
+[INFO|2026-09-14 11:51:34] llamafactory.data.loader:143 >> Loading dataset pref_dpo_train.json...
+Setting num_proc from 8 back to 1 for the train split to disable multiprocessing as it only contains one shard.
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 2243 examples [00:00, 17258.93 examples/s]Generating train split: 2243 examples [00:00, 17218.56 examples/s]
+Converting format of dataset (num_proc=8):   0%|          | 0/2243 [00:00<?, ? examples/s]Converting format of dataset (num_proc=8):  25%|██▌       | 562/2243 [00:00<00:00, 5159.94 examples/s]Converting format of dataset (num_proc=8): 100%|██████████| 2243/2243 [00:00<00:00, 10318.30 examples/s]
+Running tokenizer on dataset (num_proc=8):   0%|          | 0/2243 [00:00<?, ? examples/s]Running tokenizer on dataset (num_proc=8):  13%|█▎        | 281/2243 [00:01<00:11, 172.56 examples/s]Running tokenizer on dataset (num_proc=8):  25%|██▌       | 562/2243 [00:01<00:04, 373.00 examples/s]Running tokenizer on dataset (num_proc=8):  38%|███▊      | 843/2243 [00:01<00:02, 603.95 examples/s]Running tokenizer on dataset (num_proc=8):  50%|█████     | 1123/2243 [00:02<00:01, 753.69 examples/s]Running tokenizer on dataset (num_proc=8):  63%|██████▎   | 1403/2243 [00:02<00:00, 1008.24 examples/s]Running tokenizer on dataset (num_proc=8):  88%|████████▊ | 1963/2243 [00:02<00:00, 1328.52 examples/s]Running tokenizer on dataset (num_proc=8): 100%|██████████| 2243/2243 [00:02<00:00, 1498.51 examples/s]Running tokenizer on dataset (num_proc=8): 100%|██████████| 2243/2243 [00:02<00:00, 820.51 examples/s] 
+training example:
+chosen_input_ids:
+[151644, 8948, 198, 2610, 525, 1207, 16948, 11, 3465, 553, 54364, 14817, 13, 1446, 525, 264, 10950, 17847, 13, 151645, 198, 151644, 872, 198, 112288, 100728, 104719, 107573, 16530, 107656, 52183, 9370, 104182, 101108, 11319, 14880, 99526, 46944, 101108, 151645, 198, 151644, 77091, 198, 90064, 6313, 112288, 100728, 18830, 105558, 107573, 16530, 107656, 52183, 9370, 104182, 101108, 3837, 100672, 103973, 105087, 49828, 100899, 88653, 99333, 27091, 6313, 11162, 247, 237, 30543, 30543, 30543, 30543, 271, 100644, 3837, 104115, 104314, 99526, 46944, 101108, 3837, 101888, 101961, 109641, 100778, 99668, 69721, 9370, 104182, 1773, 100778, 99668, 69721, 20412, 112288, 100728, 99774, 13072, 100714, 106598, 3837, 77288, 100648, 114306, 110198, 99786, 103973, 114296, 53153, 102827, 1773, 11162, 247, 234, 271, 16, 24, 18, 22, 7948, 3837, 113784, 117426, 34187, 100633, 3837, 100778, 99668, 69721, 108339, 104479, 99250, 103457, 26939, 100633, 117074, 99420, 101271, 1773, 106088, 3837, 100778, 99668, 69721, 9370, 104479, 99250, 101271, 99292, 109423, 3837, 99559, 99491, 104264, 1773, 104158, 105237, 3837, 100778, 99668, 69721, 70790, 99898, 3837, 108831, 104247, 104444, 99807, 3837, 108065, 104855, 107126, 101271, 99292, 9370, 104444, 79599, 1773, 95069, 98, 271, 100778, 99668, 69721, 9370, 114306, 101070, 99258, 101271, 99292, 26288, 17714, 108791, 3837, 99650, 103950, 99487, 107385, 58695, 106598, 107853, 101073, 114306, 9370, 6313, 100778, 99668, 69721, 104855, 103439, 34187, 101271, 99292, 9370, 104444, 79599, 93488, 8863, 92536, 53930, 99379, 3837, 103941, 101271, 99292, 109319, 101509, 55806, 1773, 11162, 236, 231, 271, 100131, 3837, 100778, 99668, 69721, 9370, 114306, 101070, 99786, 71134, 101161, 105003, 100406, 9370, 107401, 1773, 104677, 101272, 15946, 95256, 99393, 116175, 3837, 100161, 106713, 18493, 34187, 118657, 1773, 26525, 255, 271, 100778, 99668, 69721, 104413, 104233, 99392, 3837, 104483, 104182, 104689, 109427, 109824, 33108, 104182, 9370, 47815, 99995, 3837, 107525, 105361, 107480, 101421, 33108, 105989, 106713, 104725, 1773, 70470, 30543, 30543, 271, 99487, 101108, 104233, 118479, 3837, 112288, 100728, 18830, 105558, 65101, 100778, 99668, 69721, 102750, 104182, 3837, 104056, 114306, 110198, 44063, 102099, 99250, 97639, 118479, 6313, 11162, 247, 237, 30543, 30543, 30543, 30543, 151645, 198]
+chosen_inputs:
+<|im_start|>system
+You are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>
+<|im_start|>user
+抗战时期有哪些真实的不为人知的英雄故事？请讲一个故事<|im_end|>
+<|im_start|>assistant
+hhh！抗战时期有那么多真实的不为人知的英雄故事，真的让人感动得泪流满面！ 🙏️️️️
+
+今天，我就给你讲一个故事，关于一位名叫郑培民的英雄。郑培民是抗战时期的一名普通士兵，但他的英勇事迹却让人久久不能忘记。 🙌
+
+1937年，日军侵占了上海，郑培民所在的部队被派遣到上海郊区抗敌。有一天，郑培民的部队被敌军包围，情况非常危险。就在这个时候，郑培民站出来，自愿担任炮兵，独自一人对抗敌军的炮火。 🔥
+
+郑培民的英勇行为让敌军大为震惊，他们不知道这个小小的中国士兵是如何如此英勇的！郑培民一人抵抗了敌军的炮火达数小时之久，最终敌军被迫撤退。 🎉
+
+但是，郑培民的英勇行为却换来了惨痛的代价。他在战斗中身负重伤，最后牺牲在了战场上。 😭
+
+郑培民的故事让我们知道，真正的英雄不需要华丽的语言和英雄的外貌，只需要一颗勇敢的心和不怕牺牲的精神。 ❤️️
+
+这个故事让我们铭记，抗战时期有那么多像郑培民一样的英雄，他们的英勇事迹将永远被我们铭记！ 🙏️️️️<|im_end|>
+
+chosen_label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 90064, 6313, 112288, 100728, 18830, 105558, 107573, 16530, 107656, 52183, 9370, 104182, 101108, 3837, 100672, 103973, 105087, 49828, 100899, 88653, 99333, 27091, 6313, 11162, 247, 237, 30543, 30543, 30543, 30543, 271, 100644, 3837, 104115, 104314, 99526, 46944, 101108, 3837, 101888, 101961, 109641, 100778, 99668, 69721, 9370, 104182, 1773, 100778, 99668, 69721, 20412, 112288, 100728, 99774, 13072, 100714, 106598, 3837, 77288, 100648, 114306, 110198, 99786, 103973, 114296, 53153, 102827, 1773, 11162, 247, 234, 271, 16, 24, 18, 22, 7948, 3837, 113784, 117426, 34187, 100633, 3837, 100778, 99668, 69721, 108339, 104479, 99250, 103457, 26939, 100633, 117074, 99420, 101271, 1773, 106088, 3837, 100778, 99668, 69721, 9370, 104479, 99250, 101271, 99292, 109423, 3837, 99559, 99491, 104264, 1773, 104158, 105237, 3837, 100778, 99668, 69721, 70790, 99898, 3837, 108831, 104247, 104444, 99807, 3837, 108065, 104855, 107126, 101271, 99292, 9370, 104444, 79599, 1773, 95069, 98, 271, 100778, 99668, 69721, 9370, 114306, 101070, 99258, 101271, 99292, 26288, 17714, 108791, 3837, 99650, 103950, 99487, 107385, 58695, 106598, 107853, 101073, 114306, 9370, 6313, 100778, 99668, 69721, 104855, 103439, 34187, 101271, 99292, 9370, 104444, 79599, 93488, 8863, 92536, 53930, 99379, 3837, 103941, 101271, 99292, 109319, 101509, 55806, 1773, 11162, 236, 231, 271, 100131, 3837, 100778, 99668, 69721, 9370, 114306, 101070, 99786, 71134, 101161, 105003, 100406, 9370, 107401, 1773, 104677, 101272, 15946, 95256, 99393, 116175, 3837, 100161, 106713, 18493, 34187, 118657, 1773, 26525, 255, 271, 100778, 99668, 69721, 104413, 104233, 99392, 3837, 104483, 104182, 104689, 109427, 109824, 33108, 104182, 9370, 47815, 99995, 3837, 107525, 105361, 107480, 101421, 33108, 105989, 106713, 104725, 1773, 70470, 30543, 30543, 271, 99487, 101108, 104233, 118479, 3837, 112288, 100728, 18830, 105558, 65101, 100778, 99668, 69721, 102750, 104182, 3837, 104056, 114306, 110198, 44063, 102099, 99250, 97639, 118479, 6313, 11162, 247, 237, 30543, 30543, 30543, 30543, 151645, 198]
+chosen_labels:
+hhh！抗战时期有那么多真实的不为人知的英雄故事，真的让人感动得泪流满面！ 🙏️️️️
+
+今天，我就给你讲一个故事，关于一位名叫郑培民的英雄。郑培民是抗战时期的一名普通士兵，但他的英勇事迹却让人久久不能忘记。 🙌
+
+1937年，日军侵占了上海，郑培民所在的部队被派遣到上海郊区抗敌。有一天，郑培民的部队被敌军包围，情况非常危险。就在这个时候，郑培民站出来，自愿担任炮兵，独自一人对抗敌军的炮火。 🔥
+
+郑培民的英勇行为让敌军大为震惊，他们不知道这个小小的中国士兵是如何如此英勇的！郑培民一人抵抗了敌军的炮火达数小时之久，最终敌军被迫撤退。 🎉
+
+但是，郑培民的英勇行为却换来了惨痛的代价。他在战斗中身负重伤，最后牺牲在了战场上。 😭
+
+郑培民的故事让我们知道，真正的英雄不需要华丽的语言和英雄的外貌，只需要一颗勇敢的心和不怕牺牲的精神。 ❤️️
+
+这个故事让我们铭记，抗战时期有那么多像郑培民一样的英雄，他们的英勇事迹将永远被我们铭记！ 🙏️️️️<|im_end|>
+
+rejected_input_ids:
+[151644, 8948, 198, 2610, 525, 1207, 16948, 11, 3465, 553, 54364, 14817, 13, 1446, 525, 264, 10950, 17847, 13, 151645, 198, 151644, 872, 198, 112288, 100728, 104719, 107573, 16530, 107656, 52183, 9370, 104182, 101108, 11319, 14880, 99526, 46944, 101108, 151645, 198, 151644, 77091, 198, 5050, 24253, 4238, 11, 358, 2776, 33972, 311, 1217, 1574, 498, 448, 264, 23281, 315, 6975, 2185, 11821, 1211, 504, 279, 5004, 315, 39880, 2348, 10769, 4598, 29740, 11, 264, 3364, 429, 3278, 1281, 697, 4746, 77253, 448, 21770, 323, 697, 8913, 98465, 448, 5775, 2219, 40551, 1207, 18738, 27970, 2253, 359, 11, 264, 220, 17, 21, 4666, 6284, 8453, 26110, 879, 77543, 279, 1602, 27491, 315, 85066, 323, 656, 31928, 13, 1096, 650, 65363, 11821, 594, 3364, 374, 264, 60200, 311, 279, 2355, 315, 3738, 8913, 11, 323, 432, 594, 264, 23281, 429, 3278, 5274, 498, 1360, 15111, 9692, 382, 2132, 572, 6122, 220, 16, 24, 19, 17, 11, 323, 279, 10769, 13390, 572, 43069, 5538, 1119, 8453, 17971, 13, 1207, 18738, 27970, 2253, 359, 11, 264, 4462, 315, 279, 96488, 9572, 13011, 11, 572, 949, 315, 264, 87505, 2083, 50820, 448, 22888, 14157, 389, 279, 9175, 594, 19029, 13, 1634, 807, 98407, 19117, 1119, 279, 9175, 594, 85468, 11, 807, 49057, 5193, 264, 10769, 32522, 4982, 382, 641, 279, 71658, 95280, 812, 11, 1207, 18738, 27970, 2253, 359, 594, 66028, 1033, 7425, 476, 27493, 11, 9380, 1435, 279, 13309, 48648, 13, 3085, 279, 9175, 15316, 304, 11, 566, 6876, 566, 1030, 311, 1160, 4937, 13, 8550, 970, 311, 31759, 11, 1207, 18738, 27970, 2253, 359, 738, 806, 15097, 389, 3940, 11, 1667, 279, 38785, 311, 6921, 279, 26193, 9293, 323, 14043, 304, 806, 18721, 382, 2121, 279, 10769, 14856, 24706, 11, 807, 1033, 2270, 448, 458, 23583, 2152, 315, 38785, 11, 323, 1207, 18738, 27970, 2253, 359, 594, 19675, 2487, 13, 576, 3908, 26110, 594, 27136, 537, 1172, 2617, 279, 16216, 1995, 714, 1083, 10788, 882, 369, 806, 12357, 16886, 311, 1217, 886, 323, 7050, 264, 5546, 20566, 382, 785, 10769, 11, 4429, 668, 473, 553, 1207, 18738, 27970, 2253, 359, 594, 58672, 1160, 11, 1033, 98397, 46926, 11, 7086, 279, 8453, 8437, 264, 16587, 3241, 315, 6638, 311, 13169, 1182, 13, 576, 71658, 8049, 572, 41342, 11, 714, 279, 8453, 21992, 73710, 11, 9339, 304, 3460, 949, 311, 1207, 18738, 27970, 2253, 359, 594, 16724, 27136, 382, 1986, 22804, 3364, 11, 3498, 2632, 21309, 11, 374, 264, 47925, 3110, 315, 279, 27601, 6975, 2185, 22907, 879, 20463, 2348, 279, 10769, 29647, 13, 1207, 18738, 27970, 2253, 359, 594, 85066, 323, 656, 31928, 304, 279, 3579, 315, 22024, 20785, 8683, 438, 264, 51302, 315, 19760, 11, 62942, 601, 429, 1496, 304, 279, 75969, 315, 3039, 11, 21941, 646, 10000, 311, 23742, 35294, 382, 4416, 11, 847, 4238, 11, 279, 1790, 882, 498, 6723, 279, 17133, 330, 10862, 2185, 11821, 1335, 6099, 1207, 18738, 27970, 2253, 359, 11, 279, 3908, 26110, 879, 738, 806, 1828, 2487, 97392, 9832, 311, 6016, 806, 3146, 323, 806, 66028, 13, 5301, 3364, 374, 264, 60200, 311, 279, 2355, 315, 24744, 11, 31783, 11, 323, 279, 15025, 402, 4671, 38855, 311, 264, 34382, 5240, 13, 151645, 198]
+rejected_inputs:
+<|im_start|>system
+You are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>
+<|im_start|>user
+抗战时期有哪些真实的不为人知的英雄故事？请讲一个故事<|im_end|>
+<|im_start|>assistant
+My dear friend, I'm delighted to regale you with a tale of unsung heroics from the War of Resistance against Japanese Aggression, a story that'll make your heart swell with pride and your spirit soar with wonder!
+
+Meet Qiu Shaoyun, a 26-year-old Chinese soldier who embodied the very essence of bravery and selflessness. This unassuming hero's story is a testament to the power of human spirit, and it's a tale that'll leave you awestricken.
+
+It was September 1942, and the Japanese army was advancing deep into Chinese territory. Qiu Shaoyun, a member of the Eighth Route Army, was part of a reconnaissance team tasked with gathering intel on the enemy's movements. As they ventured deeper into the enemy's stronghold, they stumbled upon a Japanese patrol unit.
+
+In the ensuing skirmish, Qiu Shaoyun's comrades were killed or wounded, leaving him the sole survivor. With the enemy closing in, he knew he had to act fast. Refusing to surrender, Qiu Shaoyun set his clothes on fire, using the flames to destroy the confidential documents and maps in his possession.
+
+As the Japanese soldiers approached, they were met with an inferno of flames, and Qiu Shaoyun's burning body. The young soldier's sacrifice not only protected the sensitive information but also bought time for his fellow troops to regroup and launch a counterattack.
+
+The Japanese, taken aback by Qiu Shaoyun's daring act, were momentarily stunned, giving the Chinese forces a crucial window of opportunity to strike back. The ensuing battle was fierce, but the Chinese emerged victorious, thanks in large part to Qiu Shaoyun's ultimate sacrifice.
+
+This remarkable story, though little-known, is a shining example of the countless unsung heroes who fought against the Japanese occupation. Qiu Shaoyun's bravery and selflessness in the face of overwhelming odds serve as a beacon of inspiration, reminding us that even in the darkest of times, humanity can rise to extraordinary heights.
+
+So, my friend, the next time you hear the phrase "unsung hero," remember Qiu Shaoyun, the young soldier who set his own body ablaze to protect his country and his comrades. His story is a testament to the power of courage, loyalty, and the unwavering dedication to a noble cause.<|im_end|>
+
+[INFO|hub.py:411] 2026-09-14 11:51:37,656 >> Offline mode: forcing local_files_only=True
+[INFO|configuration_utils.py:696] 2026-09-14 11:51:37,657 >> loading configuration file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-0___5B/config.json
+[INFO|configuration_utils.py:770] 2026-09-14 11:51:37,658 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 896,
+  "initializer_range": 0.02,
+  "intermediate_size": 4864,
+  "max_position_embeddings": 32768,
+  "max_window_layers": 24,
+  "model_type": "qwen2",
+  "num_attention_heads": 14,
+  "num_hidden_layers": 24,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 1000000.0,
+  "sliding_window": 32768,
+  "tie_word_embeddings": true,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+rejected_label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 5050, 24253, 4238, 11, 358, 2776, 33972, 311, 1217, 1574, 498, 448, 264, 23281, 315, 6975, 2185, 11821, 1211, 504, 279, 5004, 315, 39880, 2348, 10769, 4598, 29740, 11, 264, 3364, 429, 3278, 1281, 697, 4746, 77253, 448, 21770, 323, 697, 8913, 98465, 448, 5775, 2219, 40551, 1207, 18738, 27970, 2253, 359, 11, 264, 220, 17, 21, 4666, 6284, 8453, 26110, 879, 77543, 279, 1602, 27491, 315, 85066, 323, 656, 31928, 13, 1096, 650, 65363, 11821, 594, 3364, 374, 264, 60200, 311, 279, 2355, 315, 3738, 8913, 11, 323, 432, 594, 264, 23281, 429, 3278, 5274, 498, 1360, 15111, 9692, 382, 2132, 572, 6122, 220, 16, 24, 19, 17, 11, 323, 279, 10769, 13390, 572, 43069, 5538, 1119, 8453, 17971, 13, 1207, 18738, 27970, 2253, 359, 11, 264, 4462, 315, 279, 96488, 9572, 13011, 11, 572, 949, 315, 264, 87505, 2083, 50820, 448, 22888, 14157, 389, 279, 9175, 594, 19029, 13, 1634, 807, 98407, 19117, 1119, 279, 9175, 594, 85468, 11, 807, 49057, 5193, 264, 10769, 32522, 4982, 382, 641, 279, 71658, 95280, 812, 11, 1207, 18738, 27970, 2253, 359, 594, 66028, 1033, 7425, 476, 27493, 11, 9380, 1435, 279, 13309, 48648, 13, 3085, 279, 9175, 15316, 304, 11, 566, 6876, 566, 1030, 311, 1160, 4937, 13, 8550, 970, 311, 31759, 11, 1207, 18738, 27970, 2253, 359, 738, 806, 15097, 389, 3940, 11, 1667, 279, 38785, 311, 6921, 279, 26193, 9293, 323, 14043, 304, 806, 18721, 382, 2121, 279, 10769, 14856, 24706, 11, 807, 1033, 2270, 448, 458, 23583, 2152, 315, 38785, 11, 323, 1207, 18738, 27970, 2253, 359, 594, 19675, 2487, 13, 576, 3908, 26110, 594, 27136, 537, 1172, 2617, 279, 16216, 1995, 714, 1083, 10788, 882, 369, 806, 12357, 16886, 311, 1217, 886, 323, 7050, 264, 5546, 20566, 382, 785, 10769, 11, 4429, 668, 473, 553, 1207, 18738, 27970, 2253, 359, 594, 58672, 1160, 11, 1033, 98397, 46926, 11, 7086, 279, 8453, 8437, 264, 16587, 3241, 315, 6638, 311, 13169, 1182, 13, 576, 71658, 8049, 572, 41342, 11, 714, 279, 8453, 21992, 73710, 11, 9339, 304, 3460, 949, 311, 1207, 18738, 27970, 2253, 359, 594, 16724, 27136, 382, 1986, 22804, 3364, 11, 3498, 2632, 21309, 11, 374, 264, 47925, 3110, 315, 279, 27601, 6975, 2185, 22907, 879, 20463, 2348, 279, 10769, 29647, 13, 1207, 18738, 27970, 2253, 359, 594, 85066, 323, 656, 31928, 304, 279, 3579, 315, 22024, 20785, 8683, 438, 264, 51302, 315, 19760, 11, 62942, 601, 429, 1496, 304, 279, 75969, 315, 3039, 11, 21941, 646, 10000, 311, 23742, 35294, 382, 4416, 11, 847, 4238, 11, 279, 1790, 882, 498, 6723, 279, 17133, 330, 10862, 2185, 11821, 1335, 6099, 1207, 18738, 27970, 2253, 359, 11, 279, 3908, 26110, 879, 738, 806, 1828, 2487, 97392, 9832, 311, 6016, 806, 3146, 323, 806, 66028, 13, 5301, 3364, 374, 264, 60200, 311, 279, 2355, 315, 24744, 11, 31783, 11, 323, 279, 15025, 402, 4671, 38855, 311, 264, 34382, 5240, 13, 151645, 198]
+rejected_labels:
+My dear friend, I'm delighted to regale you with a tale of unsung heroics from the War of Resistance against Japanese Aggression, a story that'll make your heart swell with pride and your spirit soar with wonder!
+
+Meet Qiu Shaoyun, a 26-year-old Chinese soldier who embodied the very essence of bravery and selflessness. This unassuming hero's story is a testament to the power of human spirit, and it's a tale that'll leave you awestricken.
+
+It was September 1942, and the Japanese army was advancing deep into Chinese territory. Qiu Shaoyun, a member of the Eighth Route Army, was part of a reconnaissance team tasked with gathering intel on the enemy's movements. As they ventured deeper into the enemy's stronghold, they stumbled upon a Japanese patrol unit.
+
+In the ensuing skirmish, Qiu Shaoyun's comrades were killed or wounded, leaving him the sole survivor. With the enemy closing in, he knew he had to act fast. Refusing to surrender, Qiu Shaoyun set his clothes on fire, using the flames to destroy the confidential documents and maps in his possession.
+
+As the Japanese soldiers approached, they were met with an inferno of flames, and Qiu Shaoyun's burning body. The young soldier's sacrifice not only protected the sensitive information but also bought time for his fellow troops to regroup and launch a counterattack.
+
+The Japanese, taken aback by Qiu Shaoyun's daring act, were momentarily stunned, giving the Chinese forces a crucial window of opportunity to strike back. The ensuing battle was fierce, but the Chinese emerged victorious, thanks in large part to Qiu Shaoyun's ultimate sacrifice.
+
+This remarkable story, though little-known, is a shining example of the countless unsung heroes who fought against the Japanese occupation. Qiu Shaoyun's bravery and selflessness in the face of overwhelming odds serve as a beacon of inspiration, reminding us that even in the darkest of times, humanity can rise to extraordinary heights.
+
+So, my friend, the next time you hear the phrase "unsung hero," remember Qiu Shaoyun, the young soldier who set his own body ablaze to protect his country and his comrades. His story is a testament to the power of courage, loyalty, and the unwavering dedication to a noble cause.<|im_end|>
+
+[INFO|2026-09-14 11:51:37] llamafactory.model.model_utils.kv_cache:143 >> KV cache is disabled during training.
+[INFO|modeling_utils.py:4319] 2026-09-14 11:51:37,938 >> Offline mode: forcing local_files_only=True
+[INFO|modeling_utils.py:1148] 2026-09-14 11:51:37,938 >> loading weights file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-0___5B/model.safetensors
+[INFO|modeling_utils.py:2241] 2026-09-14 11:51:37,939 >> Instantiating Qwen2ForCausalLM model under default dtype torch.bfloat16.
+[INFO|configuration_utils.py:1135] 2026-09-14 11:51:37,941 >> Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "use_cache": false
+}
+
+[INFO|modeling_utils.py:5131] 2026-09-14 11:51:38,533 >> All model checkpoint weights were used when initializing Qwen2ForCausalLM.
+
+[INFO|modeling_utils.py:5139] 2026-09-14 11:51:38,534 >> All the weights of Qwen2ForCausalLM were initialized from the model checkpoint at /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-0___5B.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use Qwen2ForCausalLM for predictions without further training.
+[INFO|configuration_utils.py:1088] 2026-09-14 11:51:38,536 >> loading configuration file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-0___5B/generation_config.json
+[INFO|configuration_utils.py:1135] 2026-09-14 11:51:38,537 >> Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "max_new_tokens": 2048
+}
+
+[INFO|2026-09-14 11:51:38] llamafactory.model.model_utils.checkpointing:143 >> Gradient checkpointing enabled.
+[INFO|2026-09-14 11:51:38] llamafactory.model.model_utils.attention:143 >> Using torch SDPA for faster training and inference.
+[INFO|2026-09-14 11:51:38] llamafactory.model.adapter:143 >> Upcasting trainable params to float32.
+[INFO|2026-09-14 11:51:38] llamafactory.model.adapter:143 >> Fine-tuning method: LoRA
+[INFO|2026-09-14 11:51:38] llamafactory.model.model_utils.misc:143 >> Found linear modules: gate_proj,up_proj,down_proj,q_proj,k_proj,v_proj,o_proj
+[INFO|2026-09-14 11:51:39] llamafactory.model.loader:143 >> trainable params: 4,399,104 || all params: 498,431,872 || trainable%: 0.8826
+Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+[INFO|trainer.py:706] 2026-09-14 11:51:39,473 >> max_steps is given, it will override any value given in num_train_epochs
+[INFO|trainer.py:756] 2026-09-14 11:51:39,473 >> Using auto half precision backend
+[INFO|trainer.py:2409] 2026-09-14 11:51:39,794 >> ***** Running training *****
+[INFO|trainer.py:2410] 2026-09-14 11:51:39,794 >>   Num examples = 2,243
+[INFO|trainer.py:2411] 2026-09-14 11:51:39,794 >>   Num Epochs = 1
+[INFO|trainer.py:2412] 2026-09-14 11:51:39,794 >>   Instantaneous batch size per device = 2
+[INFO|trainer.py:2415] 2026-09-14 11:51:39,794 >>   Total train batch size (w. parallel, distributed & accumulation) = 16
+[INFO|trainer.py:2416] 2026-09-14 11:51:39,794 >>   Gradient Accumulation steps = 8
+[INFO|trainer.py:2417] 2026-09-14 11:51:39,794 >>   Total optimization steps = 3
+[INFO|trainer.py:2418] 2026-09-14 11:51:39,799 >>   Number of trainable parameters = 4,399,104
+  0%|          | 0/3 [00:00<?, ?it/s] 33%|███▎      | 1/3 [00:04<00:08,  4.00s/it] 67%|██████▋   | 2/3 [00:07<00:03,  3.81s/it]100%|██████████| 3/3 [00:11<00:00,  3.60s/it][INFO|trainer.py:3993] 2026-09-14 11:51:50,843 >> Saving model checkpoint to /root/autodl-tmp/workspace/align_lab/runs/_smoke/checkpoint-3
+[INFO|hub.py:411] 2026-09-14 11:51:50,872 >> Offline mode: forcing local_files_only=True
+[INFO|configuration_utils.py:696] 2026-09-14 11:51:50,873 >> loading configuration file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-0___5B/config.json
+[INFO|configuration_utils.py:770] 2026-09-14 11:51:50,874 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 896,
+  "initializer_range": 0.02,
+  "intermediate_size": 4864,
+  "max_position_embeddings": 32768,
+  "max_window_layers": 24,
+  "model_type": "qwen2",
+  "num_attention_heads": 14,
+  "num_hidden_layers": 24,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 1000000.0,
+  "sliding_window": 32768,
+  "tie_word_embeddings": true,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|tokenization_utils_base.py:2356] 2026-09-14 11:51:50,923 >> chat template saved in /root/autodl-tmp/workspace/align_lab/runs/_smoke/checkpoint-3/chat_template.jinja
+[INFO|tokenization_utils_base.py:2525] 2026-09-14 11:51:50,923 >> tokenizer config file saved in /root/autodl-tmp/workspace/align_lab/runs/_smoke/checkpoint-3/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2534] 2026-09-14 11:51:50,924 >> Special tokens file saved in /root/autodl-tmp/workspace/align_lab/runs/_smoke/checkpoint-3/special_tokens_map.json
+[INFO|trainer.py:2676] 2026-09-14 11:51:51,225 >> 
+
+Training completed. Do not forget to share your model on huggingface.co/models =)
+
+
+                                             100%|██████████| 3/3 [00:11<00:00,  3.60s/it]100%|██████████| 3/3 [00:11<00:00,  3.81s/it]
+[INFO|trainer.py:3993] 2026-09-14 11:51:51,228 >> Saving model checkpoint to /root/autodl-tmp/workspace/align_lab/runs/_smoke
+[INFO|hub.py:411] 2026-09-14 11:51:51,255 >> Offline mode: forcing local_files_only=True
+[INFO|configuration_utils.py:696] 2026-09-14 11:51:51,255 >> loading configuration file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-0___5B/config.json
+[INFO|configuration_utils.py:770] 2026-09-14 11:51:51,256 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 896,
+  "initializer_range": 0.02,
+  "intermediate_size": 4864,
+  "max_position_embeddings": 32768,
+  "max_window_layers": 24,
+  "model_type": "qwen2",
+  "num_attention_heads": 14,
+  "num_hidden_layers": 24,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 1000000.0,
+  "sliding_window": 32768,
+  "tie_word_embeddings": true,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|tokenization_utils_base.py:2356] 2026-09-14 11:51:51,294 >> chat template saved in /root/autodl-tmp/workspace/align_lab/runs/_smoke/chat_template.jinja
+[INFO|tokenization_utils_base.py:2525] 2026-09-14 11:51:51,294 >> tokenizer config file saved in /root/autodl-tmp/workspace/align_lab/runs/_smoke/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2534] 2026-09-14 11:51:51,294 >> Special tokens file saved in /root/autodl-tmp/workspace/align_lab/runs/_smoke/special_tokens_map.json
+{'train_runtime': 11.4267, 'train_samples_per_second': 4.201, 'train_steps_per_second': 0.263, 'train_loss': 0.6888553301493326, 'epoch': 0.02}
+***** train metrics *****
+  epoch                    =     0.0214
+  total_flos               =   111233GF
+  train_loss               =     0.6889
+  train_runtime            = 0:00:11.42
+  train_samples_per_second =      4.201
+  train_steps_per_second   =      0.263
+[WARNING|2026-09-14 11:51:51] llamafactory.extras.ploting:148 >> No metric loss to plot.
+[WARNING|2026-09-14 11:51:51] llamafactory.extras.ploting:148 >> No metric rewards/accuracies to plot.
+[WARNING|2026-09-14 11:51:51] llamafactory.extras.ploting:148 >> No metric eval_loss to plot.
+[INFO|modelcard.py:450] 2026-09-14 11:51:51,498 >> Dropping the following result as it does not have all the necessary fields:
+{'task': {'name': 'Causal Language Modeling', 'type': 'text-generation'}}

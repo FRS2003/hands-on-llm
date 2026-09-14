@@ -1,7 +1,7 @@
 algorithm,needs_reward_model,needs_reference,data_type,gpu_mem_MB,train_min,final_loss,eval_winrate,stability,notes
-sft,no,no,instruction,,,,,
-dpo,no,yes,preference_pair,,,,,
-ppo,yes,yes,prompt+rm,,,,,
-kto,no,yes,binary_feedback,,,,,
-orpo,no,no,instruction,,,,,
-simpo,no,no,instruction,,,,,
+sft,no,no,instruction,3699,7.61,1.8400,,稳定;指令交叉熵loss单调下降,实测复用 peft_lab 的 LoRA-SFT(同硬件同LoRA-r8 全局batch16);3000指令train/300eval cutoff512;final_loss取train_loss;SFT无偏好胜率概念故eval_winrate留空;详见 peft_lab/
+dpo,no,yes,preference_pair,8333,13.81,0.2816,1.00,稳定;loss从理论起点-ln2=0.693单调降至0.28,shareAI中文语言偏好(中文chosen/英文rejected)2243train/150eval cutoff1024;LoRA r8/a16 micro1×accum16=全局16 lr5e-6 beta0.1 sigmoid;eval偏好准确率1.0 即chosen平均奖励0.84高于rejected-1.96 margin2.80;LoRA下以禁用adapter的基座隐式充当reference不另占整模;adapter17MB;注意与SFT的数据类型/序列长度不同 显存耗时绝对值仅供机制对照;详见 align_lab/
+ppo,yes,yes,prompt+rm,,,,,未实测
+kto,no,yes,binary_feedback,,,,,未实测
+orpo,no,no,instruction,,,,,未实测
+simpo,no,no,instruction,,,,,未实测

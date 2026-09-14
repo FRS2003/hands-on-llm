@@ -5,9 +5,9 @@
 | 文件 | 状态 |
 | --- | --- |
 | `peft_compare.csv` | **full / lora / qlora 三行已在单卡 RTX 3080 Ti(12G) + Qwen2.5-0.5B 上实测填好**，完整配置、原始日志、逐秒显存采样与复现脚本见 [`peft_lab/`](./peft_lab/README.md)；freeze/adapter/prefix/p_tuning/dora 未实测、留空 |
-| `alignment_compare.csv` | 空白模板，待实测 |
+| `alignment_compare.csv` | **sft / dpo 两行已在单卡 RTX 3080 Ti(12G) + Qwen2.5-0.5B 上实测填好**，配置/日志/奖励曲线见 [lign_lab/](./align_lab/README.md)；ppo/kto/orpo/simpo 未实测、留空 |
 | `distributed_compare.csv` | 空白模板，待多卡环境实测 |
-| `quant_infer.csv` | 空白模板，待实测 |
+| `quant_infer.csv` | **bf16(fp16 同属 16bit) / NF4-4bit 两行已实测**（模型显存/PPL/TTFT/TPOT/吞吐），脚本与日志见 [quant_lab/](./quant_lab/README.md)；gptq/awq/vllm_fp16 未实测、留空 |
 
 ## 这些表是什么
 
@@ -22,7 +22,7 @@
 
 ## 为什么大部分格子留空而不是抄“参考数字”
 
-显存、延迟、吞吐**强依赖**模型规模、序列长度、batch、显卡型号和驱动版本，直接抄网上的数字既不可复现也容易误导。正确做法是在**统一口径**下实测填入——这也正是“对照实验”的价值。已实测的三行同样遵循该原则，且每个数字都能在 `peft_lab/logs/` 里找到出处。
+显存、延迟、吞吐**强依赖**模型规模、序列长度、batch、显卡型号和驱动版本，直接抄网上的数字既不可复现也容易误导。正确做法是在**统一口径**下实测填入——这也正是“对照实验”的价值。已实测的各组同样遵循该原则，每个数字都能在对应实验包（`peft_lab/`、`align_lab/`、`quant_lab/`）的 `logs/` 或结果 json 里找到出处。
 
 ## 填表方法（保证可比）
 
@@ -36,8 +36,8 @@
 ## 推荐最小对照路径（配合 configs 模板与 peft_lab 实例）
 
 1. `sft_full` vs `sft_lora` vs `sft_qlora`：填 `peft_compare.csv`，直观看到参数与显存差异（**本仓库已给出完整实例，见 `peft_lab/`**）；
-2. 同一 SFT 起点切 `dpo/kto/orpo`：填 `alignment_compare.csv`；
+2. 同一 SFT 起点切 `dpo/kto/orpo`：填 `alignment_compare.csv`（**SFT vs DPO 已给出完整实例，见 `align_lab/`**）；
 3. 单卡 vs `torchrun` 两卡 + `ds_zero2.json`：填 `distributed_compare.csv`；
-4. FP16 vs GPTQ/AWQ，再用 vLLM 起服务：填 `quant_infer.csv`。
+4. FP16 vs GPTQ/AWQ，再用 vLLM 起服务：填 `quant_infer.csv`（**bf16 vs NF4-4bit 已给出完整实例，见 `quant_lab/`**）。
 
-> 每次实验建议像 `peft_lab/` 一样另存 `logs/`（原始日志）与显存采样，csv 里只填汇总值，做到每个数字都能回溯到日志。
+> 每次实验建议像 `peft_lab/`、`align_lab/`、`quant_lab/` 一样另存 `logs/`（原始日志）与显存采样，csv 里只填汇总值，做到每个数字都能回溯到日志。

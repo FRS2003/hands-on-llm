@@ -31,7 +31,7 @@
 | `notes/` | 源码走读、对齐选型、PEFT/分布式/量化选型三篇笔记 |
 | `configs/` | 可直接改跑的模板：LoRA / QLoRA / 全参 SFT / DPO + ZeRO-2，带中文注释 |
 | `custom/` | 二次开发示例：数据集注册、单轮/多轮/偏好样例、训练回调 |
-| `experiments/` | 对照记录表（csv）+ 填表口径；Full/LoRA/QLoRA 已在 RTX 3080 Ti 实测、完整可复现实验包见 `experiments/peft_lab/`，其余方法留空待补 |
+| `experiments/` | 对照记录表（csv）+ 填表口径；PEFT(Full/LoRA/QLoRA)、对齐(SFT/DPO)、量化推理(bf16/NF4) 已在 RTX 3080 Ti 实测，可复现实验包分别见 `experiments/` 下 `peft_lab/`、`align_lab/`、`quant_lab/`，其余方法留空待补 |
 | `docs/` | 垂直领域端到端实践方案 |
 
 ## 四、环境
@@ -49,13 +49,13 @@ llamafactory-cli train ../03-peft-framework/configs/sft_lora_qwen0.5.yaml
 1. 先读 [源码走读](notes/source_walkthrough.md)，对着本地 LLaMA-Factory 走一遍四层调用关系；
 2. 读两篇选型笔记，建立"数据形态 + 显存约束 → 方法"的决策框架；
 3. 用 `configs/sft_lora` 跑通一个小模型基线，再只改一个变量做对照（LoRA vs 全参、r=8 vs 32）；
-4. 先跑通 `experiments/peft_lab/`（Full/LoRA/QLoRA 完整实测样例），再按 `experiments/README.md` 的口径把其余方法实测补进 csv；
+4. 先跑通 `experiments/peft_lab/`（Full/LoRA/QLoRA 完整实测样例），再看 `experiments/align_lab/`（SFT vs DPO 对齐）与 `experiments/quant_lab/`（bf16 vs NF4 量化推理），最后按 `experiments/README.md` 的口径把其余方法补进 csv；
 5. 用 `custom/` 示例接入自己的数据集、加一个 loss 记录回调，完成一次二次开发；
 6. 想做完整项目时，按 `docs/垂直领域大模型微调实践方案.md` 端到端落地。
 
 ## 六、关于 experiments 里的数字口径
 
-显存、延迟、吞吐强依赖模型、序列、batch 与显卡，抄来的数字不可复现，因此本模块不堆砌“参考 benchmark”，而是提供**选型原理（定性）+ 可复现模板 + 统一记录口径**。其中 PEFT 的 Full/LoRA/QLoRA 已在单卡 RTX 3080 Ti + Qwen2.5-0.5B 上按统一口径实测，配置、原始日志、逐秒显存采样与复现脚本都在 [`experiments/peft_lab/`](experiments/peft_lab/README.md)，每个数字可回溯；其余方法、分布式与量化表仍留空，供在自己的环境按同一口径补测。
+显存、延迟、吞吐强依赖模型、序列、batch 与显卡，抄来的数字不可复现，因此本模块不堆砌“参考 benchmark”，而是提供**选型原理（定性）+ 可复现模板 + 统一记录口径**。其中 PEFT 的 Full/LoRA/QLoRA、对齐的 SFT/DPO、量化推理的 bf16/NF4 已在单卡 RTX 3080 Ti + Qwen2.5-0.5B 上按统一口径实测，配置、原始日志、逐秒显存采样与复现脚本分别在 [`experiments/peft_lab/`](experiments/peft_lab/README.md)、[`experiments/align_lab/`](experiments/align_lab/README.md)、[`experiments/quant_lab/`](experiments/quant_lab/README.md)，每个数字可回溯；分布式表与其余未做方法仍留空，供在自己的环境按同一口径补测。
 
 ## 七、参考与致谢
 

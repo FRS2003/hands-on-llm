@@ -159,3 +159,22 @@ stage: orpo               # 或 stage: simpo
 ```
 
 > 一句话：**先看数据形态排除一批，再看显存与是否要 reference 排除一批，剩下的就是合适的方法**——没有绝对最优，只有和数据、资源、稳定性约束最匹配的那个。
+
+## 9. 实测对照：SFT vs DPO（本仓库已复现）
+
+在 RTX 3080 Ti(12G) + Qwen2.5-0.5B 上，用同一套 LoRA(r8/a16)、全局 batch16、bf16、seed42 实测了 SFT 与 DPO 两个阶段；完整配置、原始日志与奖励曲线见 [`../experiments/align_lab/`](../experiments/align_lab/README.md)，汇总数字见 [`../experiments/alignment_compare.csv`](../experiments/alignment_compare.csv)。
+
+| 维度 | SFT(LoRA) | DPO(LoRA) |
+| --- | --- | --- |
+| 需要 reference | 否 | 是（LoRA 下用"关掉 adapter 的基座"隐式充当） |
+| 数据 | 指令-回答 | chosen/rejected 偏好对 |
+| 显存峰值 | 3699 MB | 8333 MB |
+| 纯训练时长 | 7.61 min | 13.81 min |
+| 最终 loss | 1.8400（交叉熵） | 0.2816（DPO，从 0.693 起步） |
+| 评测 | eval_loss 2.0067 | 偏好准确率 1.0；chosen +0.84 / rejected −1.96 / margin 2.80 |
+
+三个最值得记住的实测结论：
+
+1. **DPO loss 第一步 ≈ 0.693 = −ln2**：此刻 policy 与 reference 完全相同、sigmoid 输入为 0，这是判断 DPO 是否正确启动的信号，随后 loss 降到 0.28。
+2. **DPO 明显更耗显存和时间**：每步要对 chosen、rejected 在 policy 与 reference 上各前向一次（约 4 次前向 + 2 次反向）。micro-batch2 曾冲到 11.9G，改成 micro1×累积16（全局 batch 仍 16）后稳定在 8.3G。
+3. **奖励分离就是"对齐在发生"**：chosen 奖励上升、rejected 奖励下降、margin 从 0 拉到 +2.8、偏好准确率升到 1.0。注意这是差异较明显的语言偏好任务，复杂偏好上数字会更温和；PPO/KTO/ORPO/SimPO 未实测，其资源列留空、不臆造。

@@ -1,0 +1,24 @@
+{
+  "zh_pref_dpo": {
+    "file_name": "pref_dpo_train.json",
+    "formatting": "alpaca",
+    "ranking": true,
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "chosen": "chosen",
+      "rejected": "rejected"
+    }
+  },
+  "zh_pref_dpo_eval": {
+    "file_name": "pref_dpo_eval.json",
+    "formatting": "alpaca",
+    "ranking": true,
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "chosen": "chosen",
+      "rejected": "rejected"
+    }
+  }
+}

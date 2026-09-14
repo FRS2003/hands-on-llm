@@ -1,0 +1,4 @@
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+bf16 {"bits": 16, "model_mem_MB": 942, "gen_peak_MB": 953, "avg_nll": 1.9677, "ppl": 7.1544, "ttft_ms": 27.21, "tpot_ms": 25.2, "throughput_tok_s": 39.61, "concurrency": 1, "n_timed": 20}
+nf4 {"bits": 4, "model_mem_MB": 444, "gen_peak_MB": 456, "avg_nll": 2.0844, "ppl": 8.0397, "ttft_ms": 61.2, "tpot_ms": 47.23, "throughput_tok_s": 21.39, "concurrency": 1, "n_timed": 20}
+SAVED /root/autodl-tmp/workspace/quant_lab/quant_result.json

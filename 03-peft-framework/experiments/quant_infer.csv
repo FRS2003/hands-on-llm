@@ -1,5 +1,6 @@
 method,bits,model_size_MB,ppl,first_token_latency_ms,tpot_ms,throughput_tok_s,concurrency,notes
-fp16,16,,,,,,,
-gptq,4,,,,,,,
-awq,4,,,,,,,
-vllm_fp16,16,,,,,,,
+fp16,16,942,7.1544,27.21,25.20,39.61,1,30系实测用bf16(fp16/bf16同为16bit 体积与速度等价);transformers原生贪心解码 do_sample=false max_new_tokens64;20条计时(前3条warmup);PPL为100条评测集response部分困惑度;model_size取加载后常驻显存;详见 quant_lab/
+nf4_bnb,4,444,8.0397,61.20,47.23,21.39,1,bitsandbytes在线NF4+double_quant 计算时反量化为bf16;体积压到bf16的47%;PPL升约12%;单卡0.5B无显存带宽瓶颈 反量化开销反使解码变慢;详见 quant_lab/
+gptq,4,,,,,,,未实测;离线权重量化 需校准集
+awq,4,,,,,,,未实测;离线权重量化
+vllm_fp16,16,,,,,,,未实测;vLLM PagedAttention连续批处理引擎 并发可大于1 需另装
