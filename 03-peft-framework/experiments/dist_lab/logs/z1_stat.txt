@@ -1,0 +1,1 @@
+WALL_SEC=30 RC=1 NPROC=2 YAML=yamls/z1_15.yaml

@@ -1,0 +1,31 @@
+### 实验A：DDP 吞吐扩展（Qwen2.5-0.5B 全参 SFT）
+### 同一 yaml 分别用 1 卡 / 2 卡启动，仅改 nproc 与梯度累积，保持全局 batch=16，对比步速/每卡显存
+### model
+model_name_or_path: /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-0___5B
+### method
+stage: sft
+do_train: true
+finetuning_type: full
+### dataset（复用 peft_lab 已固定切分的中文指令数据）
+dataset: zh_instruct_3k
+dataset_dir: /root/autodl-tmp/workspace/peft_lab/data
+template: qwen
+cutoff_len: 512
+overwrite_cache: true
+preprocessing_num_workers: 8
+### output（不保存权重，只测训练吞吐）
+output_dir: /root/autodl-tmp/workspace/dist_lab/runs/ddp05
+logging_steps: 5
+save_steps: 100000
+overwrite_output_dir: true
+### train：每卡 micro-batch=2；梯度累积由启动命令按卡数覆盖（1卡accum8 / 2卡accum4，全局均16）
+per_device_train_batch_size: 2
+gradient_accumulation_steps: 8
+max_steps: 40
+learning_rate: 1.0e-5
+lr_scheduler_type: cosine
+warmup_ratio: 0.05
+bf16: true
+gradient_checkpointing: true
+seed: 42
+ddp_timeout: 180000000

@@ -1,0 +1,1 @@
+WALL_SEC=144 RC=0 NPROC=1 YAML=yamls/ddp1_05.yaml

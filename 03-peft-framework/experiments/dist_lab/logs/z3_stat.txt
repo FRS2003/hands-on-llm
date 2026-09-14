@@ -1,0 +1,1 @@
+WALL_SEC=270 RC=0 NPROC=2 YAML=yamls/z3_15.yaml

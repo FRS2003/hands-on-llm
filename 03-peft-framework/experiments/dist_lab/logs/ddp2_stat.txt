@@ -1,0 +1,1 @@
+WALL_SEC=90 RC=0 NPROC=2 YAML=yamls/ddp2_05.yaml

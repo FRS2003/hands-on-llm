@@ -1,0 +1,1 @@
+WALL_SEC=20 RC=1 NPROC=2 YAML=yamls/zddp_15.yaml
