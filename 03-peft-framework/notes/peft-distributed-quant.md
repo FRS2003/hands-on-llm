@@ -51,6 +51,28 @@ LoRA 效果差一口气、能多花一点算力 ─────────► D
 ```
 
 > LoRA/QLoRA/DoRA 训练完可以把增量**合并（merge）回基座**，推理时无额外延迟；而 Adapter/Prefix 类推理时必须带着额外结构，会增加延迟或占用上下文，这是常被忽略的差别。
+
+### 1.5 实测对照：Full vs LoRA vs QLoRA（本仓库已复现）
+
+上面是定性结论，下面用一组控制变量实验来验证。固定 Qwen2.5-0.5B、3000/300 条中文指令、全局 batch=16、cutoff 512、bf16、1 epoch、seed 42，只改变微调方式，在单卡 RTX 3080 Ti 12GB 上实测：
+
+| 指标 | Full | LoRA | QLoRA |
+| --- | ---: | ---: | ---: |
+| 可训参数（占比） | 494.0M（100%） | 4.40M（0.88%） | 4.40M（0.88%） |
+| 训练显存峰值 | 11081 MB | 3699 MB | 3199 MB |
+| 纯训练时长 | 4.53 min | 7.61 min | 9.94 min |
+| train / eval loss | 1.806 / 1.826 | 1.840 / 2.007 | 1.916 / 2.083 |
+| 部署权重大小 | 1885 MB | 16.8 MB | 16.8 MB |
+
+可以读出三点：
+
+1. **显存与存储数量级下降。** LoRA 只训 0.88% 参数、显存降到约三分之一，QLoRA 靠 4bit 基座进一步压到 3.2G；adapter 仅 16.8MB，比全参权重小约 112 倍，且能按任务热切换。
+2. **效果代价很小。** 在只训 1 epoch 的小数据上 eval_loss 差距有限，Full 优于 LoRA、LoRA 优于 QLoRA 的排序，正好对应“可训练容量递减、量化引入噪声”的预期。
+3. **LoRA 并不一定更快。** 本实验为保证公平把 micro-batch 都压到 2（Full 在 micro-batch=4 时第一步反向就 OOM）；LoRA 的冻结层在梯度检查点下反向仍要重算前向，QLoRA 还要额外做 4bit 反量化，于是 Full 反而最快。LoRA/QLoRA 的吞吐优势，要在“用省下的显存把 micro-batch 开大、或换更大模型”时才体现——这是显存与速度之间的真实取舍，不能只背“LoRA 又省又快”。
+
+两个高频坑：① 全参训练时**优化器状态**才是显存大头，调小 micro-batch、用梯度累积保持全局 batch，比硬扛更有效；② 大词表模型（Qwen 词表约 15.2 万）评测时 logits 张量大小约为 batch × seq × vocab，常常训练不 OOM、却在 epoch 末评测时 OOM，把评测 micro-batch 单独设为 1 即可。
+
+> 完整配置、原始日志、逐秒显存采样与一键复现脚本见 [`../experiments/peft_lab/`](../experiments/peft_lab/README.md)，汇总数值见 [`../experiments/peft_compare.csv`](../experiments/peft_compare.csv)。
 ---
 
 ## 第二部分 · 分布式训练怎么选

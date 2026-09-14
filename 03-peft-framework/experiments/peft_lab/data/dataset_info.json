@@ -1,0 +1,18 @@
+{
+  "zh_instruct_3k": {
+    "file_name": "zh_instruct_train.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output"
+    }
+  },
+  "zh_instruct_eval": {
+    "file_name": "zh_instruct_eval.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output"
+    }
+  }
+}

@@ -1,9 +1,9 @@
 method,trainable_params,param_ratio_pct,gpu_mem_MB,train_min,eval_score,extra_infer_latency,notes
-full,,,,,,no,
-freeze,,,,,,no,
-lora,,,,,,merge,no,
-qlora,,,,,,merge,no,
-adapter,,,,,,yes,
-prefix,,,,,,yes,
-p_tuning,,,,,,yes,
-dora,,,,,,merge,no,
+full,494032768,100.0,11081,4.53,1.8259,,no; 已实测 RTX3080Ti-12G Qwen2.5-0.5B 3000train/300eval 1ep global-batch16 micro-batch2 cutoff512 bf16 seed42; eval_score列填的是eval_loss(越低越好); 全参保存权重fp32约1885MB; 原始日志见 peft_lab/
+freeze,,,,,,no; 未实测
+lora,4399104,0.8826,3699,7.61,2.0067,,merge; 已实测 r8/alpha16/dropout0.05/target=all 其余同full; adapter权重仅16.8MB; 原始日志见 peft_lab/
+qlora,4399104,0.8826,3199,9.94,2.0826,,merge; 已实测 bitsandbytes NF4 4bit量化基座+同款LoRA; adapter16.8MB; 4bit反量化使单步最慢; 原始日志见 peft_lab/
+adapter,,,,,,yes; 未实测
+prefix,,,,,,yes; 未实测
+p_tuning,,,,,,yes; 未实测
+dora,,,,,,merge; 未实测

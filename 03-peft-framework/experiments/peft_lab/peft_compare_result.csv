@@ -1,0 +1,4 @@
+method,trainable_params,param_ratio_pct,gpu_mem_peak_MB,train_min,train_loss,eval_loss,ckpt_MB,notes
+full,494032768,100.0,11081,4.53,1.8063373362764399,1.8259098529815674,7570,all_params=494032768;Qwen2.5-0.5B;global_bs=16;cutoff512;1ep;seed42
+lora,4399104,0.8826,3699,7.61,1.8400420533849837,2.0066609382629395,98,all_params=498431872;Qwen2.5-0.5B;global_bs=16;cutoff512;1ep;seed42
+qlora,4399104,0.8826,3199,9.94,1.915515960531032,2.0825533866882324,98,all_params=498431872;Qwen2.5-0.5B;global_bs=16;cutoff512;1ep;seed42
