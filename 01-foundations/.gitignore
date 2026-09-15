@@ -4,3 +4,6 @@ __pycache__/
 .DS_Store
 # 教学笔记的 Word 版随仓库发布，取消忽略 notes 下的 docx
 !notes/*.docx
+
+# Word 打开时产生的临时锁文件（~$ 开头）始终忽略，正常教学 docx 仍由上一行放行
+notes/~$*.docx
