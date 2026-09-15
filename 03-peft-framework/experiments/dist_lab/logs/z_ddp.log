@@ -1,0 +1,267 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[2026-09-14 23:32:44,651] [INFO] [real_accelerator.py:222:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2026-09-14 23:32:44,752] [INFO] [real_accelerator.py:222:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[INFO|2026-09-14 23:32:46] llamafactory.hparams.parser:406 >> Process rank: 1, world size: 2, device: cuda:1, distributed training: True, compute dtype: torch.bfloat16
+[INFO|2026-09-14 23:32:46] llamafactory.hparams.parser:406 >> Process rank: 0, world size: 2, device: cuda:0, distributed training: True, compute dtype: torch.bfloat16
+[INFO|hub.py:411] 2026-09-14 23:32:46,686 >> Offline mode: forcing local_files_only=True
+[INFO|tokenization_utils_base.py:1879] 2026-09-14 23:32:46,690 >> Offline mode: forcing local_files_only=True
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:32:46,691 >> loading file vocab.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:32:46,691 >> loading file merges.txt
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:32:46,691 >> loading file tokenizer.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:32:46,691 >> loading file added_tokens.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:32:46,691 >> loading file special_tokens_map.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:32:46,691 >> loading file tokenizer_config.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:32:46,691 >> loading file chat_template.jinja
+[INFO|tokenization_utils_base.py:2299] 2026-09-14 23:32:47,084 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+[INFO|hub.py:411] 2026-09-14 23:32:47,085 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 23:32:47,085 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 23:32:47,085 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 23:32:47,085 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 23:32:47,085 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 23:32:47,086 >> Offline mode: forcing local_files_only=True
+[INFO|configuration_utils.py:696] 2026-09-14 23:32:47,086 >> loading configuration file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-1___5B/config.json
+[INFO|configuration_utils.py:770] 2026-09-14 23:32:47,090 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 1536,
+  "initializer_range": 0.02,
+  "intermediate_size": 8960,
+  "max_position_embeddings": 131072,
+  "max_window_layers": 28,
+  "model_type": "qwen2",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 1000000.0,
+  "sliding_window": 131072,
+  "tie_word_embeddings": true,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|hub.py:411] 2026-09-14 23:32:47,090 >> Offline mode: forcing local_files_only=True
+[INFO|tokenization_utils_base.py:1879] 2026-09-14 23:32:47,090 >> Offline mode: forcing local_files_only=True
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:32:47,091 >> loading file vocab.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:32:47,091 >> loading file merges.txt
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:32:47,091 >> loading file tokenizer.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:32:47,091 >> loading file added_tokens.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:32:47,091 >> loading file special_tokens_map.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:32:47,091 >> loading file tokenizer_config.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:32:47,091 >> loading file chat_template.jinja
+[rank1]:[W914 23:32:47.260710731 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[INFO|tokenization_utils_base.py:2299] 2026-09-14 23:32:47,484 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+[INFO|2026-09-14 23:32:47] llamafactory.data.template:143 >> Replace eos token: <|im_end|>.
+[INFO|2026-09-14 23:32:47] llamafactory.data.loader:143 >> Loading dataset zh_instruct_train.json...
+Converting format of dataset (num_proc=8):   0%|          | 0/3000 [00:00<?, ? examples/s]Converting format of dataset (num_proc=8):  12%|█▎        | 375/3000 [00:00<00:00, 3300.17 examples/s]Converting format of dataset (num_proc=8): 100%|██████████| 3000/3000 [00:00<00:00, 11790.77 examples/s]
+[rank0]:[W914 23:32:48.989933149 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+NCCL version 2.21.5+cuda12.4
+Running tokenizer on dataset (num_proc=8):   0%|          | 0/3000 [00:00<?, ? examples/s]Running tokenizer on dataset (num_proc=8):  12%|█▎        | 375/3000 [00:01<00:07, 364.38 examples/s]Running tokenizer on dataset (num_proc=8):  25%|██▌       | 750/3000 [00:01<00:03, 733.86 examples/s]Running tokenizer on dataset (num_proc=8):  38%|███▊      | 1125/3000 [00:01<00:01, 1024.05 examples/s]Running tokenizer on dataset (num_proc=8):  62%|██████▎   | 1875/3000 [00:01<00:00, 1667.68 examples/s]Running tokenizer on dataset (num_proc=8):  75%|███████▌  | 2250/3000 [00:01<00:00, 1727.84 examples/s]Running tokenizer on dataset (num_proc=8): 100%|██████████| 3000/3000 [00:02<00:00, 2219.33 examples/s]Running tokenizer on dataset (num_proc=8): 100%|██████████| 3000/3000 [00:02<00:00, 1417.13 examples/s]
+training example:
+input_ids:
+[151644, 8948, 198, 2610, 525, 1207, 16948, 11, 3465, 553, 54364, 14817, 13, 1446, 525, 264, 10950, 17847, 13, 151645, 198, 151644, 872, 198, 61443, 46944, 101108, 3837, 109268, 2073, 101986, 99486, 104383, 112482, 97907, 100313, 1773, 151645, 198, 151644, 77091, 198, 103997, 104627, 109641, 94237, 107318, 99818, 100623, 3837, 42411, 99424, 106568, 104939, 33108, 106175, 99415, 99336, 9370, 111707, 1773, 77288, 108327, 103926, 99593, 99322, 3837, 94237, 107318, 99818, 104187, 104048, 101053, 100186, 77144, 13072, 9370, 34794, 100226, 3407, 99999, 3837, 42411, 103930, 111385, 104383, 101964, 109259, 9370, 112482, 3407, 94237, 107318, 99818, 104038, 100648, 22243, 102781, 3837, 102351, 106315, 99314, 1773, 42411, 106014, 111951, 5373, 101231, 99208, 5373, 96465, 99956, 113464, 109143, 104307, 3837, 74763, 99683, 102283, 99475, 34187, 100511, 99686, 57811, 100410, 9370, 108559, 3407, 42411, 99314, 102346, 102258, 5373, 106441, 5373, 108731, 3837, 55286, 105277, 34187, 107162, 113702, 3837, 74763, 112914, 107480, 101928, 107596, 100309, 9370, 109259, 3407, 110799, 3837, 42411, 107867, 34187, 100646, 99200, 100535, 17340, 3837, 108636, 104989, 100648, 99614, 3837, 106494, 42411, 101374, 38182, 102446, 106132, 99567, 100318, 24968, 108636, 104428, 100648, 101049, 96050, 102062, 42411, 100364, 33108, 112711, 104146, 3837, 74763, 109126, 34187, 42411, 108813, 102522, 3407, 102534, 100729, 35727, 100688, 3837, 94237, 107318, 99818, 18493, 99407, 108748, 114768, 34187, 99244, 106588, 101483, 3837, 74763, 114265, 99244, 106588, 102635, 102058, 1773, 103997, 9370, 116713, 100272, 116227, 99250, 105894, 100268, 119177, 100215, 99194, 121945, 107198, 99473, 3407, 18493, 113007, 9370, 115821, 3837, 94237, 107318, 99818, 94375, 104853, 103366, 3837, 107441, 102515, 99212, 99579, 108960, 53930, 103281, 9370, 57811, 100035, 3837, 118468, 111602, 100195, 99321, 103435, 9370, 106056, 3407, 42411, 108449, 3837, 101986, 104092, 42411, 103969, 9370, 112482, 101891, 3837, 113007, 101047, 100646, 109398, 5373, 100646, 17340, 5373, 100646, 100798, 71268, 115114, 100147, 37474, 112482, 9370, 151645, 198]
+inputs:
+<|im_start|>system
+You are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>
+<|im_start|>user
+写一个故事，阐述“人生就是一段旅程”的意思。<|im_end|>
+<|im_start|>assistant
+曾经有个名叫约瑟夫的人，他生活在一个和平和极为富足的国度。但就算是拥有了一切，约瑟夫仍然感到一种不可言名的空虚。
+
+所以，他决定踏上一段探索未知的旅程。
+
+约瑟夫带着他的行囊，一路向前走。他经历了大雨、狂风、雷暴等各种恶劣天气，也顺带领略了壮丽山川的美景。
+
+他走过了森林、草原、沙漠，开始懂得了世界的多样性，也学会了勇敢面对前行路上的未知。
+
+在路上，他遇见了各种各样的人，有的人成为了他的朋友，陪伴他渡过无数艰难险阻；有的人则是他的老师，在给予他帮助和启示的同时，也教会了他人生的道理。
+
+日子一天天过去，约瑟夫在旅途中领略了世间的美好，也见证了世间的苍凉。曾经的懵懂无知被岁月磨砺成了深邃睿智。
+
+在旅途的尽头，约瑟夫停下了脚步，望着眼前那座蓝天之巅的山峰，脑海中涌现出了往昔的种种。
+
+他明白了，人生就像他这次的旅程一样，旅途中的各种景色、各种人、各种经历都构成了这一段旅程的<|im_end|>
+
+label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 103997, 104627, 109641, 94237, 107318, 99818, 100623, 3837, 42411, 99424, 106568, 104939, 33108, 106175, 99415, 99336, 9370, 111707, 1773, 77288, 108327, 103926, 99593, 99322, 3837, 94237, 107318, 99818, 104187, 104048, 101053, 100186, 77144, 13072, 9370, 34794, 100226, 3407, 99999, 3837, 42411, 103930, 111385, 104383, 101964, 109259, 9370, 112482, 3407, 94237, 107318, 99818, 104038, 100648, 22243, 102781, 3837, 102351, 106315, 99314, 1773, 42411, 106014, 111951, 5373, 101231, 99208, 5373, 96465, 99956, 113464, 109143, 104307, 3837, 74763, 99683, 102283, 99475, 34187, 100511, 99686, 57811, 100410, 9370, 108559, 3407, 42411, 99314, 102346, 102258, 5373, 106441, 5373, 108731, 3837, 55286, 105277, 34187, 107162, 113702, 3837, 74763, 112914, 107480, 101928, 107596, 100309, 9370, 109259, 3407, 110799, 3837, 42411, 107867, 34187, 100646, 99200, 100535, 17340, 3837, 108636, 104989, 100648, 99614, 3837, 106494, 42411, 101374, 38182, 102446, 106132, 99567, 100318, 24968, 108636, 104428, 100648, 101049, 96050, 102062, 42411, 100364, 33108, 112711, 104146, 3837, 74763, 109126, 34187, 42411, 108813, 102522, 3407, 102534, 100729, 35727, 100688, 3837, 94237, 107318, 99818, 18493, 99407, 108748, 114768, 34187, 99244, 106588, 101483, 3837, 74763, 114265, 99244, 106588, 102635, 102058, 1773, 103997, 9370, 116713, 100272, 116227, 99250, 105894, 100268, 119177, 100215, 99194, 121945, 107198, 99473, 3407, 18493, 113007, 9370, 115821, 3837, 94237, 107318, 99818, 94375, 104853, 103366, 3837, 107441, 102515, 99212, 99579, 108960, 53930, 103281, 9370, 57811, 100035, 3837, 118468, 111602, 100195, 99321, 103435, 9370, 106056, 3407, 42411, 108449, 3837, 101986, 104092, 42411, 103969, 9370, 112482, 101891, 3837, 113007, 101047, 100646, 109398, 5373, 100646, 17340, 5373, 100646, 100798, 71268, 115114, 100147, 37474, 112482, 9370, 151645, 198]
+labels:
+曾经有个名叫约瑟夫的人，他生活在一个和平和极为富足的国度。但就算是拥有了一切，约瑟夫仍然感到一种不可言名的空虚。
+
+所以，他决定踏上一段探索未知的旅程。
+
+约瑟夫带着他的行囊，一路向前走。他经历了大雨、狂风、雷暴等各种恶劣天气，也顺带领略了壮丽山川的美景。
+
+他走过了森林、草原、沙漠，开始懂得了世界的多样性，也学会了勇敢面对前行路上的未知。
+
+在路上，他遇见了各种各样的人，有的人成为了他的朋友，陪伴他渡过无数艰难险阻；有的人则是他的老师，在给予他帮助和启示的同时，也教会了他人生的道理。
+
+日子一天天过去，约瑟夫在旅途中领略了世间的美好，也见证了世间的苍凉。曾经的懵懂无知被岁月磨砺成了深邃睿智。
+
+在旅途的尽头，约瑟夫停下了脚步，望着眼前那座蓝天之巅的山峰，脑海中涌现出了往昔的种种。
+
+他明白了，人生就像他这次的旅程一样，旅途中的各种景色、各种人、各种经历都构成了这一段旅程的<|im_end|>
+
+[INFO|hub.py:411] 2026-09-14 23:32:51,051 >> Offline mode: forcing local_files_only=True
+[INFO|configuration_utils.py:696] 2026-09-14 23:32:51,051 >> loading configuration file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-1___5B/config.json
+[INFO|configuration_utils.py:770] 2026-09-14 23:32:51,053 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 1536,
+  "initializer_range": 0.02,
+  "intermediate_size": 8960,
+  "max_position_embeddings": 131072,
+  "max_window_layers": 28,
+  "model_type": "qwen2",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 1000000.0,
+  "sliding_window": 131072,
+  "tie_word_embeddings": true,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|2026-09-14 23:32:51] llamafactory.model.model_utils.kv_cache:143 >> KV cache is disabled during training.
+[INFO|modeling_utils.py:4319] 2026-09-14 23:32:51,361 >> Offline mode: forcing local_files_only=True
+[INFO|modeling_utils.py:1148] 2026-09-14 23:32:51,361 >> loading weights file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-1___5B/model.safetensors
+[INFO|modeling_utils.py:2241] 2026-09-14 23:32:51,362 >> Instantiating Qwen2ForCausalLM model under default dtype torch.bfloat16.
+[INFO|configuration_utils.py:1135] 2026-09-14 23:32:51,365 >> Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "use_cache": false
+}
+
+[INFO|modeling_utils.py:5131] 2026-09-14 23:32:52,519 >> All model checkpoint weights were used when initializing Qwen2ForCausalLM.
+
+[INFO|modeling_utils.py:5139] 2026-09-14 23:32:52,519 >> All the weights of Qwen2ForCausalLM were initialized from the model checkpoint at /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-1___5B.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use Qwen2ForCausalLM for predictions without further training.
+[INFO|configuration_utils.py:1088] 2026-09-14 23:32:52,523 >> loading configuration file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-1___5B/generation_config.json
+[INFO|configuration_utils.py:1135] 2026-09-14 23:32:52,523 >> Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "max_new_tokens": 2048
+}
+
+[INFO|2026-09-14 23:32:52] llamafactory.model.model_utils.checkpointing:143 >> Gradient checkpointing enabled.
+[INFO|2026-09-14 23:32:52] llamafactory.model.model_utils.attention:143 >> Using torch SDPA for faster training and inference.
+[INFO|2026-09-14 23:32:52] llamafactory.model.adapter:143 >> Upcasting trainable params to float32.
+[INFO|2026-09-14 23:32:52] llamafactory.model.adapter:143 >> Fine-tuning method: Full
+[INFO|2026-09-14 23:32:52] llamafactory.model.loader:143 >> trainable params: 1,543,714,304 || all params: 1,543,714,304 || trainable%: 100.0000
+Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+[INFO|trainer.py:706] 2026-09-14 23:32:52,578 >> max_steps is given, it will override any value given in num_train_epochs
+[INFO|trainer.py:756] 2026-09-14 23:32:52,579 >> Using auto half precision backend
+[INFO|trainer.py:1257] 2026-09-14 23:32:53,239 >> skipped Embedding(151936, 1536): 222.5625M params
+[INFO|trainer.py:1260] 2026-09-14 23:32:53,239 >> skipped: 222.5625M params
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/root/autodl-tmp/workspace/dist_lab/run_tuner.py", line 3, in <module>
+[rank0]:     run_exp()
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/llamafactory/train/tuner.py", line 110, in run_exp
+[rank0]:     _training_function(config={"args": args, "callbacks": callbacks})
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/llamafactory/train/tuner.py", line 72, in _training_function
+[rank0]:     run_sft(model_args, data_args, training_args, finetuning_args, generating_args, callbacks)
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/llamafactory/train/sft/workflow.py", line 96, in run_sft
+[rank0]:     train_result = trainer.train(resume_from_checkpoint=training_args.resume_from_checkpoint)
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/transformers/trainer.py", line 2240, in train
+[rank0]:     return inner_training_loop(
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/transformers/trainer.py", line 2369, in _inner_training_loop
+[rank0]:     model, self.optimizer = self.accelerator.prepare(self.model, self.optimizer)
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/accelerate/accelerator.py", line 1438, in prepare
+[rank0]:     result = tuple(
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/accelerate/accelerator.py", line 1439, in <genexpr>
+[rank0]:     self._prepare_one(obj, first_pass=True, device_placement=d) for obj, d in zip(args, device_placement)
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/accelerate/accelerator.py", line 1281, in _prepare_one
+[rank0]:     return self.prepare_model(obj, device_placement=device_placement)
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/accelerate/accelerator.py", line 1585, in prepare_model
+[rank0]:     model = torch.nn.parallel.DistributedDataParallel(
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/torch/nn/parallel/distributed.py", line 839, in __init__
+[rank0]:     self._ddp_init_helper(
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/torch/nn/parallel/distributed.py", line 1196, in _ddp_init_helper
+[rank0]:     self.reducer = dist.Reducer(
+[rank0]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 5.75 GiB. GPU 0 has a total capacity of 11.63 GiB of which 5.11 GiB is free. Including non-PyTorch memory, this process has 6.51 GiB memory in use. Of the allocated memory 5.75 GiB is allocated by PyTorch, and 375.20 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/root/autodl-tmp/workspace/dist_lab/run_tuner.py", line 3, in <module>
+[rank1]:     run_exp()
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/llamafactory/train/tuner.py", line 110, in run_exp
+[rank1]:     _training_function(config={"args": args, "callbacks": callbacks})
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/llamafactory/train/tuner.py", line 72, in _training_function
+[rank1]:     run_sft(model_args, data_args, training_args, finetuning_args, generating_args, callbacks)
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/llamafactory/train/sft/workflow.py", line 96, in run_sft
+[rank1]:     train_result = trainer.train(resume_from_checkpoint=training_args.resume_from_checkpoint)
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/transformers/trainer.py", line 2240, in train
+[rank1]:     return inner_training_loop(
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/transformers/trainer.py", line 2369, in _inner_training_loop
+[rank1]:     model, self.optimizer = self.accelerator.prepare(self.model, self.optimizer)
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/accelerate/accelerator.py", line 1438, in prepare
+[rank1]:     result = tuple(
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/accelerate/accelerator.py", line 1439, in <genexpr>
+[rank1]:     self._prepare_one(obj, first_pass=True, device_placement=d) for obj, d in zip(args, device_placement)
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/accelerate/accelerator.py", line 1281, in _prepare_one
+[rank1]:     return self.prepare_model(obj, device_placement=device_placement)
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/accelerate/accelerator.py", line 1585, in prepare_model
+[rank1]:     model = torch.nn.parallel.DistributedDataParallel(
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/torch/nn/parallel/distributed.py", line 839, in __init__
+[rank1]:     self._ddp_init_helper(
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/torch/nn/parallel/distributed.py", line 1196, in _ddp_init_helper
+[rank1]:     self.reducer = dist.Reducer(
+[rank1]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 5.75 GiB. GPU 1 has a total capacity of 11.63 GiB of which 5.11 GiB is free. Including non-PyTorch memory, this process has 6.51 GiB memory in use. Of the allocated memory 5.75 GiB is allocated by PyTorch, and 375.20 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank0]:[W914 23:32:54.605222693 ProcessGroupNCCL.cpp:1496] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+W0914 23:32:56.212000 9454 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 9513 closing signal SIGTERM
+E0914 23:32:56.327000 9454 site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: 1) local_rank: 1 (pid: 9514) of binary: /root/autodl-tmp/envs/llmfab/bin/python
+Traceback (most recent call last):
+  File "/root/autodl-tmp/envs/llmfab/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/root/autodl-tmp/envs/llmfab/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/torch/distributed/run.py", line 922, in <module>
+    main()
+  File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+  File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/torch/distributed/run.py", line 918, in main
+    run(args)
+  File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/torch/distributed/run.py", line 909, in run
+    elastic_launch(
+  File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+/root/autodl-tmp/workspace/dist_lab/run_tuner.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-09-14_23:32:56
+  host      : localhost
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 9514)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

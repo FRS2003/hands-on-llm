@@ -1,0 +1,4 @@
+WALL_SEC=29 RC=1 NPROC=2 YAML=yamls/z1_15.yaml
+WALL_SEC=31 RC=1 NPROC=2 YAML=yamls/z2_15.yaml
+WALL_SEC=34 RC=1 NPROC=2 YAML=yamls/z3_15.yaml
+Z_DONE

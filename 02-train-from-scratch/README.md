@@ -15,8 +15,8 @@
 ## 一、项目目标
 - 手写 BPE 分词器与 Transformer Decoder：RMSNorm、RoPE、GQA、SwiGLU、Causal Attention；
 - 跑通 “数据清洗去重 → 预训练 → SFT → LoRA → DPO → GRPO” 全流程，记录每阶段 loss / 显存峰值 / 吞吐 / 耗时 / 生成效果；
-- 用 Triton 编写 RMSNorm 自定义 Kernel、手写分块 Flash Attention 以降低显存；
-- 实践 DeepSpeed ZeRO 分片、梯度检查点、混合精度（BF16）与多卡数据并行；
+- 【规划中·尚未实现】用 Triton 编写 RMSNorm 自定义 Kernel、手写分块 Flash Attention；
+- 本模块单卡训练实践混合精度（BF16）、梯度检查点等显存优化；DeepSpeed ZeRO 多卡并行在 ③ 工业框架模块实测（见 ../03-peft-framework/experiments/dist_lab）；
 - 依据 Chinchilla 结论拟合 Scaling Law，核算训练资源。
 
 ## 二、目录结构
@@ -51,7 +51,7 @@ python -c "import torch; print(torch.cuda.is_available(), torch.cuda.is_bf16_sup
 - [x] 五阶段同种子生成横评（pretrain→GRPO 能力演进，见 experiments/stage_evolution.md）
 - [x] 架构/精度消融：MHA/GQA/MQA × fp32/bf16/fp16 × batch 显存吞吐 + 推理 KV cache（见 experiments/ablation/）
 - [ ] Triton Kernel / 分块注意力
-- [ ] DeepSpeed ZeRO + 混合精度 + 梯度检查点（多卡）
+- [x] DeepSpeed ZeRO 多卡对照（DDP/ZeRO-1/2/3）在 ③ 工业框架模块实测，见 ../03-peft-framework/experiments/dist_lab（本模块为单卡手写模型）
 
 ## 五、手写组件 Checklist（`from_scratch/`）
 - [ ] BPE Tokenizer（merge 规则、编解码）

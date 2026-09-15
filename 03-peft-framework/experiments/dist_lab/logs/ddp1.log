@@ -1,0 +1,230 @@
+[2026-09-14 23:18:08,176] [INFO] [real_accelerator.py:222:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[INFO|2026-09-14 23:18:10] llamafactory.hparams.parser:406 >> Process rank: 0, world size: 1, device: cuda:0, distributed training: True, compute dtype: torch.bfloat16
+[INFO|hub.py:411] 2026-09-14 23:18:10,057 >> Offline mode: forcing local_files_only=True
+[INFO|tokenization_utils_base.py:1879] 2026-09-14 23:18:10,064 >> Offline mode: forcing local_files_only=True
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:18:10,065 >> loading file vocab.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:18:10,065 >> loading file merges.txt
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:18:10,065 >> loading file tokenizer.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:18:10,065 >> loading file added_tokens.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:18:10,065 >> loading file special_tokens_map.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:18:10,065 >> loading file tokenizer_config.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:18:10,065 >> loading file chat_template.jinja
+[INFO|tokenization_utils_base.py:2299] 2026-09-14 23:18:10,439 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+[INFO|hub.py:411] 2026-09-14 23:18:10,439 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 23:18:10,439 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 23:18:10,439 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 23:18:10,439 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 23:18:10,439 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 23:18:10,440 >> Offline mode: forcing local_files_only=True
+[INFO|configuration_utils.py:696] 2026-09-14 23:18:10,440 >> loading configuration file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-0___5B/config.json
+[INFO|configuration_utils.py:770] 2026-09-14 23:18:10,442 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 896,
+  "initializer_range": 0.02,
+  "intermediate_size": 4864,
+  "max_position_embeddings": 32768,
+  "max_window_layers": 24,
+  "model_type": "qwen2",
+  "num_attention_heads": 14,
+  "num_hidden_layers": 24,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 1000000.0,
+  "sliding_window": 32768,
+  "tie_word_embeddings": true,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|hub.py:411] 2026-09-14 23:18:10,442 >> Offline mode: forcing local_files_only=True
+[INFO|tokenization_utils_base.py:1879] 2026-09-14 23:18:10,442 >> Offline mode: forcing local_files_only=True
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:18:10,443 >> loading file vocab.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:18:10,443 >> loading file merges.txt
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:18:10,443 >> loading file tokenizer.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:18:10,443 >> loading file added_tokens.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:18:10,443 >> loading file special_tokens_map.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:18:10,443 >> loading file tokenizer_config.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:18:10,443 >> loading file chat_template.jinja
+[INFO|tokenization_utils_base.py:2299] 2026-09-14 23:18:10,801 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+[INFO|2026-09-14 23:18:10] llamafactory.data.template:143 >> Replace eos token: <|im_end|>.
+[INFO|2026-09-14 23:18:10] llamafactory.data.loader:143 >> Loading dataset zh_instruct_train.json...
+Converting format of dataset (num_proc=8):   0%|          | 0/3000 [00:00<?, ? examples/s]Converting format of dataset (num_proc=8):  12%|█▎        | 375/3000 [00:00<00:00, 2880.85 examples/s]Converting format of dataset (num_proc=8): 100%|██████████| 3000/3000 [00:00<00:00, 10340.17 examples/s]
+Running tokenizer on dataset (num_proc=8):   0%|          | 0/3000 [00:00<?, ? examples/s]Running tokenizer on dataset (num_proc=8):  12%|█▎        | 375/3000 [00:01<00:07, 331.19 examples/s]Running tokenizer on dataset (num_proc=8):  38%|███▊      | 1125/3000 [00:01<00:01, 974.96 examples/s]Running tokenizer on dataset (num_proc=8):  50%|█████     | 1500/3000 [00:01<00:01, 1278.40 examples/s]Running tokenizer on dataset (num_proc=8):  62%|██████▎   | 1875/3000 [00:01<00:00, 1535.80 examples/s]Running tokenizer on dataset (num_proc=8):  75%|███████▌  | 2250/3000 [00:01<00:00, 1806.05 examples/s]Running tokenizer on dataset (num_proc=8): 100%|██████████| 3000/3000 [00:02<00:00, 2021.01 examples/s]Running tokenizer on dataset (num_proc=8): 100%|██████████| 3000/3000 [00:02<00:00, 1374.36 examples/s]
+training example:
+input_ids:
+[151644, 8948, 198, 2610, 525, 1207, 16948, 11, 3465, 553, 54364, 14817, 13, 1446, 525, 264, 10950, 17847, 13, 151645, 198, 151644, 872, 198, 61443, 46944, 101108, 3837, 109268, 2073, 101986, 99486, 104383, 112482, 97907, 100313, 1773, 151645, 198, 151644, 77091, 198, 103997, 104627, 109641, 94237, 107318, 99818, 100623, 3837, 42411, 99424, 106568, 104939, 33108, 106175, 99415, 99336, 9370, 111707, 1773, 77288, 108327, 103926, 99593, 99322, 3837, 94237, 107318, 99818, 104187, 104048, 101053, 100186, 77144, 13072, 9370, 34794, 100226, 3407, 99999, 3837, 42411, 103930, 111385, 104383, 101964, 109259, 9370, 112482, 3407, 94237, 107318, 99818, 104038, 100648, 22243, 102781, 3837, 102351, 106315, 99314, 1773, 42411, 106014, 111951, 5373, 101231, 99208, 5373, 96465, 99956, 113464, 109143, 104307, 3837, 74763, 99683, 102283, 99475, 34187, 100511, 99686, 57811, 100410, 9370, 108559, 3407, 42411, 99314, 102346, 102258, 5373, 106441, 5373, 108731, 3837, 55286, 105277, 34187, 107162, 113702, 3837, 74763, 112914, 107480, 101928, 107596, 100309, 9370, 109259, 3407, 110799, 3837, 42411, 107867, 34187, 100646, 99200, 100535, 17340, 3837, 108636, 104989, 100648, 99614, 3837, 106494, 42411, 101374, 38182, 102446, 106132, 99567, 100318, 24968, 108636, 104428, 100648, 101049, 96050, 102062, 42411, 100364, 33108, 112711, 104146, 3837, 74763, 109126, 34187, 42411, 108813, 102522, 3407, 102534, 100729, 35727, 100688, 3837, 94237, 107318, 99818, 18493, 99407, 108748, 114768, 34187, 99244, 106588, 101483, 3837, 74763, 114265, 99244, 106588, 102635, 102058, 1773, 103997, 9370, 116713, 100272, 116227, 99250, 105894, 100268, 119177, 100215, 99194, 121945, 107198, 99473, 3407, 18493, 113007, 9370, 115821, 3837, 94237, 107318, 99818, 94375, 104853, 103366, 3837, 107441, 102515, 99212, 99579, 108960, 53930, 103281, 9370, 57811, 100035, 3837, 118468, 111602, 100195, 99321, 103435, 9370, 106056, 3407, 42411, 108449, 3837, 101986, 104092, 42411, 103969, 9370, 112482, 101891, 3837, 113007, 101047, 100646, 109398, 5373, 100646, 17340, 5373, 100646, 100798, 71268, 115114, 100147, 37474, 112482, 9370, 151645, 198]
+inputs:
+<|im_start|>system
+You are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>
+<|im_start|>user
+写一个故事，阐述“人生就是一段旅程”的意思。<|im_end|>
+<|im_start|>assistant
+曾经有个名叫约瑟夫的人，他生活在一个和平和极为富足的国度。但就算是拥有了一切，约瑟夫仍然感到一种不可言名的空虚。
+
+所以，他决定踏上一段探索未知的旅程。
+
+约瑟夫带着他的行囊，一路向前走。他经历了大雨、狂风、雷暴等各种恶劣天气，也顺带领略了壮丽山川的美景。
+
+他走过了森林、草原、沙漠，开始懂得了世界的多样性，也学会了勇敢面对前行路上的未知。
+
+在路上，他遇见了各种各样的人，有的人成为了他的朋友，陪伴他渡过无数艰难险阻；有的人则是他的老师，在给予他帮助和启示的同时，也教会了他人生的道理。
+
+日子一天天过去，约瑟夫在旅途中领略了世间的美好，也见证了世间的苍凉。曾经的懵懂无知被岁月磨砺成了深邃睿智。
+
+在旅途的尽头，约瑟夫停下了脚步，望着眼前那座蓝天之巅的山峰，脑海中涌现出了往昔的种种。
+
+他明白了，人生就像他这次的旅程一样，旅途中的各种景色、各种人、各种经历都构成了这一段旅程的<|im_end|>
+
+label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 103997, 104627, 109641, 94237, 107318, 99818, 100623, 3837, 42411, 99424, 106568, 104939, 33108, 106175, 99415, 99336, 9370, 111707, 1773, 77288, 108327, 103926, 99593, 99322, 3837, 94237, 107318, 99818, 104187, 104048, 101053, 100186, 77144, 13072, 9370, 34794, 100226, 3407, 99999, 3837, 42411, 103930, 111385, 104383, 101964, 109259, 9370, 112482, 3407, 94237, 107318, 99818, 104038, 100648, 22243, 102781, 3837, 102351, 106315, 99314, 1773, 42411, 106014, 111951, 5373, 101231, 99208, 5373, 96465, 99956, 113464, 109143, 104307, 3837, 74763, 99683, 102283, 99475, 34187, 100511, 99686, 57811, 100410, 9370, 108559, 3407, 42411, 99314, 102346, 102258, 5373, 106441, 5373, 108731, 3837, 55286, 105277, 34187, 107162, 113702, 3837, 74763, 112914, 107480, 101928, 107596, 100309, 9370, 109259, 3407, 110799, 3837, 42411, 107867, 34187, 100646, 99200, 100535, 17340, 3837, 108636, 104989, 100648, 99614, 3837, 106494, 42411, 101374, 38182, 102446, 106132, 99567, 100318, 24968, 108636, 104428, 100648, 101049, 96050, 102062, 42411, 100364, 33108, 112711, 104146, 3837, 74763, 109126, 34187, 42411, 108813, 102522, 3407, 102534, 100729, 35727, 100688, 3837, 94237, 107318, 99818, 18493, 99407, 108748, 114768, 34187, 99244, 106588, 101483, 3837, 74763, 114265, 99244, 106588, 102635, 102058, 1773, 103997, 9370, 116713, 100272, 116227, 99250, 105894, 100268, 119177, 100215, 99194, 121945, 107198, 99473, 3407, 18493, 113007, 9370, 115821, 3837, 94237, 107318, 99818, 94375, 104853, 103366, 3837, 107441, 102515, 99212, 99579, 108960, 53930, 103281, 9370, 57811, 100035, 3837, 118468, 111602, 100195, 99321, 103435, 9370, 106056, 3407, 42411, 108449, 3837, 101986, 104092, 42411, 103969, 9370, 112482, 101891, 3837, 113007, 101047, 100646, 109398, 5373, 100646, 17340, 5373, 100646, 100798, 71268, 115114, 100147, 37474, 112482, 9370, 151645, 198]
+labels:
+曾经有个名叫约瑟夫的人，他生活在一个和平和极为富足的国度。但就算是拥有了一切，约瑟夫仍然感到一种不可言名的空虚。
+
+所以，他决定踏上一段探索未知的旅程。
+
+约瑟夫带着他的行囊，一路向前走。他经历了大雨、狂风、雷暴等各种恶劣天气，也顺带领略了壮丽山川的美景。
+
+他走过了森林、草原、沙漠，开始懂得了世界的多样性，也学会了勇敢面对前行路上的未知。
+
+在路上，他遇见了各种各样的人，有的人成为了他的朋友，陪伴他渡过无数艰难险阻；有的人则是他的老师，在给予他帮助和启示的同时，也教会了他人生的道理。
+
+日子一天天过去，约瑟夫在旅途中领略了世间的美好，也见证了世间的苍凉。曾经的懵懂无知被岁月磨砺成了深邃睿智。
+
+在旅途的尽头，约瑟夫停下了脚步，望着眼前那座蓝天之巅的山峰，脑海中涌现出了往昔的种种。
+
+他明白了，人生就像他这次的旅程一样，旅途中的各种景色、各种人、各种经历都构成了这一段旅程的<|im_end|>
+
+[INFO|hub.py:411] 2026-09-14 23:18:13,954 >> Offline mode: forcing local_files_only=True
+[INFO|configuration_utils.py:696] 2026-09-14 23:18:13,955 >> loading configuration file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-0___5B/config.json
+[INFO|configuration_utils.py:770] 2026-09-14 23:18:13,956 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 896,
+  "initializer_range": 0.02,
+  "intermediate_size": 4864,
+  "max_position_embeddings": 32768,
+  "max_window_layers": 24,
+  "model_type": "qwen2",
+  "num_attention_heads": 14,
+  "num_hidden_layers": 24,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 1000000.0,
+  "sliding_window": 32768,
+  "tie_word_embeddings": true,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|2026-09-14 23:18:13] llamafactory.model.model_utils.kv_cache:143 >> KV cache is disabled during training.
+[INFO|modeling_utils.py:4319] 2026-09-14 23:18:14,232 >> Offline mode: forcing local_files_only=True
+[INFO|modeling_utils.py:1148] 2026-09-14 23:18:14,233 >> loading weights file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-0___5B/model.safetensors
+[INFO|modeling_utils.py:2241] 2026-09-14 23:18:14,234 >> Instantiating Qwen2ForCausalLM model under default dtype torch.bfloat16.
+[INFO|configuration_utils.py:1135] 2026-09-14 23:18:14,236 >> Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "use_cache": false
+}
+
+[INFO|modeling_utils.py:5131] 2026-09-14 23:18:14,815 >> All model checkpoint weights were used when initializing Qwen2ForCausalLM.
+
+[INFO|modeling_utils.py:5139] 2026-09-14 23:18:14,816 >> All the weights of Qwen2ForCausalLM were initialized from the model checkpoint at /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-0___5B.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use Qwen2ForCausalLM for predictions without further training.
+[INFO|configuration_utils.py:1088] 2026-09-14 23:18:14,818 >> loading configuration file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-0___5B/generation_config.json
+[INFO|configuration_utils.py:1135] 2026-09-14 23:18:14,819 >> Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "max_new_tokens": 2048
+}
+
+[INFO|2026-09-14 23:18:14] llamafactory.model.model_utils.checkpointing:143 >> Gradient checkpointing enabled.
+[INFO|2026-09-14 23:18:14] llamafactory.model.model_utils.attention:143 >> Using torch SDPA for faster training and inference.
+[INFO|2026-09-14 23:18:14] llamafactory.model.adapter:143 >> Upcasting trainable params to float32.
+[INFO|2026-09-14 23:18:14] llamafactory.model.adapter:143 >> Fine-tuning method: Full
+[INFO|2026-09-14 23:18:14] llamafactory.model.loader:143 >> trainable params: 494,032,768 || all params: 494,032,768 || trainable%: 100.0000
+Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+[INFO|trainer.py:706] 2026-09-14 23:18:14,870 >> max_steps is given, it will override any value given in num_train_epochs
+[INFO|trainer.py:756] 2026-09-14 23:18:14,871 >> Using auto half precision backend
+[WARNING|2026-09-14 23:18:14] llamafactory.train.callbacks:154 >> Previous trainer log in this folder will be deleted.
+[INFO|trainer.py:1257] 2026-09-14 23:18:15,483 >> skipped Embedding(151936, 896): 129.828125M params
+[INFO|trainer.py:1260] 2026-09-14 23:18:15,483 >> skipped: 129.828125M params
+NCCL version 2.21.5+cuda12.4
+[INFO|trainer.py:2409] 2026-09-14 23:18:15,782 >> ***** Running training *****
+[INFO|trainer.py:2410] 2026-09-14 23:18:15,782 >>   Num examples = 3,000
+[INFO|trainer.py:2411] 2026-09-14 23:18:15,782 >>   Num Epochs = 1
+[INFO|trainer.py:2412] 2026-09-14 23:18:15,782 >>   Instantaneous batch size per device = 1
+[INFO|trainer.py:2415] 2026-09-14 23:18:15,782 >>   Total train batch size (w. parallel, distributed & accumulation) = 16
+[INFO|trainer.py:2416] 2026-09-14 23:18:15,782 >>   Gradient Accumulation steps = 16
+[INFO|trainer.py:2417] 2026-09-14 23:18:15,782 >>   Total optimization steps = 40
+[INFO|trainer.py:2418] 2026-09-14 23:18:15,783 >>   Number of trainable parameters = 494,032,768
+  0%|          | 0/40 [00:00<?, ?it/s]  2%|▎         | 1/40 [00:03<02:34,  3.96s/it]  5%|▌         | 2/40 [00:07<02:16,  3.59s/it]                                              {'loss': 1.3989, 'grad_norm': 8.525081634521484, 'learning_rate': 5e-06, 'epoch': 0.01}
+  5%|▌         | 2/40 [00:07<02:16,  3.59s/it]  8%|▊         | 3/40 [00:10<02:07,  3.44s/it] 10%|█         | 4/40 [00:13<01:53,  3.15s/it]                                              {'loss': 1.929, 'grad_norm': 6.807912349700928, 'learning_rate': 9.98292246503335e-06, 'epoch': 0.02}
+ 10%|█         | 4/40 [00:13<01:53,  3.15s/it] 12%|█▎        | 5/40 [00:15<01:44,  2.98s/it] 15%|█▌        | 6/40 [00:18<01:39,  2.94s/it]                                              {'loss': 1.9121, 'grad_norm': 6.708189487457275, 'learning_rate': 9.847001329696653e-06, 'epoch': 0.03}
+ 15%|█▌        | 6/40 [00:18<01:39,  2.94s/it] 18%|█▊        | 7/40 [00:21<01:35,  2.88s/it] 20%|██        | 8/40 [00:24<01:30,  2.84s/it]                                              {'loss': 2.0224, 'grad_norm': 7.301671981811523, 'learning_rate': 9.578866633275289e-06, 'epoch': 0.04}
+ 20%|██        | 8/40 [00:24<01:30,  2.84s/it] 22%|██▎       | 9/40 [00:27<01:26,  2.81s/it] 25%|██▌       | 10/40 [00:29<01:23,  2.78s/it]                                               {'loss': 1.8442, 'grad_norm': 7.066573143005371, 'learning_rate': 9.185832391312644e-06, 'epoch': 0.05}
+ 25%|██▌       | 10/40 [00:29<01:23,  2.78s/it] 28%|██▊       | 11/40 [00:32<01:20,  2.76s/it] 30%|███       | 12/40 [00:35<01:17,  2.77s/it]                                               {'loss': 1.7741, 'grad_norm': 7.115793228149414, 'learning_rate': 8.67861955336566e-06, 'epoch': 0.06}
+ 30%|███       | 12/40 [00:35<01:17,  2.77s/it] 32%|███▎      | 13/40 [00:38<01:14,  2.77s/it] 35%|███▌      | 14/40 [00:40<01:11,  2.77s/it]                                               {'loss': 1.758, 'grad_norm': 7.984706878662109, 'learning_rate': 8.071063563448341e-06, 'epoch': 0.07}
+ 35%|███▌      | 14/40 [00:40<01:11,  2.77s/it] 38%|███▊      | 15/40 [00:43<01:08,  2.75s/it] 40%|████      | 16/40 [00:46<01:05,  2.75s/it]                                               {'loss': 1.7319, 'grad_norm': 7.417261600494385, 'learning_rate': 7.379736965185369e-06, 'epoch': 0.09}
+ 40%|████      | 16/40 [00:46<01:05,  2.75s/it] 42%|████▎     | 17/40 [00:48<01:03,  2.74s/it] 45%|████▌     | 18/40 [00:51<01:00,  2.76s/it]                                               {'loss': 1.8651, 'grad_norm': 7.684913635253906, 'learning_rate': 6.6234973460234184e-06, 'epoch': 0.1}
+ 45%|████▌     | 18/40 [00:51<01:00,  2.76s/it] 48%|████▊     | 19/40 [00:54<00:58,  2.77s/it] 50%|█████     | 20/40 [00:57<00:55,  2.76s/it]                                               {'loss': 1.855, 'grad_norm': 7.882986545562744, 'learning_rate': 5.82297295140367e-06, 'epoch': 0.11}
+ 50%|█████     | 20/40 [00:57<00:55,  2.76s/it] 52%|█████▎    | 21/40 [01:00<00:52,  2.75s/it] 55%|█████▌    | 22/40 [01:02<00:49,  2.74s/it]                                               {'loss': 2.1457, 'grad_norm': 9.272653579711914, 'learning_rate': 5e-06, 'epoch': 0.12}
+ 55%|█████▌    | 22/40 [01:02<00:49,  2.74s/it] 57%|█████▊    | 23/40 [01:05<00:46,  2.74s/it] 60%|██████    | 24/40 [01:08<00:43,  2.75s/it]                                               {'loss': 1.794, 'grad_norm': 9.302396774291992, 'learning_rate': 4.17702704859633e-06, 'epoch': 0.13}
+ 60%|██████    | 24/40 [01:08<00:43,  2.75s/it] 62%|██████▎   | 25/40 [01:10<00:41,  2.74s/it] 65%|██████▌   | 26/40 [01:13<00:38,  2.74s/it]                                               {'loss': 1.9922, 'grad_norm': 10.544753074645996, 'learning_rate': 3.3765026539765832e-06, 'epoch': 0.14}
+ 65%|██████▌   | 26/40 [01:13<00:38,  2.74s/it] 68%|██████▊   | 27/40 [01:16<00:35,  2.73s/it] 70%|███████   | 28/40 [01:19<00:32,  2.73s/it]                                               {'loss': 2.0981, 'grad_norm': 11.661234855651855, 'learning_rate': 2.6202630348146323e-06, 'epoch': 0.15}
+ 70%|███████   | 28/40 [01:19<00:32,  2.73s/it] 72%|███████▎  | 29/40 [01:21<00:30,  2.73s/it] 75%|███████▌  | 30/40 [01:24<00:27,  2.75s/it]                                               {'loss': 1.7551, 'grad_norm': 12.397197723388672, 'learning_rate': 1.928936436551661e-06, 'epoch': 0.16}
+ 75%|███████▌  | 30/40 [01:24<00:27,  2.75s/it] 78%|███████▊  | 31/40 [01:27<00:24,  2.75s/it] 80%|████████  | 32/40 [01:30<00:22,  2.78s/it]                                               {'loss': 2.0135, 'grad_norm': 13.849357604980469, 'learning_rate': 1.321380446634342e-06, 'epoch': 0.17}
+ 80%|████████  | 32/40 [01:30<00:22,  2.78s/it] 82%|████████▎ | 33/40 [01:33<00:19,  2.81s/it] 85%|████████▌ | 34/40 [01:36<00:17,  2.99s/it]                                               {'loss': 2.0664, 'grad_norm': 14.553901672363281, 'learning_rate': 8.141676086873574e-07, 'epoch': 0.18}
+ 85%|████████▌ | 34/40 [01:36<00:17,  2.99s/it] 88%|████████▊ | 35/40 [01:39<00:15,  3.00s/it] 90%|█████████ | 36/40 [01:42<00:11,  2.95s/it]                                               {'loss': 2.2302, 'grad_norm': 18.555004119873047, 'learning_rate': 4.211333667247125e-07, 'epoch': 0.19}
+ 90%|█████████ | 36/40 [01:42<00:11,  2.95s/it] 92%|█████████▎| 37/40 [01:45<00:08,  2.95s/it] 95%|█████████▌| 38/40 [01:48<00:05,  2.95s/it]                                               {'loss': 2.2227, 'grad_norm': 24.195154190063477, 'learning_rate': 1.5299867030334815e-07, 'epoch': 0.2}
+ 95%|█████████▌| 38/40 [01:48<00:05,  2.95s/it] 98%|█████████▊| 39/40 [01:51<00:02,  2.96s/it]100%|██████████| 40/40 [01:54<00:00,  2.92s/it]                                               {'loss': 2.365, 'grad_norm': 27.260520935058594, 'learning_rate': 1.7077534966650767e-08, 'epoch': 0.21}
+100%|██████████| 40/40 [01:54<00:00,  2.92s/it][INFO|trainer.py:3993] 2026-09-14 23:20:09,949 >> Saving model checkpoint to /root/autodl-tmp/workspace/dist_lab/runs/ddp1/checkpoint-40
+[INFO|configuration_utils.py:424] 2026-09-14 23:20:09,954 >> Configuration saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp1/checkpoint-40/config.json
+[INFO|configuration_utils.py:904] 2026-09-14 23:20:09,955 >> Configuration saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp1/checkpoint-40/generation_config.json
+[INFO|modeling_utils.py:3725] 2026-09-14 23:20:12,645 >> Model weights saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp1/checkpoint-40/model.safetensors
+[INFO|tokenization_utils_base.py:2356] 2026-09-14 23:20:12,647 >> chat template saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp1/checkpoint-40/chat_template.jinja
+[INFO|tokenization_utils_base.py:2525] 2026-09-14 23:20:12,648 >> tokenizer config file saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp1/checkpoint-40/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2534] 2026-09-14 23:20:12,648 >> Special tokens file saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp1/checkpoint-40/special_tokens_map.json
+[INFO|trainer.py:2676] 2026-09-14 23:20:18,726 >> 
+
+Training completed. Do not forget to share your model on huggingface.co/models =)
+
+
+                                               {'train_runtime': 122.9434, 'train_samples_per_second': 5.206, 'train_steps_per_second': 0.325, 'train_loss': 1.9386916995048522, 'epoch': 0.21}
+100%|██████████| 40/40 [02:02<00:00,  2.92s/it]100%|██████████| 40/40 [02:02<00:00,  3.07s/it]
+[INFO|trainer.py:3993] 2026-09-14 23:20:18,729 >> Saving model checkpoint to /root/autodl-tmp/workspace/dist_lab/runs/ddp1
+[INFO|configuration_utils.py:424] 2026-09-14 23:20:18,733 >> Configuration saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp1/config.json
+[INFO|configuration_utils.py:904] 2026-09-14 23:20:18,733 >> Configuration saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp1/generation_config.json
+[INFO|modeling_utils.py:3725] 2026-09-14 23:20:21,488 >> Model weights saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp1/model.safetensors
+[INFO|tokenization_utils_base.py:2356] 2026-09-14 23:20:21,491 >> chat template saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp1/chat_template.jinja
+[INFO|tokenization_utils_base.py:2525] 2026-09-14 23:20:21,491 >> tokenizer config file saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp1/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2534] 2026-09-14 23:20:21,492 >> Special tokens file saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp1/special_tokens_map.json
+***** train metrics *****
+  epoch                    =     0.2133
+  total_flos               =   246405GF
+  train_loss               =     1.9387
+  train_runtime            = 0:02:02.94
+  train_samples_per_second =      5.206
+  train_steps_per_second   =      0.325
+[INFO|modelcard.py:450] 2026-09-14 23:20:21,728 >> Dropping the following result as it does not have all the necessary fields:
+{'task': {'name': 'Causal Language Modeling', 'type': 'text-generation'}}

@@ -1,0 +1,13 @@
+WALL_SEC=0 RC=127 NPROC=1 ACCUM=8 DS= EXTRA=
+WALL_SEC=0 RC=127 NPROC=2 ACCUM=4 DS= EXTRA=
+WALL_SEC=0 RC=127 NPROC=2 ACCUM=8 DS= EXTRA=
+WALL_SEC=0 RC=127 NPROC=2 ACCUM=8 DS=ds_config/ds_zero1.json EXTRA=
+WALL_SEC=0 RC=127 NPROC=2 ACCUM=8 DS=ds_config/ds_zero2.json EXTRA=
+WALL_SEC=0 RC=127 NPROC=2 ACCUM=8 DS=ds_config/ds_zero3.json EXTRA=
+ALL DONE
+-rw-r--r-- 1 root root 45 Sep 14 23:01 logs/ddp1_stat.txt
+-rw-r--r-- 1 root root 45 Sep 14 23:01 logs/ddp2_stat.txt
+-rw-r--r-- 1 root root 68 Sep 14 23:01 logs/z1_stat.txt
+-rw-r--r-- 1 root root 68 Sep 14 23:01 logs/z2_stat.txt
+-rw-r--r-- 1 root root 68 Sep 14 23:01 logs/z3_stat.txt
+-rw-r--r-- 1 root root 45 Sep 14 23:01 logs/z_ddp_stat.txt

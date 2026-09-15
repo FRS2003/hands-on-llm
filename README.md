@@ -24,7 +24,7 @@ MoE/Scaling/对齐   DPO·GRPO + 对照实验     量化推理 选型           
 | --- | --- | --- |
 | ① 理论基础 | [`01-foundations`](01-foundations) | Stanford CS336（L1–L17）5 篇中文精讲：分词、Transformer、注意力变体、MoE、GPU/并行、Scaling Law、推理优化、对齐与 GRPO |
 | ② 手搓与训练 | [`02-train-from-scratch`](02-train-from-scratch) | 原生 PyTorch 手写 RMSNorm/RoPE/GQA/SwiGLU + 26 项数值自检；单卡跑通五阶段训练 + 可验证奖励 RLVR，并做规模/资源/偏好/架构对照实验 |
-| ③ 工业框架 | [`03-peft-framework`](03-peft-framework) | 源码级走读 LLaMA-Factory 四层链路；对齐/PEFT/分布式/量化选型笔记 + 带注释可改跑的 yaml 模板与二次开发示例 + 垂直领域微调方案（csv 为自测记录表） |
+| ③ 工业框架 | [`03-peft-framework`](03-peft-framework) | 源码级走读 LLaMA-Factory 四层链路；对齐/PEFT/量化选型笔记 + 双卡 DDP/ZeRO 分布式实测 + 带注释 yaml 模板与工程化封装 + 垂直领域微调方案（csv 为自测记录表） |
 | ④ Agent 工程 | [`04-agent`](04-agent) | 终端编程 Agent：ReAct + Harness、Skill 路由、记忆闭环、分层上下文压缩、主从多智能体、分层安全 |
 | ⑤ RAG 落地 | [`05-rag-application`](05-rag-application) | 医学文献混合检索问答：BM25+稠密双路、加权融合、Rerank、HyDE/QE、带引文生成、ReAct 编排、Streamlit |
 
@@ -57,6 +57,7 @@ MoE/Scaling/对齐   DPO·GRPO + 对照实验     量化推理 选型           
 - **GRPO** 免 1.8B 奖励模型改纯规则奖励，单卡真实训练 300 步（21.7 min）：组内优势均值严格为 0、平均 |KL|≈0.005 未漂移，同 prompt/种子前后对比规则分 0.109→0.290；100 条未训练 held-out 题上 +0.084、3-gram 重复度下降，并做五阶段（pretrain→GRPO）同种子生成横评；另配 14 项纯 tensor 自检；
 - **可验证奖励 RLVR（答案对错自动判分）**：一位加法先 SFT 冷启动到「采样能偶尔答对」的甜区（greedy 0.633），再用对错判分的 GRPO（B8×G4、lr 4e-6、β-KL 0.08、300 步）把独立 120 题 **greedy 0.633→0.792、采样三种子均值 0.503→0.603**；对照证明 RL 只放大已有能力、不注入知识，并复现了 lr 过大 / KL 过弱导致的策略崩溃；
 - **架构/精度消融**：同骨架实测 MHA/GQA/MQA——训练侧 MQA 比 MHA 省约 12% 显存、快约 16%，而推理 KV cache@4096 为 100.7/50.3/12.6MB（随 KV 头数 8:4:1，长上下文这才是 GQA/MQA 主价值）；bf16 较 fp32 省 35–49% 显存、约 1.8× 吞吐；
+- **分布式对照（2×RTX 3080 Ti，详见 ③ 模块）**：0.5B 双卡 DDP 接近线性加速、每卡显存与单卡持平（DDP 只扩吞吐、不省单卡显存）；1.5B 全参 DDP/ZeRO-1/2 先后显存不足，仅参数也分片的 ZeRO-3 跑通，验证“分片越彻底越省显存、通信开销越大”；
 - 全程显存峰值 4.6–7.4GB、GPU 利用率 96–99%，证明单卡可完整走通主链路。
 
 ## 🗺 怎么开始
@@ -94,7 +95,8 @@ hands-on-llm/
 - [x] GRPO 100 条 held-out 定量评测 + 五阶段同种子生成横评（能力演进证据链）
 - [x] MHA/GQA/MQA × 混合精度 × batch 架构消融（训练显存/吞吐 + 推理 KV cache 实测）
 - [x] 可验证奖励 RLVR（对错判分）：SFT 甜区冷启动 + GRPO，greedy 0.633→0.792，含能力边界 / 策略崩溃对照
-- [ ] Triton 自定义 Kernel、手写分块 Flash Attention、DeepSpeed ZeRO 实测
+- [x] DeepSpeed 分布式实测：双卡 DDP vs ZeRO-1/2/3 对照（显存/通信/吞吐，见 03 模块 dist_lab）
+- [ ] Triton 自定义 Kernel、手写分块 Flash Attention（尚未实现，列后续规划）
 - [ ] 持续补充论文精读与自测题
 
 ## 🙏 致谢与说明

@@ -1,0 +1,452 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[2026-09-14 23:33:11,655] [INFO] [real_accelerator.py:222:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2026-09-14 23:33:11,728] [INFO] [real_accelerator.py:222:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2026-09-14 23:33:13,242] [INFO] [comm.py:658:init_distributed] cdb=None
+[2026-09-14 23:33:13,242] [INFO] [comm.py:689:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+[2026-09-14 23:33:13,328] [INFO] [comm.py:658:init_distributed] cdb=None
+[INFO|2026-09-14 23:33:13] llamafactory.hparams.parser:406 >> Process rank: 0, world size: 2, device: cuda:0, distributed training: True, compute dtype: torch.bfloat16
+[INFO|hub.py:411] 2026-09-14 23:33:13,457 >> Offline mode: forcing local_files_only=True
+[INFO|tokenization_utils_base.py:1879] 2026-09-14 23:33:13,462 >> Offline mode: forcing local_files_only=True
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:33:13,463 >> loading file vocab.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:33:13,463 >> loading file merges.txt
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:33:13,463 >> loading file tokenizer.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:33:13,463 >> loading file added_tokens.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:33:13,463 >> loading file special_tokens_map.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:33:13,463 >> loading file tokenizer_config.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:33:13,463 >> loading file chat_template.jinja
+[INFO|2026-09-14 23:33:13] llamafactory.hparams.parser:406 >> Process rank: 1, world size: 2, device: cuda:1, distributed training: True, compute dtype: torch.bfloat16
+[INFO|tokenization_utils_base.py:2299] 2026-09-14 23:33:13,851 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+[INFO|hub.py:411] 2026-09-14 23:33:13,851 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 23:33:13,851 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 23:33:13,852 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 23:33:13,852 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 23:33:13,852 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 23:33:13,852 >> Offline mode: forcing local_files_only=True
+[INFO|configuration_utils.py:696] 2026-09-14 23:33:13,852 >> loading configuration file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-1___5B/config.json
+[INFO|configuration_utils.py:770] 2026-09-14 23:33:13,854 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 1536,
+  "initializer_range": 0.02,
+  "intermediate_size": 8960,
+  "max_position_embeddings": 131072,
+  "max_window_layers": 28,
+  "model_type": "qwen2",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 1000000.0,
+  "sliding_window": 131072,
+  "tie_word_embeddings": true,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|hub.py:411] 2026-09-14 23:33:13,854 >> Offline mode: forcing local_files_only=True
+[INFO|tokenization_utils_base.py:1879] 2026-09-14 23:33:13,855 >> Offline mode: forcing local_files_only=True
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:33:13,855 >> loading file vocab.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:33:13,855 >> loading file merges.txt
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:33:13,855 >> loading file tokenizer.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:33:13,855 >> loading file added_tokens.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:33:13,855 >> loading file special_tokens_map.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:33:13,855 >> loading file tokenizer_config.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:33:13,855 >> loading file chat_template.jinja
+[INFO|tokenization_utils_base.py:2299] 2026-09-14 23:33:14,242 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+[INFO|2026-09-14 23:33:14] llamafactory.data.template:143 >> Replace eos token: <|im_end|>.
+[INFO|2026-09-14 23:33:14] llamafactory.data.loader:143 >> Loading dataset zh_instruct_train.json...
+Converting format of dataset (num_proc=8):   0%|          | 0/3000 [00:00<?, ? examples/s][rank1]:[W914 23:33:14.295793136 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+Converting format of dataset (num_proc=8):  12%|█▎        | 375/3000 [00:00<00:00, 3441.44 examples/s]Converting format of dataset (num_proc=8): 100%|██████████| 3000/3000 [00:00<00:00, 11564.01 examples/s]
+[rank0]:[W914 23:33:14.713766438 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+NCCL version 2.21.5+cuda12.4
+Running tokenizer on dataset (num_proc=8):   0%|          | 0/3000 [00:00<?, ? examples/s]Running tokenizer on dataset (num_proc=8):  12%|█▎        | 375/3000 [00:01<00:07, 339.92 examples/s]Running tokenizer on dataset (num_proc=8):  38%|███▊      | 1125/3000 [00:01<00:01, 1052.29 examples/s]Running tokenizer on dataset (num_proc=8):  50%|█████     | 1500/3000 [00:01<00:01, 1255.56 examples/s]Running tokenizer on dataset (num_proc=8):  75%|███████▌  | 2250/3000 [00:01<00:00, 1914.62 examples/s]Running tokenizer on dataset (num_proc=8):  88%|████████▊ | 2625/3000 [00:01<00:00, 1912.13 examples/s]Running tokenizer on dataset (num_proc=8): 100%|██████████| 3000/3000 [00:02<00:00, 1475.72 examples/s]
+training example:
+input_ids:
+[151644, 8948, 198, 2610, 525, 1207, 16948, 11, 3465, 553, 54364, 14817, 13, 1446, 525, 264, 10950, 17847, 13, 151645, 198, 151644, 872, 198, 61443, 46944, 101108, 3837, 109268, 2073, 101986, 99486, 104383, 112482, 97907, 100313, 1773, 151645, 198, 151644, 77091, 198, 103997, 104627, 109641, 94237, 107318, 99818, 100623, 3837, 42411, 99424, 106568, 104939, 33108, 106175, 99415, 99336, 9370, 111707, 1773, 77288, 108327, 103926, 99593, 99322, 3837, 94237, 107318, 99818, 104187, 104048, 101053, 100186, 77144, 13072, 9370, 34794, 100226, 3407, 99999, 3837, 42411, 103930, 111385, 104383, 101964, 109259, 9370, 112482, 3407, 94237, 107318, 99818, 104038, 100648, 22243, 102781, 3837, 102351, 106315, 99314, 1773, 42411, 106014, 111951, 5373, 101231, 99208, 5373, 96465, 99956, 113464, 109143, 104307, 3837, 74763, 99683, 102283, 99475, 34187, 100511, 99686, 57811, 100410, 9370, 108559, 3407, 42411, 99314, 102346, 102258, 5373, 106441, 5373, 108731, 3837, 55286, 105277, 34187, 107162, 113702, 3837, 74763, 112914, 107480, 101928, 107596, 100309, 9370, 109259, 3407, 110799, 3837, 42411, 107867, 34187, 100646, 99200, 100535, 17340, 3837, 108636, 104989, 100648, 99614, 3837, 106494, 42411, 101374, 38182, 102446, 106132, 99567, 100318, 24968, 108636, 104428, 100648, 101049, 96050, 102062, 42411, 100364, 33108, 112711, 104146, 3837, 74763, 109126, 34187, 42411, 108813, 102522, 3407, 102534, 100729, 35727, 100688, 3837, 94237, 107318, 99818, 18493, 99407, 108748, 114768, 34187, 99244, 106588, 101483, 3837, 74763, 114265, 99244, 106588, 102635, 102058, 1773, 103997, 9370, 116713, 100272, 116227, 99250, 105894, 100268, 119177, 100215, 99194, 121945, 107198, 99473, 3407, 18493, 113007, 9370, 115821, 3837, 94237, 107318, 99818, 94375, 104853, 103366, 3837, 107441, 102515, 99212, 99579, 108960, 53930, 103281, 9370, 57811, 100035, 3837, 118468, 111602, 100195, 99321, 103435, 9370, 106056, 3407, 42411, 108449, 3837, 101986, 104092, 42411, 103969, 9370, 112482, 101891, 3837, 113007, 101047, 100646, 109398, 5373, 100646, 17340, 5373, 100646, 100798, 71268, 115114, 100147, 37474, 112482, 9370, 151645, 198]
+inputs:
+<|im_start|>system
+You are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>
+<|im_start|>user
+写一个故事，阐述“人生就是一段旅程”的意思。<|im_end|>
+<|im_start|>assistant
+曾经有个名叫约瑟夫的人，他生活在一个和平和极为富足的国度。但就算是拥有了一切，约瑟夫仍然感到一种不可言名的空虚。
+
+所以，他决定踏上一段探索未知的旅程。
+
+约瑟夫带着他的行囊，一路向前走。他经历了大雨、狂风、雷暴等各种恶劣天气，也顺带领略了壮丽山川的美景。
+
+他走过了森林、草原、沙漠，开始懂得了世界的多样性，也学会了勇敢面对前行路上的未知。
+
+在路上，他遇见了各种各样的人，有的人成为了他的朋友，陪伴他渡过无数艰难险阻；有的人则是他的老师，在给予他帮助和启示的同时，也教会了他人生的道理。
+
+日子一天天过去，约瑟夫在旅途中领略了世间的美好，也见证了世间的苍凉。曾经的懵懂无知被岁月磨砺成了深邃睿智。
+
+在旅途的尽头，约瑟夫停下了脚步，望着眼前那座蓝天之巅的山峰，脑海中涌现出了往昔的种种。
+
+他明白了，人生就像他这次的旅程一样，旅途中的各种景色、各种人、各种经历都构成了这一段旅程的<|im_end|>
+
+label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 103997, 104627, 109641, 94237, 107318, 99818, 100623, 3837, 42411, 99424, 106568, 104939, 33108, 106175, 99415, 99336, 9370, 111707, 1773, 77288, 108327, 103926, 99593, 99322, 3837, 94237, 107318, 99818, 104187, 104048, 101053, 100186, 77144, 13072, 9370, 34794, 100226, 3407, 99999, 3837, 42411, 103930, 111385, 104383, 101964, 109259, 9370, 112482, 3407, 94237, 107318, 99818, 104038, 100648, 22243, 102781, 3837, 102351, 106315, 99314, 1773, 42411, 106014, 111951, 5373, 101231, 99208, 5373, 96465, 99956, 113464, 109143, 104307, 3837, 74763, 99683, 102283, 99475, 34187, 100511, 99686, 57811, 100410, 9370, 108559, 3407, 42411, 99314, 102346, 102258, 5373, 106441, 5373, 108731, 3837, 55286, 105277, 34187, 107162, 113702, 3837, 74763, 112914, 107480, 101928, 107596, 100309, 9370, 109259, 3407, 110799, 3837, 42411, 107867, 34187, 100646, 99200, 100535, 17340, 3837, 108636, 104989, 100648, 99614, 3837, 106494, 42411, 101374, 38182, 102446, 106132, 99567, 100318, 24968, 108636, 104428, 100648, 101049, 96050, 102062, 42411, 100364, 33108, 112711, 104146, 3837, 74763, 109126, 34187, 42411, 108813, 102522, 3407, 102534, 100729, 35727, 100688, 3837, 94237, 107318, 99818, 18493, 99407, 108748, 114768, 34187, 99244, 106588, 101483, 3837, 74763, 114265, 99244, 106588, 102635, 102058, 1773, 103997, 9370, 116713, 100272, 116227, 99250, 105894, 100268, 119177, 100215, 99194, 121945, 107198, 99473, 3407, 18493, 113007, 9370, 115821, 3837, 94237, 107318, 99818, 94375, 104853, 103366, 3837, 107441, 102515, 99212, 99579, 108960, 53930, 103281, 9370, 57811, 100035, 3837, 118468, 111602, 100195, 99321, 103435, 9370, 106056, 3407, 42411, 108449, 3837, 101986, 104092, 42411, 103969, 9370, 112482, 101891, 3837, 113007, 101047, 100646, 109398, 5373, 100646, 17340, 5373, 100646, 100798, 71268, 115114, 100147, 37474, 112482, 9370, 151645, 198]
+labels:
+曾经有个名叫约瑟夫的人，他生活在一个和平和极为富足的国度。但就算是拥有了一切，约瑟夫仍然感到一种不可言名的空虚。
+
+所以，他决定踏上一段探索未知的旅程。
+
+约瑟夫带着他的行囊，一路向前走。他经历了大雨、狂风、雷暴等各种恶劣天气，也顺带领略了壮丽山川的美景。
+
+他走过了森林、草原、沙漠，开始懂得了世界的多样性，也学会了勇敢面对前行路上的未知。
+
+在路上，他遇见了各种各样的人，有的人成为了他的朋友，陪伴他渡过无数艰难险阻；有的人则是他的老师，在给予他帮助和启示的同时，也教会了他人生的道理。
+
+日子一天天过去，约瑟夫在旅途中领略了世间的美好，也见证了世间的苍凉。曾经的懵懂无知被岁月磨砺成了深邃睿智。
+
+在旅途的尽头，约瑟夫停下了脚步，望着眼前那座蓝天之巅的山峰，脑海中涌现出了往昔的种种。
+
+他明白了，人生就像他这次的旅程一样，旅途中的各种景色、各种人、各种经历都构成了这一段旅程的<|im_end|>
+
+[INFO|hub.py:411] 2026-09-14 23:33:17,723 >> Offline mode: forcing local_files_only=True
+[INFO|configuration_utils.py:696] 2026-09-14 23:33:17,723 >> loading configuration file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-1___5B/config.json
+[INFO|configuration_utils.py:770] 2026-09-14 23:33:17,724 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 1536,
+  "initializer_range": 0.02,
+  "intermediate_size": 8960,
+  "max_position_embeddings": 131072,
+  "max_window_layers": 28,
+  "model_type": "qwen2",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 1000000.0,
+  "sliding_window": 131072,
+  "tie_word_embeddings": true,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|2026-09-14 23:33:17] llamafactory.model.model_utils.kv_cache:143 >> KV cache is disabled during training.
+[INFO|modeling_utils.py:4319] 2026-09-14 23:33:17,995 >> Offline mode: forcing local_files_only=True
+[INFO|modeling_utils.py:1148] 2026-09-14 23:33:17,996 >> loading weights file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-1___5B/model.safetensors
+[INFO|modeling_utils.py:2241] 2026-09-14 23:33:17,996 >> Instantiating Qwen2ForCausalLM model under default dtype torch.bfloat16.
+[INFO|configuration_utils.py:1135] 2026-09-14 23:33:17,999 >> Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "use_cache": false
+}
+
+[INFO|modeling_utils.py:5131] 2026-09-14 23:33:19,105 >> All model checkpoint weights were used when initializing Qwen2ForCausalLM.
+
+[INFO|modeling_utils.py:5139] 2026-09-14 23:33:19,105 >> All the weights of Qwen2ForCausalLM were initialized from the model checkpoint at /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-1___5B.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use Qwen2ForCausalLM for predictions without further training.
+[INFO|configuration_utils.py:1088] 2026-09-14 23:33:19,108 >> loading configuration file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-1___5B/generation_config.json
+[INFO|configuration_utils.py:1135] 2026-09-14 23:33:19,108 >> Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "max_new_tokens": 2048
+}
+
+[INFO|2026-09-14 23:33:19] llamafactory.model.model_utils.checkpointing:143 >> Gradient checkpointing enabled.
+[INFO|2026-09-14 23:33:19] llamafactory.model.model_utils.attention:143 >> Using torch SDPA for faster training and inference.
+[INFO|2026-09-14 23:33:19] llamafactory.model.adapter:143 >> Upcasting trainable params to float32.
+[INFO|2026-09-14 23:33:19] llamafactory.model.adapter:143 >> Fine-tuning method: Full
+[INFO|2026-09-14 23:33:19] llamafactory.model.loader:143 >> trainable params: 1,543,714,304 || all params: 1,543,714,304 || trainable%: 100.0000
+Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+[INFO|trainer.py:706] 2026-09-14 23:33:19,167 >> max_steps is given, it will override any value given in num_train_epochs
+[INFO|trainer.py:756] 2026-09-14 23:33:19,167 >> Using auto half precision backend
+[INFO|trainer.py:1257] 2026-09-14 23:33:19,790 >> skipped Embedding(151936, 1536): 222.5625M params
+[INFO|trainer.py:1260] 2026-09-14 23:33:19,791 >> skipped: 222.5625M params
+[2026-09-14 23:33:19,797] [INFO] [logging.py:128:log_dist] [Rank 0] DeepSpeed info: version=0.16.4, git-hash=unknown, git-branch=unknown
+[2026-09-14 23:33:19,797] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 2
+[2026-09-14 23:33:20,177] [INFO] [logging.py:128:log_dist] [Rank 0] DeepSpeed Flops Profiler Enabled: False
+[2026-09-14 23:33:20,179] [INFO] [logging.py:128:log_dist] [Rank 0] Using client Optimizer as basic optimizer
+[2026-09-14 23:33:20,179] [INFO] [logging.py:128:log_dist] [Rank 0] Removing param_group that has no 'params' in the basic Optimizer
+[2026-09-14 23:33:20,259] [INFO] [logging.py:128:log_dist] [Rank 0] DeepSpeed Basic Optimizer = AdamW
+[2026-09-14 23:33:20,259] [INFO] [utils.py:59:is_zero_supported_optimizer] Checking ZeRO support for optimizer=AdamW type=<class 'bitsandbytes.optim.adamw.AdamW'>
+[2026-09-14 23:33:20,259] [WARNING] [engine.py:1315:_do_optimizer_sanity_check] **** You are using ZeRO with an untested optimizer, proceed with caution *****
+[2026-09-14 23:33:20,259] [INFO] [logging.py:128:log_dist] [Rank 0] Creating torch.bfloat16 ZeRO stage 1 optimizer
+[2026-09-14 23:33:20,260] [INFO] [stage_1_and_2.py:149:__init__] Reduce bucket size 20000000
+[2026-09-14 23:33:20,260] [INFO] [stage_1_and_2.py:150:__init__] Allgather bucket size 20000000
+[2026-09-14 23:33:20,260] [INFO] [stage_1_and_2.py:151:__init__] CPU Offload: False
+[2026-09-14 23:33:20,260] [INFO] [stage_1_and_2.py:152:__init__] Round robin gradient partitioning: False
+[2026-09-14 23:33:25,949] [INFO] [utils.py:781:see_memory_usage] Before initializing optimizer states
+[2026-09-14 23:33:25,950] [INFO] [utils.py:782:see_memory_usage] MA 5.75 GB         Max_MA 5.75 GB         CA 5.8 GB         Max_CA 6 GB 
+[2026-09-14 23:33:25,950] [INFO] [utils.py:789:see_memory_usage] CPU Virtual Memory:  used = 33.95 GB, percent = 7.2%
+[2026-09-14 23:33:26,198] [INFO] [utils.py:781:see_memory_usage] After initializing optimizer states
+[2026-09-14 23:33:26,199] [INFO] [utils.py:782:see_memory_usage] MA 5.75 GB         Max_MA 8.63 GB         CA 8.67 GB         Max_CA 9 GB 
+[2026-09-14 23:33:26,199] [INFO] [utils.py:789:see_memory_usage] CPU Virtual Memory:  used = 34.26 GB, percent = 7.3%
+[2026-09-14 23:33:26,200] [INFO] [stage_1_and_2.py:550:__init__] optimizer state initialized
+[2026-09-14 23:33:26,483] [INFO] [utils.py:781:see_memory_usage] After initializing ZeRO optimizer
+[2026-09-14 23:33:26,484] [INFO] [utils.py:782:see_memory_usage] MA 5.75 GB         Max_MA 5.75 GB         CA 8.67 GB         Max_CA 9 GB 
+[2026-09-14 23:33:26,484] [INFO] [utils.py:789:see_memory_usage] CPU Virtual Memory:  used = 32.68 GB, percent = 6.9%
+[2026-09-14 23:33:26,488] [INFO] [logging.py:128:log_dist] [Rank 0] DeepSpeed Final Optimizer = DeepSpeedZeroOptimizer
+[2026-09-14 23:33:26,488] [INFO] [logging.py:128:log_dist] [Rank 0] DeepSpeed using configured LR scheduler = None
+[2026-09-14 23:33:26,488] [INFO] [logging.py:128:log_dist] [Rank 0] DeepSpeed LR Scheduler = None
+[2026-09-14 23:33:26,488] [INFO] [logging.py:128:log_dist] [Rank 0] step=0, skipped=0, lr=[0.0, 0.0], mom=[(0.9, 0.999), (0.9, 0.999)]
+[2026-09-14 23:33:26,490] [INFO] [config.py:1001:print] DeepSpeedEngine configuration:
+[2026-09-14 23:33:26,490] [INFO] [config.py:1005:print]   activation_checkpointing_config  {
+    "partition_activations": false, 
+    "contiguous_memory_optimization": false, 
+    "cpu_checkpointing": false, 
+    "number_checkpoints": null, 
+    "synchronize_checkpoint_boundary": false, 
+    "profile": false
+}
+[2026-09-14 23:33:26,491] [INFO] [config.py:1005:print]   aio_config ................... {'block_size': 1048576, 'queue_depth': 8, 'intra_op_parallelism': 1, 'single_submit': False, 'overlap_events': True, 'use_gds': False}
+[2026-09-14 23:33:26,491] [INFO] [config.py:1005:print]   amp_enabled .................. False
+[2026-09-14 23:33:26,491] [INFO] [config.py:1005:print]   amp_params ................... False
+[2026-09-14 23:33:26,491] [INFO] [config.py:1005:print]   autotuning_config ............ {
+    "enabled": false, 
+    "start_step": null, 
+    "end_step": null, 
+    "metric_path": null, 
+    "arg_mappings": null, 
+    "metric": "throughput", 
+    "model_info": null, 
+    "results_dir": "autotuning_results", 
+    "exps_dir": "autotuning_exps", 
+    "overwrite": true, 
+    "fast": true, 
+    "start_profile_step": 3, 
+    "end_profile_step": 5, 
+    "tuner_type": "gridsearch", 
+    "tuner_early_stopping": 5, 
+    "tuner_num_trials": 50, 
+    "model_info_path": null, 
+    "mp_size": 1, 
+    "max_train_batch_size": null, 
+    "min_train_batch_size": 1, 
+    "max_train_micro_batch_size_per_gpu": 1.024000e+03, 
+    "min_train_micro_batch_size_per_gpu": 1, 
+    "num_tuning_micro_batch_sizes": 3
+}
+[2026-09-14 23:33:26,491] [INFO] [config.py:1005:print]   bfloat16_enabled ............. True
+[2026-09-14 23:33:26,491] [INFO] [config.py:1005:print]   bfloat16_immediate_grad_update  False
+[2026-09-14 23:33:26,491] [INFO] [config.py:1005:print]   checkpoint_parallel_write_pipeline  False
+[2026-09-14 23:33:26,491] [INFO] [config.py:1005:print]   checkpoint_tag_validation_enabled  True
+[2026-09-14 23:33:26,491] [INFO] [config.py:1005:print]   checkpoint_tag_validation_fail  False
+[2026-09-14 23:33:26,491] [INFO] [config.py:1005:print]   comms_config ................. <deepspeed.comm.config.DeepSpeedCommsConfig object at 0x7f6b000ab910>
+[2026-09-14 23:33:26,491] [INFO] [config.py:1005:print]   communication_data_type ...... None
+[2026-09-14 23:33:26,491] [INFO] [config.py:1005:print]   compression_config ........... {'weight_quantization': {'shared_parameters': {'enabled': False, 'quantizer_kernel': False, 'schedule_offset': 0, 'quantize_groups': 1, 'quantize_verbose': False, 'quantization_type': 'symmetric', 'quantize_weight_in_forward': False, 'rounding': 'nearest', 'fp16_mixed_quantize': False, 'quantize_change_ratio': 0.001}, 'different_groups': {}}, 'activation_quantization': {'shared_parameters': {'enabled': False, 'quantization_type': 'symmetric', 'range_calibration': 'dynamic', 'schedule_offset': 1000}, 'different_groups': {}}, 'sparse_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'row_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'head_pruning': {'shared_parameters': {'enabled': False, 'method': 'topk', 'schedule_offset': 1000}, 'different_groups': {}}, 'channel_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'layer_reduction': {'enabled': False}}
+[2026-09-14 23:33:26,492] [INFO] [config.py:1005:print]   curriculum_enabled_legacy .... False
+[2026-09-14 23:33:26,492] [INFO] [config.py:1005:print]   curriculum_params_legacy ..... False
+[2026-09-14 23:33:26,492] [INFO] [config.py:1005:print]   data_efficiency_config ....... {'enabled': False, 'seed': 1234, 'data_sampling': {'enabled': False, 'num_epochs': 1000, 'num_workers': 0, 'curriculum_learning': {'enabled': False}}, 'data_routing': {'enabled': False, 'random_ltd': {'enabled': False, 'layer_token_lr_schedule': {'enabled': False}}}}
+[2026-09-14 23:33:26,492] [INFO] [config.py:1005:print]   data_efficiency_enabled ...... False
+[2026-09-14 23:33:26,492] [INFO] [config.py:1005:print]   dataloader_drop_last ......... False
+[2026-09-14 23:33:26,492] [INFO] [config.py:1005:print]   disable_allgather ............ False
+[2026-09-14 23:33:26,492] [INFO] [config.py:1005:print]   dump_state ................... False
+[2026-09-14 23:33:26,492] [INFO] [config.py:1005:print]   dynamic_loss_scale_args ...... None
+[2026-09-14 23:33:26,492] [INFO] [config.py:1005:print]   eigenvalue_enabled ........... False
+[2026-09-14 23:33:26,492] [INFO] [config.py:1005:print]   eigenvalue_gas_boundary_resolution  1
+[2026-09-14 23:33:26,492] [INFO] [config.py:1005:print]   eigenvalue_layer_name ........ bert.encoder.layer
+[2026-09-14 23:33:26,492] [INFO] [config.py:1005:print]   eigenvalue_layer_num ......... 0
+[2026-09-14 23:33:26,492] [INFO] [config.py:1005:print]   eigenvalue_max_iter .......... 100
+[2026-09-14 23:33:26,492] [INFO] [config.py:1005:print]   eigenvalue_stability ......... 1e-06
+[2026-09-14 23:33:26,492] [INFO] [config.py:1005:print]   eigenvalue_tol ............... 0.01
+[2026-09-14 23:33:26,492] [INFO] [config.py:1005:print]   eigenvalue_verbose ........... False
+[2026-09-14 23:33:26,492] [INFO] [config.py:1005:print]   elasticity_enabled ........... False
+[2026-09-14 23:33:26,492] [INFO] [config.py:1005:print]   flops_profiler_config ........ {
+    "enabled": false, 
+    "recompute_fwd_factor": 0.0, 
+    "profile_step": 1, 
+    "module_depth": -1, 
+    "top_modules": 1, 
+    "detailed": true, 
+    "output_file": null
+}
+[2026-09-14 23:33:26,492] [INFO] [config.py:1005:print]   fp16_auto_cast ............... None
+[2026-09-14 23:33:26,492] [INFO] [config.py:1005:print]   fp16_enabled ................. False
+[2026-09-14 23:33:26,493] [INFO] [config.py:1005:print]   fp16_master_weights_and_gradients  False
+[2026-09-14 23:33:26,493] [INFO] [config.py:1005:print]   global_rank .................. 0
+[2026-09-14 23:33:26,493] [INFO] [config.py:1005:print]   grad_accum_dtype ............. None
+[2026-09-14 23:33:26,493] [INFO] [config.py:1005:print]   gradient_accumulation_steps .. 8
+[2026-09-14 23:33:26,493] [INFO] [config.py:1005:print]   gradient_clipping ............ 1.0
+[2026-09-14 23:33:26,493] [INFO] [config.py:1005:print]   gradient_predivide_factor .... 1.0
+[2026-09-14 23:33:26,493] [INFO] [config.py:1005:print]   graph_harvesting ............. False
+[2026-09-14 23:33:26,493] [INFO] [config.py:1005:print]   hybrid_engine ................ enabled=False max_out_tokens=512 inference_tp_size=1 release_inference_cache=False pin_parameters=True tp_gather_partition_size=8
+[2026-09-14 23:33:26,493] [INFO] [config.py:1005:print]   initial_dynamic_scale ........ 1
+[2026-09-14 23:33:26,493] [INFO] [config.py:1005:print]   load_universal_checkpoint .... False
+[2026-09-14 23:33:26,493] [INFO] [config.py:1005:print]   loss_scale ................... 1.0
+[2026-09-14 23:33:26,493] [INFO] [config.py:1005:print]   memory_breakdown ............. False
+[2026-09-14 23:33:26,493] [INFO] [config.py:1005:print]   mics_hierarchial_params_gather  False
+[2026-09-14 23:33:26,493] [INFO] [config.py:1005:print]   mics_shard_size .............. -1
+[2026-09-14 23:33:26,493] [INFO] [config.py:1005:print]   monitor_config ............... tensorboard=TensorBoardConfig(enabled=False, output_path='', job_name='DeepSpeedJobName') comet=CometConfig(enabled=False, samples_log_interval=100, project=None, workspace=None, api_key=None, experiment_name=None, experiment_key=None, online=None, mode=None) wandb=WandbConfig(enabled=False, group=None, team=None, project='deepspeed') csv_monitor=CSVConfig(enabled=False, output_path='', job_name='DeepSpeedJobName')
+[2026-09-14 23:33:26,493] [INFO] [config.py:1005:print]   nebula_config ................ {
+    "enabled": false, 
+    "persistent_storage_path": null, 
+    "persistent_time_interval": 100, 
+    "num_of_version_in_retention": 2, 
+    "enable_nebula_load": true, 
+    "load_path": null
+}
+[2026-09-14 23:33:26,494] [INFO] [config.py:1005:print]   optimizer_legacy_fusion ...... False
+[2026-09-14 23:33:26,494] [INFO] [config.py:1005:print]   optimizer_name ............... None
+[2026-09-14 23:33:26,494] [INFO] [config.py:1005:print]   optimizer_params ............. None
+[2026-09-14 23:33:26,494] [INFO] [config.py:1005:print]   pipeline ..................... {'stages': 'auto', 'partition': 'best', 'seed_layers': False, 'activation_checkpoint_interval': 0, 'pipe_partitioned': True, 'grad_partitioned': True}
+[2026-09-14 23:33:26,494] [INFO] [config.py:1005:print]   pld_enabled .................. False
+[2026-09-14 23:33:26,494] [INFO] [config.py:1005:print]   pld_params ................... False
+[2026-09-14 23:33:26,494] [INFO] [config.py:1005:print]   prescale_gradients ........... False
+[2026-09-14 23:33:26,494] [INFO] [config.py:1005:print]   scheduler_name ............... None
+[2026-09-14 23:33:26,494] [INFO] [config.py:1005:print]   scheduler_params ............. None
+[2026-09-14 23:33:26,494] [INFO] [config.py:1005:print]   seq_parallel_communication_data_type  torch.float32
+[2026-09-14 23:33:26,494] [INFO] [config.py:1005:print]   sparse_attention ............. None
+[2026-09-14 23:33:26,494] [INFO] [config.py:1005:print]   sparse_gradients_enabled ..... False
+[2026-09-14 23:33:26,494] [INFO] [config.py:1005:print]   steps_per_print .............. inf
+[2026-09-14 23:33:26,494] [INFO] [config.py:1005:print]   tensor_parallel_config ....... dtype=torch.float16 autotp_size=0 tensor_parallel=TPConfig(tp_size=1, tp_grain_size=1, mpu=None, tp_group=None) injection_policy_tuple=None keep_module_on_host=False replace_with_kernel_inject=False
+[2026-09-14 23:33:26,494] [INFO] [config.py:1005:print]   timers_config ................ enabled=True synchronized=True
+[2026-09-14 23:33:26,494] [INFO] [config.py:1005:print]   train_batch_size ............. 16
+[2026-09-14 23:33:26,494] [INFO] [config.py:1005:print]   train_micro_batch_size_per_gpu  1
+[2026-09-14 23:33:26,494] [INFO] [config.py:1005:print]   use_data_before_expert_parallel_  False
+[2026-09-14 23:33:26,494] [INFO] [config.py:1005:print]   use_node_local_storage ....... False
+[2026-09-14 23:33:26,494] [INFO] [config.py:1005:print]   wall_clock_breakdown ......... False
+[2026-09-14 23:33:26,495] [INFO] [config.py:1005:print]   weight_quantization_config ... None
+[2026-09-14 23:33:26,495] [INFO] [config.py:1005:print]   world_size ................... 2
+[2026-09-14 23:33:26,495] [INFO] [config.py:1005:print]   zero_allow_untested_optimizer  True
+[2026-09-14 23:33:26,495] [INFO] [config.py:1005:print]   zero_config .................. stage=1 contiguous_gradients=True reduce_scatter=True reduce_bucket_size=20000000 use_multi_rank_bucket_allreduce=True allgather_partitions=True allgather_bucket_size=20000000 overlap_comm=True load_from_fp32_weights=True elastic_checkpoint=False offload_param=None offload_optimizer=None sub_group_size=1000000000 cpu_offload_param=None cpu_offload_use_pin_memory=None cpu_offload=None prefetch_bucket_size=50000000 param_persistence_threshold=100000 model_persistence_threshold=9223372036854775807 max_live_parameters=1000000000 max_reuse_distance=1000000000 gather_16bit_weights_on_model_save=False module_granularity_threshold=0 use_all_reduce_for_fetch_params=False stage3_gather_fp16_weights_on_model_save=False ignore_unused_parameters=True legacy_stage1=False round_robin_gradients=False zero_hpz_partition_size=1 zero_quantized_weights=False zero_quantized_nontrainable_weights=False zero_quantized_gradients=False zeropp_loco_param=None mics_shard_size=-1 mics_hierarchical_params_gather=False memory_efficient_linear=True pipeline_loading_checkpoint=False override_module_apply=True log_trace_cache_warnings=False
+[2026-09-14 23:33:26,495] [INFO] [config.py:1005:print]   zero_enabled ................. True
+[2026-09-14 23:33:26,495] [INFO] [config.py:1005:print]   zero_force_ds_cpu_optimizer .. True
+[2026-09-14 23:33:26,495] [INFO] [config.py:1005:print]   zero_optimization_stage ...... 1
+[2026-09-14 23:33:26,495] [INFO] [config.py:991:print_user_config]   json = {
+    "train_batch_size": 16, 
+    "train_micro_batch_size_per_gpu": 1, 
+    "gradient_accumulation_steps": 8, 
+    "bf16": {
+        "enabled": true
+    }, 
+    "zero_optimization": {
+        "stage": 1, 
+        "allgather_partitions": true, 
+        "allgather_bucket_size": 2.000000e+07, 
+        "overlap_comm": true, 
+        "reduce_scatter": true, 
+        "reduce_bucket_size": 2.000000e+07, 
+        "contiguous_gradients": true
+    }, 
+    "gradient_clipping": 1.0, 
+    "steps_per_print": inf, 
+    "fp16": {
+        "enabled": false
+    }, 
+    "zero_allow_untested_optimizer": true
+}
+[INFO|trainer.py:2409] 2026-09-14 23:33:26,497 >> ***** Running training *****
+[INFO|trainer.py:2410] 2026-09-14 23:33:26,497 >>   Num examples = 3,000
+[INFO|trainer.py:2411] 2026-09-14 23:33:26,497 >>   Num Epochs = 1
+[INFO|trainer.py:2412] 2026-09-14 23:33:26,497 >>   Instantaneous batch size per device = 1
+[INFO|trainer.py:2415] 2026-09-14 23:33:26,497 >>   Total train batch size (w. parallel, distributed & accumulation) = 16
+[INFO|trainer.py:2416] 2026-09-14 23:33:26,497 >>   Gradient Accumulation steps = 8
+[INFO|trainer.py:2417] 2026-09-14 23:33:26,497 >>   Total optimization steps = 30
+[INFO|trainer.py:2418] 2026-09-14 23:33:26,499 >>   Number of trainable parameters = 1,543,714,304
+  0%|          | 0/30 [00:00<?, ?it/s][rank0]: Traceback (most recent call last):
+[rank0]:   File "/root/autodl-tmp/workspace/dist_lab/run_tuner.py", line 3, in <module>
+[rank0]:     run_exp()
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/llamafactory/train/tuner.py", line 110, in run_exp
+[rank0]:     _training_function(config={"args": args, "callbacks": callbacks})
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/llamafactory/train/tuner.py", line 72, in _training_function
+[rank0]:     run_sft(model_args, data_args, training_args, finetuning_args, generating_args, callbacks)
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/llamafactory/train/sft/workflow.py", line 96, in run_sft
+[rank0]:     train_result = trainer.train(resume_from_checkpoint=training_args.resume_from_checkpoint)
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/transformers/trainer.py", line 2240, in train
+[rank0]:     return inner_training_loop(
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/transformers/trainer.py", line 2555, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/transformers/trainer.py", line 3791, in training_step
+[rank0]:     self.accelerator.backward(loss, **kwargs)
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/accelerate/accelerator.py", line 2465, in backward
+[rank0]:     self.deepspeed_engine_wrapped.backward(loss, **kwargs)
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/accelerate/utils/deepspeed.py", line 275, in backward
+[rank0]:     self.engine.step()
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 2322, in step
+[rank0]:     self._take_model_step(lr_kwargs)
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 2225, in _take_model_step
+[rank0]:     self.optimizer.step()
+[rank0]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/deepspeed/runtime/zero/stage_1_and_2.py", line 1896, in step
+[rank0]:     single_grad_partition = self.flatten(self.averaged_gradients[i]).to(
+[rank0]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.88 GiB. GPU 0 has a total capacity of 11.63 GiB of which 2.47 GiB is free. Including non-PyTorch memory, this process has 9.16 GiB memory in use. Of the allocated memory 8.66 GiB is allocated by PyTorch, and 78.43 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/root/autodl-tmp/workspace/dist_lab/run_tuner.py", line 3, in <module>
+[rank1]:     run_exp()
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/llamafactory/train/tuner.py", line 110, in run_exp
+[rank1]:     _training_function(config={"args": args, "callbacks": callbacks})
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/llamafactory/train/tuner.py", line 72, in _training_function
+[rank1]:     run_sft(model_args, data_args, training_args, finetuning_args, generating_args, callbacks)
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/llamafactory/train/sft/workflow.py", line 96, in run_sft
+[rank1]:     train_result = trainer.train(resume_from_checkpoint=training_args.resume_from_checkpoint)
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/transformers/trainer.py", line 2240, in train
+[rank1]:     return inner_training_loop(
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/transformers/trainer.py", line 2555, in _inner_training_loop
+[rank1]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/transformers/trainer.py", line 3791, in training_step
+[rank1]:     self.accelerator.backward(loss, **kwargs)
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/accelerate/accelerator.py", line 2465, in backward
+[rank1]:     self.deepspeed_engine_wrapped.backward(loss, **kwargs)
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/accelerate/utils/deepspeed.py", line 275, in backward
+[rank1]:     self.engine.step()
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 2322, in step
+[rank1]:     self._take_model_step(lr_kwargs)
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 2225, in _take_model_step
+[rank1]:     self.optimizer.step()
+[rank1]:   File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/deepspeed/runtime/zero/stage_1_and_2.py", line 1894, in step
+[rank1]:     int(self.partition_size[i])).to(self.single_partition_of_fp32_groups[i].dtype)
+[rank1]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.88 GiB. GPU 1 has a total capacity of 11.63 GiB of which 2.47 GiB is free. Including non-PyTorch memory, this process has 9.15 GiB memory in use. Of the allocated memory 8.65 GiB is allocated by PyTorch, and 85.80 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+  0%|          | 0/30 [00:04<?, ?it/s]
+[rank0]:[W914 23:33:31.986370153 ProcessGroupNCCL.cpp:1496] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+W0914 23:33:32.869000 9794 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 9856 closing signal SIGTERM
+E0914 23:33:32.984000 9794 site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: 1) local_rank: 1 (pid: 9857) of binary: /root/autodl-tmp/envs/llmfab/bin/python
+Traceback (most recent call last):
+  File "/root/autodl-tmp/envs/llmfab/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/root/autodl-tmp/envs/llmfab/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/torch/distributed/run.py", line 922, in <module>
+    main()
+  File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+  File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/torch/distributed/run.py", line 918, in main
+    run(args)
+  File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/torch/distributed/run.py", line 909, in run
+    elastic_launch(
+  File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/root/autodl-tmp/envs/llmfab/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+/root/autodl-tmp/workspace/dist_lab/run_tuner.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-09-14_23:33:32
+  host      : localhost
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 9857)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

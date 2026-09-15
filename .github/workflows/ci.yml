@@ -1,0 +1,23 @@
+name: cpu-self-tests
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+jobs:
+  from-scratch-self-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 02-train-from-scratch/from_scratch
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install CPU-only PyTorch
+        run: pip install --quiet torch --index-url https://download.pytorch.org/whl/cpu
+      - name: Model components numerical self-test
+        run: python test_model.py
+      - name: GRPO logic numerical self-test
+        run: python test_grpo_logic.py

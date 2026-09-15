@@ -6,7 +6,7 @@
 | --- | --- |
 | `peft_compare.csv` | **full / lora / qlora 三行已在单卡 RTX 3080 Ti(12G) + Qwen2.5-0.5B 上实测填好**，完整配置、原始日志、逐秒显存采样与复现脚本见 [`peft_lab/`](./peft_lab/README.md)；freeze/adapter/prefix/p_tuning/dora 未实测、留空 |
 | `alignment_compare.csv` | **sft / dpo 两行已在单卡 RTX 3080 Ti(12G) + Qwen2.5-0.5B 上实测填好**，配置/日志/奖励曲线见 [lign_lab/](./align_lab/README.md)；ppo/kto/orpo/simpo 未实测、留空 |
-| `distributed_compare.csv` | 空白模板，待多卡环境实测 |
+| `distributed_compare.csv` | **DDP / ZeRO-1/2/3 已在双卡 2×RTX 3080 Ti(12G)+Qwen2.5-0.5B/1.5B 上实测填好**：0.5B 单/双卡 DDP 对照加速比，1.5B 逐级定位 ZeRO 分片显存边界（仅 ZeRO-3 跑通）；配置/脚本/逐秒显存采样/教学报告见 [`dist_lab/`](./dist_lab/RESULTS.md)；TP/PP 受 PCIe 互联限制未实测、留空 |
 | `quant_infer.csv` | **bf16(fp16 同属 16bit) / NF4-4bit 两行已实测**（模型显存/PPL/TTFT/TPOT/吞吐），脚本与日志见 [quant_lab/](./quant_lab/README.md)；gptq/awq/vllm_fp16 未实测、留空 |
 
 ## 这些表是什么
@@ -17,7 +17,7 @@
 | --- | --- | --- |
 | `alignment_compare.csv` | SFT/DPO/PPO/KTO/ORPO/SimPO | 是否要 RM/ref、数据类型、显存、耗时、最终 loss、胜率、稳定性 |
 | `peft_compare.csv` | Full/Freeze/LoRA/QLoRA/Adapter/Prefix/P-Tuning/DoRA | 可训参数、参数占比、显存、耗时、评测分、推理是否带额外结构 |
-| `distributed_compare.csv` | DDP / ZeRO-1/2/3 / TP / PP | 每卡显存、吞吐 tok/s、通信占比 |
+| `distributed_compare.csv` | DDP / ZeRO-1/2/3 / TP / PP | 每卡峰值显存、训练耗时、samples/s、单步耗时、状态(OK/OOM) |
 | `quant_infer.csv` | FP16/GPTQ/AWQ/vLLM | 模型体积、PPL、首 Token 延迟、TPOT、吞吐、并发 |
 
 ## 为什么大部分格子留空而不是抄“参考数字”
@@ -37,7 +37,7 @@
 
 1. `sft_full` vs `sft_lora` vs `sft_qlora`：填 `peft_compare.csv`，直观看到参数与显存差异（**本仓库已给出完整实例，见 `peft_lab/`**）；
 2. 同一 SFT 起点切 `dpo/kto/orpo`：填 `alignment_compare.csv`（**SFT vs DPO 已给出完整实例，见 `align_lab/`**）；
-3. 单卡 vs `torchrun` 两卡 + `ds_zero2.json`：填 `distributed_compare.csv`；
+3. 单卡 vs `torch.distributed.run` 双卡、再逐级 ZeRO-1/2/3：填 `distributed_compare.csv`（**完整实例见 [`dist_lab/`](./dist_lab/RESULTS.md)**）；
 4. FP16 vs GPTQ/AWQ，再用 vLLM 起服务：填 `quant_infer.csv`（**bf16 vs NF4-4bit 已给出完整实例，见 `quant_lab/`**）。
 
-> 每次实验建议像 `peft_lab/`、`align_lab/`、`quant_lab/` 一样另存 `logs/`（原始日志）与显存采样，csv 里只填汇总值，做到每个数字都能回溯到日志。
+> 每次实验建议像 `peft_lab/`、`align_lab/`、`quant_lab/`、`dist_lab/` 一样另存 `logs/`（原始日志）与显存采样，csv 里只填汇总值，做到每个数字都能回溯到日志。

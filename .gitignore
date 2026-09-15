@@ -27,5 +27,9 @@ dataset/*.jsonl
 .vscode/
 .DS_Store
 Thumbs.db
+
+# MS Office lock/temp files
+~$*
 # keep the small, clean GRPO experiment log
 !02-train-from-scratch/experiments/grpo/grpo_train.log
+

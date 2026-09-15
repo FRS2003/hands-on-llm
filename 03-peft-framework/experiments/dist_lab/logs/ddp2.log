@@ -1,0 +1,237 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[2026-09-14 23:21:19,530] [INFO] [real_accelerator.py:222:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2026-09-14 23:21:19,536] [INFO] [real_accelerator.py:222:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[INFO|2026-09-14 23:21:21] llamafactory.hparams.parser:406 >> Process rank: 0, world size: 2, device: cuda:0, distributed training: True, compute dtype: torch.bfloat16
+[INFO|hub.py:411] 2026-09-14 23:21:21,400 >> Offline mode: forcing local_files_only=True
+[INFO|tokenization_utils_base.py:1879] 2026-09-14 23:21:21,411 >> Offline mode: forcing local_files_only=True
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:21:21,412 >> loading file vocab.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:21:21,412 >> loading file merges.txt
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:21:21,412 >> loading file tokenizer.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:21:21,412 >> loading file added_tokens.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:21:21,412 >> loading file special_tokens_map.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:21:21,412 >> loading file tokenizer_config.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:21:21,412 >> loading file chat_template.jinja
+[INFO|2026-09-14 23:21:21] llamafactory.hparams.parser:406 >> Process rank: 1, world size: 2, device: cuda:1, distributed training: True, compute dtype: torch.bfloat16
+[INFO|tokenization_utils_base.py:2299] 2026-09-14 23:21:21,794 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+[INFO|hub.py:411] 2026-09-14 23:21:21,794 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 23:21:21,794 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 23:21:21,794 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 23:21:21,794 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 23:21:21,794 >> Offline mode: forcing local_files_only=True
+[INFO|hub.py:411] 2026-09-14 23:21:21,795 >> Offline mode: forcing local_files_only=True
+[INFO|configuration_utils.py:696] 2026-09-14 23:21:21,795 >> loading configuration file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-0___5B/config.json
+[INFO|configuration_utils.py:770] 2026-09-14 23:21:21,797 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 896,
+  "initializer_range": 0.02,
+  "intermediate_size": 4864,
+  "max_position_embeddings": 32768,
+  "max_window_layers": 24,
+  "model_type": "qwen2",
+  "num_attention_heads": 14,
+  "num_hidden_layers": 24,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 1000000.0,
+  "sliding_window": 32768,
+  "tie_word_embeddings": true,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|hub.py:411] 2026-09-14 23:21:21,798 >> Offline mode: forcing local_files_only=True
+[INFO|tokenization_utils_base.py:1879] 2026-09-14 23:21:21,798 >> Offline mode: forcing local_files_only=True
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:21:21,798 >> loading file vocab.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:21:21,798 >> loading file merges.txt
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:21:21,798 >> loading file tokenizer.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:21:21,799 >> loading file added_tokens.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:21:21,799 >> loading file special_tokens_map.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:21:21,799 >> loading file tokenizer_config.json
+[INFO|tokenization_utils_base.py:2021] 2026-09-14 23:21:21,799 >> loading file chat_template.jinja
+[INFO|tokenization_utils_base.py:2299] 2026-09-14 23:21:22,187 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+[INFO|2026-09-14 23:21:22] llamafactory.data.template:143 >> Replace eos token: <|im_end|>.
+[INFO|2026-09-14 23:21:22] llamafactory.data.loader:143 >> Loading dataset zh_instruct_train.json...
+[rank1]:[W914 23:21:22.142184911 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+Converting format of dataset (num_proc=8):   0%|          | 0/3000 [00:00<?, ? examples/s]Converting format of dataset (num_proc=8):  12%|█▎        | 375/3000 [00:00<00:00, 3670.91 examples/s]Converting format of dataset (num_proc=8): 100%|██████████| 3000/3000 [00:00<00:00, 11872.83 examples/s]
+[rank0]:[W914 23:21:22.665478392 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+NCCL version 2.21.5+cuda12.4
+Running tokenizer on dataset (num_proc=8):   0%|          | 0/3000 [00:00<?, ? examples/s]Running tokenizer on dataset (num_proc=8):  12%|█▎        | 375/3000 [00:01<00:07, 340.71 examples/s]Running tokenizer on dataset (num_proc=8):  38%|███▊      | 1125/3000 [00:01<00:01, 1109.98 examples/s]Running tokenizer on dataset (num_proc=8):  50%|█████     | 1500/3000 [00:01<00:01, 1454.29 examples/s]Running tokenizer on dataset (num_proc=8):  62%|██████▎   | 1875/3000 [00:01<00:00, 1627.46 examples/s]Running tokenizer on dataset (num_proc=8):  75%|███████▌  | 2250/3000 [00:01<00:00, 1790.54 examples/s]Running tokenizer on dataset (num_proc=8):  88%|████████▊ | 2625/3000 [00:01<00:00, 2018.39 examples/s]Running tokenizer on dataset (num_proc=8): 100%|██████████| 3000/3000 [00:01<00:00, 1508.06 examples/s]
+training example:
+input_ids:
+[151644, 8948, 198, 2610, 525, 1207, 16948, 11, 3465, 553, 54364, 14817, 13, 1446, 525, 264, 10950, 17847, 13, 151645, 198, 151644, 872, 198, 61443, 46944, 101108, 3837, 109268, 2073, 101986, 99486, 104383, 112482, 97907, 100313, 1773, 151645, 198, 151644, 77091, 198, 103997, 104627, 109641, 94237, 107318, 99818, 100623, 3837, 42411, 99424, 106568, 104939, 33108, 106175, 99415, 99336, 9370, 111707, 1773, 77288, 108327, 103926, 99593, 99322, 3837, 94237, 107318, 99818, 104187, 104048, 101053, 100186, 77144, 13072, 9370, 34794, 100226, 3407, 99999, 3837, 42411, 103930, 111385, 104383, 101964, 109259, 9370, 112482, 3407, 94237, 107318, 99818, 104038, 100648, 22243, 102781, 3837, 102351, 106315, 99314, 1773, 42411, 106014, 111951, 5373, 101231, 99208, 5373, 96465, 99956, 113464, 109143, 104307, 3837, 74763, 99683, 102283, 99475, 34187, 100511, 99686, 57811, 100410, 9370, 108559, 3407, 42411, 99314, 102346, 102258, 5373, 106441, 5373, 108731, 3837, 55286, 105277, 34187, 107162, 113702, 3837, 74763, 112914, 107480, 101928, 107596, 100309, 9370, 109259, 3407, 110799, 3837, 42411, 107867, 34187, 100646, 99200, 100535, 17340, 3837, 108636, 104989, 100648, 99614, 3837, 106494, 42411, 101374, 38182, 102446, 106132, 99567, 100318, 24968, 108636, 104428, 100648, 101049, 96050, 102062, 42411, 100364, 33108, 112711, 104146, 3837, 74763, 109126, 34187, 42411, 108813, 102522, 3407, 102534, 100729, 35727, 100688, 3837, 94237, 107318, 99818, 18493, 99407, 108748, 114768, 34187, 99244, 106588, 101483, 3837, 74763, 114265, 99244, 106588, 102635, 102058, 1773, 103997, 9370, 116713, 100272, 116227, 99250, 105894, 100268, 119177, 100215, 99194, 121945, 107198, 99473, 3407, 18493, 113007, 9370, 115821, 3837, 94237, 107318, 99818, 94375, 104853, 103366, 3837, 107441, 102515, 99212, 99579, 108960, 53930, 103281, 9370, 57811, 100035, 3837, 118468, 111602, 100195, 99321, 103435, 9370, 106056, 3407, 42411, 108449, 3837, 101986, 104092, 42411, 103969, 9370, 112482, 101891, 3837, 113007, 101047, 100646, 109398, 5373, 100646, 17340, 5373, 100646, 100798, 71268, 115114, 100147, 37474, 112482, 9370, 151645, 198]
+inputs:
+<|im_start|>system
+You are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>
+<|im_start|>user
+写一个故事，阐述“人生就是一段旅程”的意思。<|im_end|>
+<|im_start|>assistant
+曾经有个名叫约瑟夫的人，他生活在一个和平和极为富足的国度。但就算是拥有了一切，约瑟夫仍然感到一种不可言名的空虚。
+
+所以，他决定踏上一段探索未知的旅程。
+
+约瑟夫带着他的行囊，一路向前走。他经历了大雨、狂风、雷暴等各种恶劣天气，也顺带领略了壮丽山川的美景。
+
+他走过了森林、草原、沙漠，开始懂得了世界的多样性，也学会了勇敢面对前行路上的未知。
+
+在路上，他遇见了各种各样的人，有的人成为了他的朋友，陪伴他渡过无数艰难险阻；有的人则是他的老师，在给予他帮助和启示的同时，也教会了他人生的道理。
+
+日子一天天过去，约瑟夫在旅途中领略了世间的美好，也见证了世间的苍凉。曾经的懵懂无知被岁月磨砺成了深邃睿智。
+
+在旅途的尽头，约瑟夫停下了脚步，望着眼前那座蓝天之巅的山峰，脑海中涌现出了往昔的种种。
+
+他明白了，人生就像他这次的旅程一样，旅途中的各种景色、各种人、各种经历都构成了这一段旅程的<|im_end|>
+
+label_ids:
+[-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 103997, 104627, 109641, 94237, 107318, 99818, 100623, 3837, 42411, 99424, 106568, 104939, 33108, 106175, 99415, 99336, 9370, 111707, 1773, 77288, 108327, 103926, 99593, 99322, 3837, 94237, 107318, 99818, 104187, 104048, 101053, 100186, 77144, 13072, 9370, 34794, 100226, 3407, 99999, 3837, 42411, 103930, 111385, 104383, 101964, 109259, 9370, 112482, 3407, 94237, 107318, 99818, 104038, 100648, 22243, 102781, 3837, 102351, 106315, 99314, 1773, 42411, 106014, 111951, 5373, 101231, 99208, 5373, 96465, 99956, 113464, 109143, 104307, 3837, 74763, 99683, 102283, 99475, 34187, 100511, 99686, 57811, 100410, 9370, 108559, 3407, 42411, 99314, 102346, 102258, 5373, 106441, 5373, 108731, 3837, 55286, 105277, 34187, 107162, 113702, 3837, 74763, 112914, 107480, 101928, 107596, 100309, 9370, 109259, 3407, 110799, 3837, 42411, 107867, 34187, 100646, 99200, 100535, 17340, 3837, 108636, 104989, 100648, 99614, 3837, 106494, 42411, 101374, 38182, 102446, 106132, 99567, 100318, 24968, 108636, 104428, 100648, 101049, 96050, 102062, 42411, 100364, 33108, 112711, 104146, 3837, 74763, 109126, 34187, 42411, 108813, 102522, 3407, 102534, 100729, 35727, 100688, 3837, 94237, 107318, 99818, 18493, 99407, 108748, 114768, 34187, 99244, 106588, 101483, 3837, 74763, 114265, 99244, 106588, 102635, 102058, 1773, 103997, 9370, 116713, 100272, 116227, 99250, 105894, 100268, 119177, 100215, 99194, 121945, 107198, 99473, 3407, 18493, 113007, 9370, 115821, 3837, 94237, 107318, 99818, 94375, 104853, 103366, 3837, 107441, 102515, 99212, 99579, 108960, 53930, 103281, 9370, 57811, 100035, 3837, 118468, 111602, 100195, 99321, 103435, 9370, 106056, 3407, 42411, 108449, 3837, 101986, 104092, 42411, 103969, 9370, 112482, 101891, 3837, 113007, 101047, 100646, 109398, 5373, 100646, 17340, 5373, 100646, 100798, 71268, 115114, 100147, 37474, 112482, 9370, 151645, 198]
+labels:
+曾经有个名叫约瑟夫的人，他生活在一个和平和极为富足的国度。但就算是拥有了一切，约瑟夫仍然感到一种不可言名的空虚。
+
+所以，他决定踏上一段探索未知的旅程。
+
+约瑟夫带着他的行囊，一路向前走。他经历了大雨、狂风、雷暴等各种恶劣天气，也顺带领略了壮丽山川的美景。
+
+他走过了森林、草原、沙漠，开始懂得了世界的多样性，也学会了勇敢面对前行路上的未知。
+
+在路上，他遇见了各种各样的人，有的人成为了他的朋友，陪伴他渡过无数艰难险阻；有的人则是他的老师，在给予他帮助和启示的同时，也教会了他人生的道理。
+
+日子一天天过去，约瑟夫在旅途中领略了世间的美好，也见证了世间的苍凉。曾经的懵懂无知被岁月磨砺成了深邃睿智。
+
+在旅途的尽头，约瑟夫停下了脚步，望着眼前那座蓝天之巅的山峰，脑海中涌现出了往昔的种种。
+
+他明白了，人生就像他这次的旅程一样，旅途中的各种景色、各种人、各种经历都构成了这一段旅程的<|im_end|>
+
+[INFO|hub.py:411] 2026-09-14 23:21:25,571 >> Offline mode: forcing local_files_only=True
+[INFO|configuration_utils.py:696] 2026-09-14 23:21:25,571 >> loading configuration file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-0___5B/config.json
+[INFO|configuration_utils.py:770] 2026-09-14 23:21:25,572 >> Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "hidden_act": "silu",
+  "hidden_size": 896,
+  "initializer_range": 0.02,
+  "intermediate_size": 4864,
+  "max_position_embeddings": 32768,
+  "max_window_layers": 24,
+  "model_type": "qwen2",
+  "num_attention_heads": 14,
+  "num_hidden_layers": 24,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 1000000.0,
+  "sliding_window": 32768,
+  "tie_word_embeddings": true,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.52.4",
+  "use_cache": true,
+  "use_mrope": false,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+[INFO|2026-09-14 23:21:25] llamafactory.model.model_utils.kv_cache:143 >> KV cache is disabled during training.
+[INFO|modeling_utils.py:4319] 2026-09-14 23:21:25,845 >> Offline mode: forcing local_files_only=True
+[INFO|modeling_utils.py:1148] 2026-09-14 23:21:25,845 >> loading weights file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-0___5B/model.safetensors
+[INFO|modeling_utils.py:2241] 2026-09-14 23:21:25,846 >> Instantiating Qwen2ForCausalLM model under default dtype torch.bfloat16.
+[INFO|configuration_utils.py:1135] 2026-09-14 23:21:25,848 >> Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "use_cache": false
+}
+
+[INFO|modeling_utils.py:5131] 2026-09-14 23:21:26,278 >> All model checkpoint weights were used when initializing Qwen2ForCausalLM.
+
+[INFO|modeling_utils.py:5139] 2026-09-14 23:21:26,278 >> All the weights of Qwen2ForCausalLM were initialized from the model checkpoint at /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-0___5B.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use Qwen2ForCausalLM for predictions without further training.
+[INFO|configuration_utils.py:1088] 2026-09-14 23:21:26,281 >> loading configuration file /root/autodl-tmp/models/ms_cache/Qwen/Qwen2___5-0___5B/generation_config.json
+[INFO|configuration_utils.py:1135] 2026-09-14 23:21:26,282 >> Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "eos_token_id": 151643,
+  "max_new_tokens": 2048
+}
+
+[INFO|2026-09-14 23:21:26] llamafactory.model.model_utils.checkpointing:143 >> Gradient checkpointing enabled.
+[INFO|2026-09-14 23:21:26] llamafactory.model.model_utils.attention:143 >> Using torch SDPA for faster training and inference.
+[INFO|2026-09-14 23:21:26] llamafactory.model.adapter:143 >> Upcasting trainable params to float32.
+[INFO|2026-09-14 23:21:26] llamafactory.model.adapter:143 >> Fine-tuning method: Full
+[INFO|2026-09-14 23:21:26] llamafactory.model.loader:143 >> trainable params: 494,032,768 || all params: 494,032,768 || trainable%: 100.0000
+Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+[INFO|trainer.py:706] 2026-09-14 23:21:26,330 >> max_steps is given, it will override any value given in num_train_epochs
+[INFO|trainer.py:756] 2026-09-14 23:21:26,331 >> Using auto half precision backend
+[INFO|trainer.py:1257] 2026-09-14 23:21:26,972 >> skipped Embedding(151936, 896): 129.828125M params
+[INFO|trainer.py:1260] 2026-09-14 23:21:26,972 >> skipped: 129.828125M params
+[INFO|trainer.py:2409] 2026-09-14 23:21:27,288 >> ***** Running training *****
+[INFO|trainer.py:2410] 2026-09-14 23:21:27,288 >>   Num examples = 3,000
+[INFO|trainer.py:2411] 2026-09-14 23:21:27,288 >>   Num Epochs = 1
+[INFO|trainer.py:2412] 2026-09-14 23:21:27,288 >>   Instantaneous batch size per device = 1
+[INFO|trainer.py:2415] 2026-09-14 23:21:27,288 >>   Total train batch size (w. parallel, distributed & accumulation) = 16
+[INFO|trainer.py:2416] 2026-09-14 23:21:27,288 >>   Gradient Accumulation steps = 8
+[INFO|trainer.py:2417] 2026-09-14 23:21:27,288 >>   Total optimization steps = 40
+[INFO|trainer.py:2418] 2026-09-14 23:21:27,290 >>   Number of trainable parameters = 494,032,768
+  0%|          | 0/40 [00:00<?, ?it/s]  2%|▎         | 1/40 [00:02<01:33,  2.40s/it]  5%|▌         | 2/40 [00:03<01:11,  1.88s/it]                                              {'loss': 1.658, 'grad_norm': 9.869490623474121, 'learning_rate': 5e-06, 'epoch': 0.01}
+  5%|▌         | 2/40 [00:03<01:11,  1.88s/it]  8%|▊         | 3/40 [00:05<01:03,  1.73s/it] 10%|█         | 4/40 [00:07<00:59,  1.65s/it]                                              {'loss': 2.0565, 'grad_norm': 7.703044414520264, 'learning_rate': 9.98292246503335e-06, 'epoch': 0.02}
+ 10%|█         | 4/40 [00:07<00:59,  1.65s/it] 12%|█▎        | 5/40 [00:08<00:57,  1.64s/it] 15%|█▌        | 6/40 [00:10<00:54,  1.62s/it]                                              {'loss': 1.8797, 'grad_norm': 8.066703796386719, 'learning_rate': 9.847001329696653e-06, 'epoch': 0.03}
+ 15%|█▌        | 6/40 [00:10<00:54,  1.62s/it] 18%|█▊        | 7/40 [00:11<00:52,  1.59s/it] 20%|██        | 8/40 [00:13<00:50,  1.58s/it]                                              {'loss': 1.7016, 'grad_norm': 7.472733020782471, 'learning_rate': 9.578866633275289e-06, 'epoch': 0.04}
+ 20%|██        | 8/40 [00:13<00:50,  1.58s/it] 22%|██▎       | 9/40 [00:14<00:48,  1.56s/it] 25%|██▌       | 10/40 [00:16<00:46,  1.56s/it]                                               {'loss': 1.8361, 'grad_norm': 8.327079772949219, 'learning_rate': 9.185832391312644e-06, 'epoch': 0.05}
+ 25%|██▌       | 10/40 [00:16<00:46,  1.56s/it] 28%|██▊       | 11/40 [00:17<00:45,  1.56s/it] 30%|███       | 12/40 [00:19<00:43,  1.55s/it]                                               {'loss': 1.9887, 'grad_norm': 9.063387870788574, 'learning_rate': 8.67861955336566e-06, 'epoch': 0.06}
+ 30%|███       | 12/40 [00:19<00:43,  1.55s/it] 32%|███▎      | 13/40 [00:20<00:41,  1.55s/it] 35%|███▌      | 14/40 [00:22<00:40,  1.54s/it]                                               {'loss': 1.9195, 'grad_norm': 11.048345565795898, 'learning_rate': 8.071063563448341e-06, 'epoch': 0.07}
+ 35%|███▌      | 14/40 [00:22<00:40,  1.54s/it] 38%|███▊      | 15/40 [00:24<00:38,  1.54s/it] 40%|████      | 16/40 [00:25<00:36,  1.54s/it]                                               {'loss': 2.0609, 'grad_norm': 12.94638729095459, 'learning_rate': 7.379736965185369e-06, 'epoch': 0.09}
+ 40%|████      | 16/40 [00:25<00:36,  1.54s/it] 42%|████▎     | 17/40 [00:27<00:35,  1.55s/it] 45%|████▌     | 18/40 [00:28<00:34,  1.55s/it]                                               {'loss': 2.0008, 'grad_norm': 16.69571876525879, 'learning_rate': 6.6234973460234184e-06, 'epoch': 0.1}
+ 45%|████▌     | 18/40 [00:28<00:34,  1.55s/it] 48%|████▊     | 19/40 [00:30<00:32,  1.55s/it] 50%|█████     | 20/40 [00:31<00:31,  1.56s/it]                                               {'loss': 2.2687, 'grad_norm': 20.477081298828125, 'learning_rate': 5.82297295140367e-06, 'epoch': 0.11}
+ 50%|█████     | 20/40 [00:31<00:31,  1.56s/it] 52%|█████▎    | 21/40 [00:33<00:29,  1.56s/it] 55%|█████▌    | 22/40 [00:35<00:28,  1.60s/it]                                               {'loss': 2.2252, 'grad_norm': 30.012178421020508, 'learning_rate': 5e-06, 'epoch': 0.12}
+ 55%|█████▌    | 22/40 [00:35<00:28,  1.60s/it] 57%|█████▊    | 23/40 [00:36<00:27,  1.61s/it] 60%|██████    | 24/40 [00:38<00:25,  1.61s/it]                                               {'loss': 2.343, 'grad_norm': 36.066734313964844, 'learning_rate': 4.17702704859633e-06, 'epoch': 0.13}
+ 60%|██████    | 24/40 [00:38<00:25,  1.61s/it] 62%|██████▎   | 25/40 [00:39<00:23,  1.57s/it] 65%|██████▌   | 26/40 [00:41<00:22,  1.57s/it]                                               {'loss': 1.9983, 'grad_norm': 7.212262153625488, 'learning_rate': 3.3765026539765832e-06, 'epoch': 0.14}
+ 65%|██████▌   | 26/40 [00:41<00:22,  1.57s/it] 68%|██████▊   | 27/40 [00:42<00:20,  1.56s/it] 70%|███████   | 28/40 [00:44<00:19,  1.60s/it]                                               {'loss': 1.7579, 'grad_norm': 8.117071151733398, 'learning_rate': 2.6202630348146323e-06, 'epoch': 0.15}
+ 70%|███████   | 28/40 [00:44<00:19,  1.60s/it] 72%|███████▎  | 29/40 [00:46<00:17,  1.63s/it] 75%|███████▌  | 30/40 [00:47<00:16,  1.62s/it]                                               {'loss': 2.02, 'grad_norm': 8.376912117004395, 'learning_rate': 1.928936436551661e-06, 'epoch': 0.16}
+ 75%|███████▌  | 30/40 [00:47<00:16,  1.62s/it] 78%|███████▊  | 31/40 [00:49<00:14,  1.63s/it] 80%|████████  | 32/40 [00:51<00:13,  1.63s/it]                                               {'loss': 1.8149, 'grad_norm': 7.759125232696533, 'learning_rate': 1.321380446634342e-06, 'epoch': 0.17}
+ 80%|████████  | 32/40 [00:51<00:13,  1.63s/it] 82%|████████▎ | 33/40 [00:52<00:11,  1.64s/it] 85%|████████▌ | 34/40 [00:54<00:09,  1.62s/it]                                               {'loss': 1.7927, 'grad_norm': 7.49300479888916, 'learning_rate': 8.141676086873574e-07, 'epoch': 0.18}
+ 85%|████████▌ | 34/40 [00:54<00:09,  1.62s/it] 88%|████████▊ | 35/40 [00:56<00:08,  1.61s/it] 90%|█████████ | 36/40 [00:57<00:06,  1.59s/it]                                               {'loss': 2.0238, 'grad_norm': 10.27490234375, 'learning_rate': 4.211333667247125e-07, 'epoch': 0.19}
+ 90%|█████████ | 36/40 [00:57<00:06,  1.59s/it] 92%|█████████▎| 37/40 [00:59<00:04,  1.58s/it] 95%|█████████▌| 38/40 [01:00<00:03,  1.56s/it]                                               {'loss': 1.8584, 'grad_norm': 9.536544799804688, 'learning_rate': 1.5299867030334815e-07, 'epoch': 0.2}
+ 95%|█████████▌| 38/40 [01:00<00:03,  1.56s/it] 98%|█████████▊| 39/40 [01:02<00:01,  1.54s/it]100%|██████████| 40/40 [01:03<00:00,  1.54s/it]                                               {'loss': 2.0637, 'grad_norm': 10.67625617980957, 'learning_rate': 1.7077534966650767e-08, 'epoch': 0.21}
+100%|██████████| 40/40 [01:03<00:00,  1.54s/it][INFO|trainer.py:3993] 2026-09-14 23:22:31,017 >> Saving model checkpoint to /root/autodl-tmp/workspace/dist_lab/runs/ddp2/checkpoint-40
+[INFO|configuration_utils.py:424] 2026-09-14 23:22:31,022 >> Configuration saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp2/checkpoint-40/config.json
+[INFO|configuration_utils.py:904] 2026-09-14 23:22:31,023 >> Configuration saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp2/checkpoint-40/generation_config.json
+[INFO|modeling_utils.py:3725] 2026-09-14 23:22:33,723 >> Model weights saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp2/checkpoint-40/model.safetensors
+[INFO|tokenization_utils_base.py:2356] 2026-09-14 23:22:33,724 >> chat template saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp2/checkpoint-40/chat_template.jinja
+[INFO|tokenization_utils_base.py:2525] 2026-09-14 23:22:33,725 >> tokenizer config file saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp2/checkpoint-40/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2534] 2026-09-14 23:22:33,725 >> Special tokens file saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp2/checkpoint-40/special_tokens_map.json
+[INFO|trainer.py:2676] 2026-09-14 23:22:36,273 >> 
+
+Training completed. Do not forget to share your model on huggingface.co/models =)
+
+
+                                               {'train_runtime': 68.9837, 'train_samples_per_second': 9.278, 'train_steps_per_second': 0.58, 'train_loss': 1.963418084383011, 'epoch': 0.21}
+100%|██████████| 40/40 [01:08<00:00,  1.54s/it]100%|██████████| 40/40 [01:08<00:00,  1.72s/it]
+[INFO|trainer.py:3993] 2026-09-14 23:22:36,277 >> Saving model checkpoint to /root/autodl-tmp/workspace/dist_lab/runs/ddp2
+[INFO|configuration_utils.py:424] 2026-09-14 23:22:36,281 >> Configuration saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp2/config.json
+[INFO|configuration_utils.py:904] 2026-09-14 23:22:36,282 >> Configuration saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp2/generation_config.json
+[INFO|modeling_utils.py:3725] 2026-09-14 23:22:39,006 >> Model weights saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp2/model.safetensors
+[INFO|tokenization_utils_base.py:2356] 2026-09-14 23:22:39,007 >> chat template saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp2/chat_template.jinja
+[INFO|tokenization_utils_base.py:2525] 2026-09-14 23:22:39,008 >> tokenizer config file saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp2/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2534] 2026-09-14 23:22:39,008 >> Special tokens file saved in /root/autodl-tmp/workspace/dist_lab/runs/ddp2/special_tokens_map.json
+***** train metrics *****
+  epoch                    =     0.2133
+  total_flos               =   252852GF
+  train_loss               =     1.9634
+  train_runtime            = 0:01:08.98
+  train_samples_per_second =      9.278
+  train_steps_per_second   =       0.58
+[INFO|modelcard.py:450] 2026-09-14 23:22:39,240 >> Dropping the following result as it does not have all the necessary fields:
+{'task': {'name': 'Causal Language Modeling', 'type': 'text-generation'}}
