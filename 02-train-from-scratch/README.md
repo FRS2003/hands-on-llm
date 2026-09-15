@@ -44,7 +44,7 @@ python -c "import torch; print(torch.cuda.is_available(), torch.cuda.is_bf16_sup
 - [x] 预训练（Pretrain，from scratch，bf16 + 梯度累积 + cosine 调度）
 - [x] 指令微调（SFT，从 pretrain 热启动，多轮对话仅对 response 计算 loss）
 - [x] LoRA 参数高效微调（只训 0.61% 参数，对比全量微调的显存/体积/耗时）
-- [ ] BPE 分词器自行训练（当前先用仓库 tokenizer，手写版见 `from_scratch/`）
+- [x] BPE 分词器自行训练（手写字节级 BPE，见 `from_scratch/tokenizer_bpe.py`，20 项自检）
 - [x] DPO 偏好对齐（17k 偏好对、β=0.15，验证 -ln2 初始与隐式 reward margin 拉开）
 - [x] GRPO 强化学习对齐（纯规则奖励免 1.8B 奖励模型，300 步 / 21.7 min；规则分 0.109→0.290、|KL|≈0.005）
 - [x] GRPO 100 条 held-out 定量评测（排除训练题，规则分 +0.084、3-gram 重复度 0.120→0.096）
@@ -54,7 +54,7 @@ python -c "import torch; print(torch.cuda.is_available(), torch.cuda.is_bf16_sup
 - [x] DeepSpeed ZeRO 多卡对照（DDP/ZeRO-1/2/3）在 ③ 工业框架模块实测，见 ../03-peft-framework/experiments/dist_lab（本模块为单卡手写模型）
 
 ## 五、手写组件 Checklist（`from_scratch/`）
-- [ ] BPE Tokenizer（merge 规则、编解码）
+- [x] BPE Tokenizer（merge 规则、编解码，字节级底座保证无 OOV）
 - [x] RMSNorm（对比 LayerNorm，含数值自检）
 - [x] RoPE 旋转位置编码（rotate-half，验证相对位置不变性/保模长）
 - [x] GQA（repeat_kv 统一 MHA/MQA/GQA + 因果遮蔽，12 项自检）

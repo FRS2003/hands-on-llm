@@ -33,6 +33,19 @@ cd from_scratch && python test_model.py    # ALL 12 CHECKS PASSED
 - **数值自检 `python test_triton_kernel.py`（需 GPU）：10 项全过**——fp32/bf16 前向对拍 PyTorch、γ=1 时 RMS≈1、反向 `dx/dγ` 对齐、非 2 次幂维度（1000/2049）正确；无 GPU/无 triton 时自动 SKIP（CI 不报错）。
 - **性能 `python bench.py`（RTX 3080 Ti, bf16）**：访存受限的大张量（M=8192,D=4096）融合 Kernel 约 **2.8×** 于「pow→mean→rsqrt→mul」的多 kernel 原生写法；小张量（D=1024）因 launch 开销约 0.85×——说明**算子融合收益随张量变大、访存占比升高而显现**，不盲目套融合。
 
+## 已完成：`tokenizer_bpe.py`（字节级 BPE 分词器，纯标准库）
+
+不依赖第三方库手写 **byte-level BPE**：以 0–255 单字节为初始词表（任何中文/生僻字/emoji 都能表示、**无 OOV**），在预分词切出的词块内部逐轮合并最高频相邻符号对，编码时按学到的 merge 顺序复现合并。
+
+| 能力 | 实现要点 |
+| --- | --- |
+| 训练 | 预分词切词块 → 统计词频 → 加权统计相邻对 → 最高频优先合并（同频按符号对升序，结果可复现） |
+| 编码 | 按 merge 优先级反复合并；未登录词自动回退到单字节，保证不抛 OOV |
+| 解码 | id→字节片段拼接后整体 UTF-8 解码，多字节中文不乱码、与原文严格可逆 |
+| 持久化 | 只存有序 merge 规则即可确定性重建词表（save/load），另预留 pad/bos/eos/unk |
+
+- **自检 `python test_tokenizer_bpe.py`：20 项全过（纯 CPU、零第三方依赖）**——中英/标点/空白编解码可逆、首条 merge 恰为最高频对、BPE token 数少于原始字节数、未见词与 emoji 无损还原、merge 词表一致、训练确定性、save/load 一致、空串边界。
+- 直观效果：演示语料上 `the mat` 从 7 个 UTF-8 字节压缩为 2 个 token，而训练时没见过的 `xyz / 生僻字 / 😀` 仍能编码并原样还原。运行 `python tokenizer_bpe.py` 可看完整演示。
+
 ## 待办
-- `tokenizer_bpe.py`：BPE 分词器（merge 规则、编解码）
 - `flash_attention_tile.py`：分块 online-softmax（Flash Attention 核心）

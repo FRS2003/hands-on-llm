@@ -23,3 +23,5 @@ jobs:
         run: python test_grpo_logic.py
       - name: Triton RMSNorm kernel self-test (auto-skip without GPU)
         run: python test_triton_kernel.py
+      - name: Byte-level BPE tokenizer self-test (pure stdlib)
+        run: python test_tokenizer_bpe.py

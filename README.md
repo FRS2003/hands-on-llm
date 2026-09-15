@@ -23,7 +23,7 @@ MoE/Scaling/对齐   DPO·GRPO + 对照实验     量化推理 选型           
 | 模块 | 目录 | 你会看到什么 |
 | --- | --- | --- |
 | ① 理论基础 | [`01-foundations`](01-foundations) | Stanford CS336（L1–L17）5 篇中文精讲：分词、Transformer、注意力变体、MoE、GPU/并行、Scaling Law、推理优化、对齐与 GRPO |
-| ② 手搓与训练 | [`02-train-from-scratch`](02-train-from-scratch) | 原生 PyTorch + Triton 手写 RMSNorm/RoPE/GQA/SwiGLU（含融合 RMSNorm Kernel）与数值自检；单卡跑通五阶段训练 + 可验证奖励 RLVR，并做规模/资源/偏好/架构对照实验 |
+| ② 手搓与训练 | [`02-train-from-scratch`](02-train-from-scratch) | 原生 PyTorch + Triton 手写字节级 BPE 分词器、RMSNorm/RoPE/GQA/SwiGLU（含融合 RMSNorm Kernel）并配数值自检；单卡跑通五阶段训练 + 可验证奖励 RLVR，并做规模/资源/偏好/架构对照实验 |
 | ③ 工业框架 | [`03-peft-framework`](03-peft-framework) | 源码级走读 LLaMA-Factory 四层链路；对齐/PEFT/量化选型笔记 + 双卡 DDP/ZeRO 分布式实测 + 带注释 yaml 模板与工程化封装 + 垂直领域微调方案（csv 为自测记录表） |
 | ④ Agent 工程 | [`04-agent`](04-agent) | 终端编程 Agent：ReAct + Harness、Skill 路由、记忆闭环、分层上下文压缩、主从多智能体、分层安全 |
 | ⑤ RAG 落地 | [`05-rag-application`](05-rag-application) | 医学文献混合检索问答：BM25+稠密双路、加权融合、Rerank、HyDE/QE、带引文生成、ReAct 编排、Streamlit |
@@ -63,7 +63,7 @@ MoE/Scaling/对齐   DPO·GRPO + 对照实验     量化推理 选型           
 ## 🗺 怎么开始
 
 - 第一次看：从 [`LEARNING_PATH.md`](LEARNING_PATH.md) 按顺序学，每个模块都有自己的 README 导览；
-- 想直接看代码：进 [`02-train-from-scratch/from_scratch`](02-train-from-scratch/from_scratch) 看手写组件，`python test_model.py`、`python test_grpo_logic.py` 跑数值自检；
+- 想直接看代码：进 [`02-train-from-scratch/from_scratch`](02-train-from-scratch/from_scratch) 看手写组件，`python test_model.py`、`python test_grpo_logic.py`、`python test_tokenizer_bpe.py` 跑数值自检；
 - 自测回查：[`appendix/`](appendix) 里有名词词典、论文清单，以及结合本仓库真实数字的核心知识自测；
 - 离线/批注：各模块的教学笔记基本都附了排版好的 **Word 版**（与同名 `.md` 同目录的 `.docx`），导航大纲齐全，可直接下载打印或批注。
 
