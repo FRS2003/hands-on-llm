@@ -15,7 +15,7 @@
 ## 一、项目目标
 - 手写 BPE 分词器与 Transformer Decoder：RMSNorm、RoPE、GQA、SwiGLU、Causal Attention；
 - 跑通 “数据清洗去重 → 预训练 → SFT → LoRA → DPO → GRPO” 全流程，记录每阶段 loss / 显存峰值 / 吞吐 / 耗时 / 生成效果；
-- 【规划中·尚未实现】用 Triton 编写 RMSNorm 自定义 Kernel、手写分块 Flash Attention；
+- 用 Triton 编写 RMSNorm 前向/反向融合 Kernel（已实现，GPU 数值对齐，见 from_scratch/kernel_rmsnorm.py）；手写分块 Flash Attention 仍为后续规划；
 - 本模块单卡训练实践混合精度（BF16）、梯度检查点等显存优化；DeepSpeed ZeRO 多卡并行在 ③ 工业框架模块实测（见 ../03-peft-framework/experiments/dist_lab）；
 - 依据 Chinchilla 结论拟合 Scaling Law，核算训练资源。
 
@@ -50,7 +50,7 @@ python -c "import torch; print(torch.cuda.is_available(), torch.cuda.is_bf16_sup
 - [x] GRPO 100 条 held-out 定量评测（排除训练题，规则分 +0.084、3-gram 重复度 0.120→0.096）
 - [x] 五阶段同种子生成横评（pretrain→GRPO 能力演进，见 experiments/stage_evolution.md）
 - [x] 架构/精度消融：MHA/GQA/MQA × fp32/bf16/fp16 × batch 显存吞吐 + 推理 KV cache（见 experiments/ablation/）
-- [ ] Triton Kernel / 分块注意力
+- [x] Triton RMSNorm 融合 Kernel 已完成（前向+反向，见 from_scratch/）；分块注意力（Flash Attention）仍待做
 - [x] DeepSpeed ZeRO 多卡对照（DDP/ZeRO-1/2/3）在 ③ 工业框架模块实测，见 ../03-peft-framework/experiments/dist_lab（本模块为单卡手写模型）
 
 ## 五、手写组件 Checklist（`from_scratch/`）
@@ -60,7 +60,7 @@ python -c "import torch; print(torch.cuda.is_available(), torch.cuda.is_bf16_sup
 - [x] GQA（repeat_kv 统一 MHA/MQA/GQA + 因果遮蔽，12 项自检）
 - [x] SwiGLU 前馈网络（门控分支数值验证）
 - [x] Causal Self-Attention（含 mask、张量维度标注、未来不可见测试）
-- [ ] Triton 版 RMSNorm Kernel
+- [x] Triton 版 RMSNorm Kernel（融合前向+反向，10 项 GPU 数值自检通过）
 - [ ] 分块 Online-Softmax（Flash Attention 核心）
 
 ## 六、实验结果（已完成：Pretrain + SFT + LoRA + DPO + GRPO + 可验证奖励 RLVR）

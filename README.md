@@ -23,7 +23,7 @@ MoE/Scaling/对齐   DPO·GRPO + 对照实验     量化推理 选型           
 | 模块 | 目录 | 你会看到什么 |
 | --- | --- | --- |
 | ① 理论基础 | [`01-foundations`](01-foundations) | Stanford CS336（L1–L17）5 篇中文精讲：分词、Transformer、注意力变体、MoE、GPU/并行、Scaling Law、推理优化、对齐与 GRPO |
-| ② 手搓与训练 | [`02-train-from-scratch`](02-train-from-scratch) | 原生 PyTorch 手写 RMSNorm/RoPE/GQA/SwiGLU + 26 项数值自检；单卡跑通五阶段训练 + 可验证奖励 RLVR，并做规模/资源/偏好/架构对照实验 |
+| ② 手搓与训练 | [`02-train-from-scratch`](02-train-from-scratch) | 原生 PyTorch + Triton 手写 RMSNorm/RoPE/GQA/SwiGLU（含融合 RMSNorm Kernel）与数值自检；单卡跑通五阶段训练 + 可验证奖励 RLVR，并做规模/资源/偏好/架构对照实验 |
 | ③ 工业框架 | [`03-peft-framework`](03-peft-framework) | 源码级走读 LLaMA-Factory 四层链路；对齐/PEFT/量化选型笔记 + 双卡 DDP/ZeRO 分布式实测 + 带注释 yaml 模板与工程化封装 + 垂直领域微调方案（csv 为自测记录表） |
 | ④ Agent 工程 | [`04-agent`](04-agent) | 终端编程 Agent：ReAct + Harness、Skill 路由、记忆闭环、分层上下文压缩、主从多智能体、分层安全 |
 | ⑤ RAG 落地 | [`05-rag-application`](05-rag-application) | 医学文献混合检索问答：BM25+稠密双路、加权融合、Rerank、HyDE/QE、带引文生成、ReAct 编排、Streamlit |
@@ -96,7 +96,8 @@ hands-on-llm/
 - [x] MHA/GQA/MQA × 混合精度 × batch 架构消融（训练显存/吞吐 + 推理 KV cache 实测）
 - [x] 可验证奖励 RLVR（对错判分）：SFT 甜区冷启动 + GRPO，greedy 0.633→0.792，含能力边界 / 策略崩溃对照
 - [x] DeepSpeed 分布式实测：双卡 DDP vs ZeRO-1/2/3 对照（显存/通信/吞吐，见 03 模块 dist_lab）
-- [ ] Triton 自定义 Kernel、手写分块 Flash Attention（尚未实现，列后续规划）
+- [x] Triton 融合 RMSNorm Kernel（前向+反向，GPU 数值对齐，访存受限大张量约 2.7×）
+- [ ] 手写分块 Flash Attention（尚未实现，列后续规划）
 - [ ] 持续补充论文精读与自测题
 
 ## 🙏 致谢与说明

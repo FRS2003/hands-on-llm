@@ -21,3 +21,5 @@ jobs:
         run: python test_model.py
       - name: GRPO logic numerical self-test
         run: python test_grpo_logic.py
+      - name: Triton RMSNorm kernel self-test (auto-skip without GPU)
+        run: python test_triton_kernel.py
